@@ -1,0 +1,58 @@
+KitContents:
+- ==: org.bukkit.inventory.ItemStack
+  type: STICK
+  meta:
+    ==: ItemMeta
+    meta-type: UNSPECIFIC
+    display-name: "\xa7bKnocbkack Stick"
+    enchants:
+      KNOCKBACK: 3
+    Unbreakable: true
+    ItemFlags: !!set
+      HIDE_ENCHANTS: null
+      HIDE_UNBREAKABLE: true
+- ==: org.bukkit.inventory.ItemStack
+  type: BOW
+  meta:
+    ==: ItemMeta
+    meta-type: UNSPECIFIC
+    display-name: "\xa7bKnockback Bow"
+    enchants:
+      ARROW_KNOCKBACK: 3
+    Unbreakable: true
+    ItemFlags: !!set
+      HIDE_ENCHANTS: null
+      HIDE_UNBREAKABLE: true
+- ==: org.bukkit.inventory.ItemStack
+  type: GOLD_PLATE
+  amount: 2
+  meta:
+    ==: ItemMeta
+    meta-type: UNSPECIFIC
+    display-name: "\xa7eJump Plate"
+- ==: org.bukkit.inventory.ItemStack
+  type: WOOL
+  amount: 64
+  meta:
+    ==: ItemMeta
+    meta-type: UNSPECIFIC
+    display-name: "\xa7fBuilding Block"
+- ==: org.bukkit.inventory.ItemStack
+  type: ENDER_PEARL
+  amount: 3
+  meta:
+    ==: ItemMeta
+    meta-type: UNSPECIFIC
+    display-name: "\xa7aEnder Pearl"
+- ==: org.bukkit.inventory.ItemStack
+  type: ARROW
+  meta:
+    ==: ItemMeta
+    meta-type: UNSPECIFIC
+    display-name: "\xa7bKnockback Arrow"
+Price: 0
+KitName: Default
+KitIcon: STICK
+KitDescription:
+- "\xa77Default kit"
+- "\xa77Must be configured in plugins/KnockbackFFA/kits !"

@@ -1,0 +1,32 @@
+#======================[Event Messages]===========================
+joinmessage: "&f -=&7[&4+&7]&f=- &7hey &2%player_name% &7welcome to knockbackFFA"
+leavemessage: "&f -=&7[&4-&7]&f=- &7Hope to see you again &4%player_name% &7:(!"
+deathmessage: "&c %player_name%&e was killed by &a %killer%"
+chatformat: "&7[&8%player%&7]&f : %message%"
+
+#===================[Kill Messages]========================
+kill: "&6You Killed &b %player%"
+prize: "&c+ &f%prize%"
+suicide: "&bYou died by falling into the void"
+killstreakrecord: "&c You've beaten your previous record of %killstreak% kills!"
+
+#=========================[Errors]===========================
+no-arena-ready: "&c&lSorry! &f&6but there is no arena ready to play ..."
+nospawnpoint: "§cAsk an admin to create the spawnpoint so i can get you there!"
+not-enough-money: "&cYou don't have enough money to purchase this item!"
+already-owned: "&cYou already own this item!"
+alreadyingame: "&cYou're already in game isnt it?"
+cannotuseleave: "&cYou cannot use this command! maybe you are not in the game or bungeemode is on?"
+
+#==========================[Personal Messages]====================
+join-arena: "&eYou have joined the game!"
+leave-arena: "&cYou have left the game!"
+bowuse: "Reloading..."
+gotarrow: "Reload done!"
+kit-recieve: "&aSuccessfully recieved %kitname%"
+
+
+itemremoved:  "&eEvery items that were on ground were&b removed!"
+arenachangemsg: "&eThe arena has changed to &b%arena%"
+purchase-success: "&aYou have successfully purchased %cosmetic%"
+fellvoidmsg: "&c %player_name% &e fell in to the void"

@@ -1,0 +1,20 @@
+enabled: true #make this enabled so the plugin's scoreboard will be able to use.
+
+#------------------------=------------------------
+
+title : #Animated title for scoreboard. you can use placeholders on it too!
+  - "&l&eKnockbackFFA"
+  - "&l&bKnockbackFFA"
+  - "&l&bKnockbackFFA"
+
+#------------------------=------------------------
+
+lines: #Scoreboard lines with placeholder support.
+  - '&6Welcome to &l&ethe server!'
+  - ''
+  - '&6Players&f : %server_online%'
+  - '&6 Kills&f : %advancedknockbackffa_player_kills%'
+  - '&6 Deaths&f : %advancedknockbackffa_player_deaths%'
+  - '&6 CurrentMap : &e%advancedknockbackffa_current_map%'
+  - '&6 Next map : &e%advancedknockbackffa_next_map%'
+  - '&6 Next map in : &e%advancedknockbackffa_timer_nextmap%'

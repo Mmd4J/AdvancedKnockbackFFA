@@ -1,0 +1,48 @@
+#In The New Update Item names and materials are customizable customize them from here!
+LobbyItems:
+  shop:
+    name: "&6Shop"
+    material: "EMERALD"
+    lore:
+      - '&7Click to open the shop'
+    slot: 3
+  cosmetic:
+    name: "&7Cosmetic"
+    material: "CHEST"
+    lore:
+      - '&7Click to open the cosmetic shop'
+    slot: 4
+  kits:
+    name: "&eKits"
+    material: "DIAMOND_SWORD"
+    lore:
+      - '&7Click to open the kits shop'
+    slot: 5
+ShopMenu:
+  kit:
+    name: "&eKits"
+    material: "STICK"
+    lore:
+      - '&7Click to open the kits shopmenu'
+    slot: 20
+  cosmetic:
+    name: "&7Cosmetic"
+    material: "CHEST"
+    lore:
+      - '&7Click to open the cosmetic shopmenu'
+    slot: 25
+SpecialItems:
+  KBStick:
+    name: "&bKnocbkack Stick"
+    kb-level: 3
+  KBBow:
+    name: "&bKnockback Bow"
+    kb-level: 3
+  KBArrow:
+    name: "&bKnockback Arrow"
+  JumpPlate:
+    name: "&eJump Plate"
+    jumpLevel: 3
+    removeafter: 5
+  EnderPearl:
+    name: "&aEnder Pearl"

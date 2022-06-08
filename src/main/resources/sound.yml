@@ -1,0 +1,6 @@
+  arenachange: NOTE_PLING #This sound will be played when the arena changes
+  itemremoved: NOTE_BASS #This sound will be played when plugin's anti lag removes items on the ground.
+  jumpplate: BAT_TAKEOFF #This sound will be played when someone pushes the pressure plate or the jump plate
+  join: LEVEL_UP #This sound will be played when a player joins the server
+  guiclose: CHEST_CLOSE #This sound will be played when the player closes the gui
+  guiopen: CHEST_OPEN #This sound will be played when the player opens the gui
