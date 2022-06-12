@@ -16,12 +16,16 @@ import java.nio.file.StandardCopyOption;
 @Getter
 public abstract class Cosmetic {
     private static File file;
+    private static FileConfiguration configuration;
     private String name;
     private String description;
     private Material icon;
     private CosmeticType type;
     private Double price;
-    private static FileConfiguration configuration;
+
+    public Cosmetic(CosmeticType cosmeticType, String name, String description, Double price, Material icon) {
+
+    }
 
     public static void setup() {
         file = new File(KnockbackFFALegacy.getInstance().getDataFolder(), "cosmetics.yml");
@@ -50,10 +54,6 @@ public abstract class Cosmetic {
 
     public static void reload() {
         configuration = YamlConfiguration.loadConfiguration(file);
-    }
-
-    public Cosmetic(CosmeticType cosmeticType, String name, String description, Double price, Material icon) {
-
     }
 
     public static Cosmetic getFromString(String name) {
