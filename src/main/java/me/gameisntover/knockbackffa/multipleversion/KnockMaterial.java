@@ -4,13 +4,16 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 
 public enum KnockMaterial {
-    WOOL("WOOL","WHITE_WOOL");
-    private String legacy,nonLegacy;
-    KnockMaterial(String legacy,String nonLegacy){
+    WOOL("WOOL", "WHITE_WOOL");
+    private final String legacy;
+    private final String nonLegacy;
+
+    KnockMaterial(String legacy, String nonLegacy) {
         this.legacy = legacy;
         this.nonLegacy = nonLegacy;
     }
-    public Material toMaterial(){
+
+    public Material toMaterial() {
         if (Bukkit.getServer().getVersion().contains("1.8")) return Material.getMaterial(legacy);
         else if (Bukkit.getServer().getVersion().contains("1.9")) return Material.getMaterial(legacy);
         else if (Bukkit.getServer().getVersion().contains("1.10")) return Material.getMaterial(legacy);

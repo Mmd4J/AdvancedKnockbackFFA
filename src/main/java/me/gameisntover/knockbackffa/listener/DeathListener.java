@@ -1,8 +1,8 @@
 package me.gameisntover.knockbackffa.listener;
 
 import me.clip.placeholderapi.PlaceholderAPI;
-import me.gameisntover.knockbackffa.kit.KnockbackFFALegacy;
 import me.gameisntover.knockbackffa.configurations.Messages;
+import me.gameisntover.knockbackffa.kit.KnockbackFFALegacy;
 import me.gameisntover.knockbackffa.util.KBFFAKit;
 import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.World;

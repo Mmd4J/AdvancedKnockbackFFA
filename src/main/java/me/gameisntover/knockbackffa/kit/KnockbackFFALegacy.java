@@ -1,12 +1,14 @@
 package me.gameisntover.knockbackffa.kit;
 
 import lombok.SneakyThrows;
-import me.gameisntover.knockbackffa.listener.JoinLeaveListeners;
 import me.gameisntover.knockbackffa.arena.ArenaConfiguration;
 import me.gameisntover.knockbackffa.arena.ArenaManager;
 import me.gameisntover.knockbackffa.arena.ArenaSettings;
 import me.gameisntover.knockbackffa.commands.CommandManager;
-import me.gameisntover.knockbackffa.configurations.*;
+import me.gameisntover.knockbackffa.configurations.ItemConfiguration;
+import me.gameisntover.knockbackffa.configurations.Messages;
+import me.gameisntover.knockbackffa.configurations.ScoreboardConfiguration;
+import me.gameisntover.knockbackffa.configurations.Sounds;
 import me.gameisntover.knockbackffa.cosmetics.Cosmetic;
 import me.gameisntover.knockbackffa.listener.*;
 import me.gameisntover.knockbackffa.util.Expansion;
@@ -42,13 +44,16 @@ import java.util.stream.Collectors;
 
 public final class KnockbackFFALegacy extends JavaPlugin implements Listener {
     public static KnockbackFFALegacy INSTANCE;
-    int ArenaID = 0;
     public Integer timer = 0;
+    int ArenaID = 0;
 
     public static KnockbackFFALegacy getInstance() {
         return INSTANCE;
     }
 
+    public static boolean BungeeMode() {
+        return KnockbackFFALegacy.getInstance().getConfig().getBoolean("Bungee-Mode");
+    }
 
     @Override
     public void onEnable() {
@@ -168,7 +173,8 @@ public final class KnockbackFFALegacy extends JavaPlugin implements Listener {
                     if (BungeeMode() || knocker.isInGame()) {
                         World world = p.getWorld();
                         List<Entity> entList = world.getEntities();
-                        for (Entity current : entList) if (current instanceof Item) {
+                        for (Entity current : entList)
+                            if (current instanceof Item) {
                                 current.remove();
                                 knocker.playSound(Sounds.ITEM_REMOVED.getSound(), 1, 1);
                             }
@@ -191,7 +197,7 @@ public final class KnockbackFFALegacy extends JavaPlugin implements Listener {
 
     private void loadCommands() {
         CommandManager cmdManager = new CommandManager();
-        if (BungeeMode()){
+        if (BungeeMode()) {
             cmdManager.getCommandMap().getCommand("kbffajoin").unregister(cmdManager.getCommandMap());
             cmdManager.getCommandMap().getCommand("kbffaleave").unregister(cmdManager.getCommandMap());
         }
@@ -290,22 +296,18 @@ public final class KnockbackFFALegacy extends JavaPlugin implements Listener {
                     Knocker.getKnocker(player.getUniqueId()).playSound(Sounds.JUMP_PLATE.getSound(), 1, 1);
                 }
             }
-        }else{
-        if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-            if (e.getClickedBlock() instanceof Sign) {
-                Sign sign = (Sign) e.getClickedBlock().getState();
-                if (sign.getLine(0).equalsIgnoreCase(ChatColor.YELLOW + "[A]KnockbackFFA")) {
-                    if (sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN + "Join")) {
-                        if (knocker.isInGame()) knocker.sendMessage(Messages.ALREADY_IN_GAME.toString());
-                        else player.chat("/join");
+        } else {
+            if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+                if (e.getClickedBlock() instanceof Sign) {
+                    Sign sign = (Sign) e.getClickedBlock().getState();
+                    if (sign.getLine(0).equalsIgnoreCase(ChatColor.YELLOW + "[A]KnockbackFFA")) {
+                        if (sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN + "Join")) {
+                            if (knocker.isInGame()) knocker.sendMessage(Messages.ALREADY_IN_GAME.toString());
+                            else player.chat("/join");
+                        }
                     }
                 }
             }
         }
-        }
-    }
-
-    public static boolean BungeeMode() {
-        return KnockbackFFALegacy.getInstance().getConfig().getBoolean("Bungee-Mode");
     }
 }
