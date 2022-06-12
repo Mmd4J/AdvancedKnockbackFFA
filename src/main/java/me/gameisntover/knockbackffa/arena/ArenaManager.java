@@ -1,9 +1,9 @@
 package me.gameisntover.knockbackffa.arena;
 
-import me.gameisntover.knockbackffa.util.KBFFAKit;
-import me.gameisntover.knockbackffa.kit.KnockbackFFALegacy;
 import me.gameisntover.knockbackffa.configurations.Messages;
 import me.gameisntover.knockbackffa.configurations.Sounds;
+import me.gameisntover.knockbackffa.kit.KnockbackFFALegacy;
+import me.gameisntover.knockbackffa.util.KBFFAKit;
 import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -15,6 +15,7 @@ import java.util.*;
 
 public class ArenaManager {
     public static Map<String, Arena> arenaMap = new HashMap<>();
+    public static Arena enabledArena = null;
 
     /**
      * Changes the arena to another arena
@@ -46,9 +47,6 @@ public class ArenaManager {
         }
         return arenas;
     }
-
-    public static Arena enabledArena = null;
-
 
     public static Arena create(String arenaName, Location position1, Location position2, Location spawnPoint) {
         File cfile = new File(KnockbackFFALegacy.getInstance().getDataFolder(), "ArenaData" + File.separator + arenaName + ".yml");

@@ -1,10 +1,10 @@
 package me.gameisntover.knockbackffa.arena;
 
-import me.gameisntover.knockbackffa.util.Knocker;
 import me.gameisntover.knockbackffa.gui.ItemBuilder;
 import me.gameisntover.knockbackffa.gui.LightButton;
 import me.gameisntover.knockbackffa.gui.LightButtonManager;
 import me.gameisntover.knockbackffa.gui.LightGUI;
+import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -19,19 +19,19 @@ import java.util.List;
 
 public class EditArenaGUI extends LightGUI {
     public EditArenaGUI(String arenaname) {
-        super("Arena Editor",54);
-        Arena arena =  ArenaManager.load(arenaname);
+        super("Arena Editor", 54);
+        Arena arena = ArenaManager.load(arenaname);
         LightGUI arenaGUI = this;
         LightButton blockBreak = LightButtonManager.createButton(ItemBuilder.builder().material(Material.DIAMOND_PICKAXE).name(ChatColor.GRAY + "Block Break").lore(ChatColor.GRAY + "Toggle whether or not players can break blocks").build(), e -> {
             arena.getConfig().set("block-break", !arena.getConfig().getBoolean("block-break"));
             arena.save();
-            e.getWhoClicked().sendMessage(ChatColor.GREEN + "Block breaking is now "+arena.getConfig().getBoolean("block-break"));
+            e.getWhoClicked().sendMessage(ChatColor.GREEN + "Block breaking is now " + arena.getConfig().getBoolean("block-break"));
         });
         ItemMeta blockBreakMeta = blockBreak.getItem().getItemMeta();
         LightButton itemDrop = LightButtonManager.createButton(ItemBuilder.builder().material(Material.DIAMOND).lore(ChatColor.GRAY + "Toggle whether or not players can drop items").name(ChatColor.GRAY + "Item Drop").build(), e -> {
             arena.getConfig().set("item-drop", !arena.getConfig().getBoolean("item-drop"));
             arena.save();
-            e.getWhoClicked().sendMessage(ChatColor.GREEN + "Item dropping is now "+arena.getConfig().getBoolean("item-drop"));
+            e.getWhoClicked().sendMessage(ChatColor.GREEN + "Item dropping is now " + arena.getConfig().getBoolean("item-drop"));
         });
         ItemMeta itemDropMeta = itemDrop.getItem().getItemMeta();
         blockBreakMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
@@ -46,7 +46,7 @@ public class EditArenaGUI extends LightGUI {
         });
         LightButton autoReset = LightButtonManager.createButton(ItemBuilder.builder().material(Material.DISPENSER).name(ChatColor.GRAY + "Auto Reset").lore(ChatColor.GRAY + "Toggle whether or not the arena will reset blocks placed or broke automatically").build(), e -> {
             arena.getConfig().set("auto-reset", !arena.getConfig().getBoolean("auto-reset"));
-            if (arena.getConfig().getString("blocks")==null) {
+            if (arena.getConfig().getString("blocks") == null) {
                 Location loc1 = arena.getPos1();
                 Location loc2 = arena.getPos2();
                 List<String> blocks = new ArrayList<>();
@@ -105,11 +105,11 @@ public class EditArenaGUI extends LightGUI {
                 worldBorderr.reset();
             }
         });
-        arenaGUI.setButton(blockBreak,10);
-        arenaGUI.setButton(itemDrop,11);
-        arenaGUI.setButton(setspawn,12);
-        arenaGUI.setButton(setpos,13);
-        arenaGUI.setButton(worldBorder,14);
-        arenaGUI.setButton(autoReset,15);
+        arenaGUI.setButton(blockBreak, 10);
+        arenaGUI.setButton(itemDrop, 11);
+        arenaGUI.setButton(setspawn, 12);
+        arenaGUI.setButton(setpos, 13);
+        arenaGUI.setButton(worldBorder, 14);
+        arenaGUI.setButton(autoReset, 15);
     }
 }
