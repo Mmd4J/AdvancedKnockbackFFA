@@ -1,14 +1,14 @@
 package me.gameisntover.knockbackffa.commands.knockcommands.arena;
 
-import me.gameisntover.knockbackffa.util.Knocker;
 import me.gameisntover.knockbackffa.commands.KFCommand;
 import me.gameisntover.knockbackffa.commands.KnockCommand;
 import me.gameisntover.knockbackffa.gui.Items;
+import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.permissions.PermissionDefault;
 
 import java.util.List;
 
-@KFCommand(name = "kbffawand",syntax = "/kbffawand",description = "gives the player a position selector wand",permissionDefault = PermissionDefault.OP)
+@KFCommand(name = "kbffawand", syntax = "/kbffawand", description = "gives the player a position selector wand", permissionDefault = PermissionDefault.OP)
 public class WandCommand extends KnockCommand {
     @Override
     public List<String> performTab(String[] args, Knocker knocker) {

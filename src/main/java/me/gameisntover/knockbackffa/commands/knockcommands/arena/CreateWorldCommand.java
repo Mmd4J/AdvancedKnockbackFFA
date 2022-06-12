@@ -1,16 +1,19 @@
 package me.gameisntover.knockbackffa.commands.knockcommands.arena;
 
-import me.gameisntover.knockbackffa.util.Knocker;
 import me.gameisntover.knockbackffa.arena.VoidChunkGenerator;
 import me.gameisntover.knockbackffa.commands.KFCommand;
 import me.gameisntover.knockbackffa.commands.KnockCommand;
-import org.bukkit.*;
+import me.gameisntover.knockbackffa.util.Knocker;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
 import org.bukkit.block.Block;
 import org.bukkit.permissions.PermissionDefault;
 
 import java.util.List;
 
-@KFCommand(name = "kbffaworldcreate",syntax = "/kbffaworldcreate <name>", permissionDefault = PermissionDefault.OP, description = "creates a world for player")
+@KFCommand(name = "kbffaworldcreate", syntax = "/kbffaworldcreate <name>", permissionDefault = PermissionDefault.OP, description = "creates a world for player")
 public class CreateWorldCommand extends KnockCommand {
     @Override
     public List<String> performTab(String[] args, Knocker knocker) {

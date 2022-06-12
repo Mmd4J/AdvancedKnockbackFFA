@@ -10,7 +10,7 @@ import org.bukkit.permissions.PermissionDefault;
 
 import java.util.List;
 
-@KFCommand(name = "kbffaspecialitems",description = "opens a new inventory with special items",permissionDefault = PermissionDefault.OP,syntax = "/kbffaspecialitems")
+@KFCommand(name = "kbffaspecialitems", description = "opens a new inventory with special items", permissionDefault = PermissionDefault.OP, syntax = "/kbffaspecialitems")
 public class SpecialItems extends KnockCommand {
     @Override
     public List<String> performTab(String[] args, Knocker knocker) {
