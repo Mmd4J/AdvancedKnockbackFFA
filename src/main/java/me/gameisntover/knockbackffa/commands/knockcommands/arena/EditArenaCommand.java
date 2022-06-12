@@ -11,15 +11,15 @@ import org.bukkit.permissions.PermissionDefault;
 import java.util.Arrays;
 import java.util.List;
 
-@KFCommand(name = "kbffaeditarena",description = "edits arena",permissionDefault = PermissionDefault.OP,syntax = "/kbffaeditarena <arenaname>")
+@KFCommand(name = "kbffaeditarena", description = "edits arena", permissionDefault = PermissionDefault.OP, syntax = "/kbffaeditarena <arenaname>")
 public class EditArenaCommand extends KnockCommand {
 
     @Override
     public List<String> performTab(String[] args, Knocker knocker) {
-            List<String> arenaList = Arrays.asList(Arrays.stream(Arrays.stream(ArenaManager.getfolder().list()).map(s -> {
-                return s.replace(".yml", "");
-            }).toArray()).toArray(String[]::new));
-            return arenaList;
+        List<String> arenaList = Arrays.asList(Arrays.stream(Arrays.stream(ArenaManager.getfolder().list()).map(s -> {
+            return s.replace(".yml", "");
+        }).toArray()).toArray(String[]::new));
+        return arenaList;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class EditArenaCommand extends KnockCommand {
         if (args.length == 1) {
             List<String> arenaList = Arrays.asList(ArenaManager.getfolder().list());
             if (!arenaList.contains(args[0] + ".yml")) knocker.sendMessage("&cThat arena name does not exist!");
-            else  {
+            else {
                 knocker.sendMessage("&aYou are now editing " + args[0]);
                 LightGUI gui = new EditArenaGUI(args[0]);
                 knocker.openGUI(gui);

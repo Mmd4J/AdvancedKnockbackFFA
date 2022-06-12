@@ -1,10 +1,10 @@
 package me.gameisntover.knockbackffa.listener;
 
-import me.gameisntover.knockbackffa.util.KBFFAKit;
-import me.gameisntover.knockbackffa.kit.KnockbackFFALegacy;
 import me.gameisntover.knockbackffa.arena.ArenaConfiguration;
 import me.gameisntover.knockbackffa.arena.Cuboid;
 import me.gameisntover.knockbackffa.configurations.Messages;
+import me.gameisntover.knockbackffa.kit.KnockbackFFALegacy;
+import me.gameisntover.knockbackffa.util.KBFFAKit;
 import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -79,32 +79,33 @@ public class GameRulesListener implements Listener {
         if (e.getEntity().getShooter() instanceof Player) {
             Knocker knocker = Knocker.getKnocker(e.getEntity().getUniqueId());
             Player player = (Player) e.getEntity().getShooter();
-            if (!knocker.isInGame())  return;
-                if (player.getInventory().getItemInHand().getType().equals(Material.BOW)) return;
-                    player.sendMessage(Messages.BOW_USE.toString());
-                    new BukkitRunnable() {
-                        int timer = 10;
-                        @Override
-                        public void run() {
-                            timer--;
-                            if (timer == 10 || timer == 9 || timer == 8 || timer == 7 || timer == 6 || timer == 5 || timer == 4 || timer == 3 || timer == 2 || timer == 1) {
-                                if (player.getInventory().contains(Material.ARROW) || !player.getInventory().contains(Material.BOW)) {
-                                    cancel();
-                                    timer = 10;
-                                }
-                            }
-                            if (timer == 0) {
-                                if (!player.getInventory().contains(Material.ARROW) && player.getInventory().contains(Material.BOW)) {
-                                    KBFFAKit kitManager = new KBFFAKit();
-                                    player.getInventory().addItem(kitManager.kbbowArrow());
-                                    player.sendMessage(Messages.ARROW_GET.toString());
-                                }
-                                cancel();
-                                timer = 10;
-                            }
+            if (!knocker.isInGame()) return;
+            if (player.getInventory().getItemInHand().getType().equals(Material.BOW)) return;
+            player.sendMessage(Messages.BOW_USE.toString());
+            new BukkitRunnable() {
+                int timer = 10;
+
+                @Override
+                public void run() {
+                    timer--;
+                    if (timer == 10 || timer == 9 || timer == 8 || timer == 7 || timer == 6 || timer == 5 || timer == 4 || timer == 3 || timer == 2 || timer == 1) {
+                        if (player.getInventory().contains(Material.ARROW) || !player.getInventory().contains(Material.BOW)) {
+                            cancel();
+                            timer = 10;
                         }
-                    }.runTaskTimer(KnockbackFFALegacy.getInstance(), 0, 20);
-            }
+                    }
+                    if (timer == 0) {
+                        if (!player.getInventory().contains(Material.ARROW) && player.getInventory().contains(Material.BOW)) {
+                            KBFFAKit kitManager = new KBFFAKit();
+                            player.getInventory().addItem(kitManager.kbbowArrow());
+                            player.sendMessage(Messages.ARROW_GET.toString());
+                        }
+                        cancel();
+                        timer = 10;
+                    }
+                }
+            }.runTaskTimer(KnockbackFFALegacy.getInstance(), 0, 20);
+        }
     }
 
     @EventHandler

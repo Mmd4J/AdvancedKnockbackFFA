@@ -1,10 +1,10 @@
 package me.gameisntover.knockbackffa.commands.knockcommands.game;
 
 import me.clip.placeholderapi.PlaceholderAPI;
-import me.gameisntover.knockbackffa.kit.KnockbackFFALegacy;
 import me.gameisntover.knockbackffa.commands.KFCommand;
 import me.gameisntover.knockbackffa.commands.KnockCommand;
 import me.gameisntover.knockbackffa.configurations.Messages;
+import me.gameisntover.knockbackffa.kit.KnockbackFFALegacy;
 import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.permissions.PermissionDefault;
@@ -12,7 +12,7 @@ import org.bukkit.permissions.PermissionDefault;
 import java.util.List;
 import java.util.Objects;
 
-@KFCommand(name = "kbffaleave",syntax = "/kbffaleave",description = "leaves the game",permissionDefault = PermissionDefault.TRUE)
+@KFCommand(name = "kbffaleave", syntax = "/kbffaleave", description = "leaves the game", permissionDefault = PermissionDefault.TRUE)
 public class LeaveCommand extends KnockCommand {
     @Override
     public List<String> performTab(String[] args, Knocker knocker) {

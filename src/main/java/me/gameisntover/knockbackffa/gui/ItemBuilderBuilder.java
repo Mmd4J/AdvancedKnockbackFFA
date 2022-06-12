@@ -13,6 +13,12 @@ public class ItemBuilderBuilder {
     private ItemStack item;
     private ItemMeta meta;
     private boolean unbreakable = true;
+
+    public ItemBuilderBuilder() {
+        item = new ItemStack(Material.STONE);
+        meta = item.getItemMeta();
+    }
+
     public ItemStack build() {
         meta.spigot().setUnbreakable(unbreakable);
         item.setItemMeta(meta);
@@ -21,7 +27,7 @@ public class ItemBuilderBuilder {
 
     public ItemBuilderBuilder name(String name) {
         if (meta == null) meta = item.getItemMeta();
-        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',name));
+        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
         return this;
     }
 
@@ -31,7 +37,7 @@ public class ItemBuilderBuilder {
     }
 
     public ItemBuilderBuilder enchants(List<KEnchant> enchants) {
-        enchants.forEach(enchant -> meta.addEnchant(enchant.getEnchantment(),enchant.getLevel(),true));
+        enchants.forEach(enchant -> meta.addEnchant(enchant.getEnchantment(), enchant.getLevel(), true));
         return this;
     }
 
@@ -49,28 +55,27 @@ public class ItemBuilderBuilder {
         item = new ItemStack(material);
         return this;
     }
-    public ItemBuilderBuilder lore(String lore){
+
+    public ItemBuilderBuilder lore(String lore) {
         meta.setLore(Collections.singletonList(lore));
         item.setItemMeta(meta);
         return this;
     }
-    public ItemBuilderBuilder lores(List<String> lores){
-        lores.forEach(lore -> ChatColor.translateAlternateColorCodes('&',lore));
+
+    public ItemBuilderBuilder lores(List<String> lores) {
+        lores.forEach(lore -> ChatColor.translateAlternateColorCodes('&', lore));
         meta.setLore(lores);
         item.setItemMeta(meta);
-        return  this;
-    }
-    public ItemBuilderBuilder(){
-        item = new ItemStack(Material.STONE);
-        meta = item.getItemMeta();
+        return this;
     }
 
     /**
      * instead
+     *
      * @return this
      */
-    public ItemBuilderBuilder coolMeta(){
-        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE,ItemFlag.HIDE_ATTRIBUTES,ItemFlag.HIDE_ENCHANTS,ItemFlag.HIDE_POTION_EFFECTS,ItemFlag.HIDE_DESTROYS);
+    public ItemBuilderBuilder coolMeta() {
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_DESTROYS);
         meta.spigot().setUnbreakable(true);
         item.setItemMeta(meta);
         return this;
