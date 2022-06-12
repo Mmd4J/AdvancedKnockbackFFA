@@ -39,35 +39,16 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 public class Knocker {
+    public static File playersfolder = new File(KnockbackFFALegacy.getInstance().getDataFolder(), "player data" + File.separator);
+    public static Map<UUID, Knocker> knockerMap = new HashMap<>();
+    private final UUID uniqueID;
     public File cfile;
     public FileConfiguration config;
-    public static File playersfolder = new File(KnockbackFFALegacy.getInstance().getDataFolder(), "player data" + File.separator);
     private boolean inGame;
     private boolean inArena;
     private BukkitTask scoreboardTask;
-
-    public File getfile() {
-        return cfile;
-    }
-
-
-    public FileConfiguration get() {
-        return config;
-    }
-
-    public void saveConfig() {
-        try {
-            config.save(cfile);
-        } catch (Exception e) {
-            Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Error saving " + cfile.getName() + "!");
-        }
-    }
-
-    private final UUID uniqueID;
-    public static Map<UUID, Knocker> knockerMap = new HashMap<>();
     private Location positionA;
     private Location positionB;
-
     protected Knocker(UUID uuid) {
         this.uniqueID = uuid;
         cfile = new File(playersfolder, uuid + ".yml");
@@ -79,10 +60,6 @@ public class Knocker {
             }
         }
         config = YamlConfiguration.loadConfiguration(cfile);
-    }
-
-    public Player getPlayer() {
-        return Bukkit.getPlayer(uniqueID);
     }
 
     public static Knocker getKnocker(UUID uuid) {
@@ -98,13 +75,33 @@ public class Knocker {
         return getKnocker(Bukkit.getPlayer(name).getUniqueId());
     }
 
-    public void setBalance(float balance) {
-        get().set("balance", balance);
-        saveConfig();
+    public File getfile() {
+        return cfile;
+    }
+
+    public FileConfiguration get() {
+        return config;
+    }
+
+    public void saveConfig() {
+        try {
+            config.save(cfile);
+        } catch (Exception e) {
+            Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Error saving " + cfile.getName() + "!");
+        }
+    }
+
+    public Player getPlayer() {
+        return Bukkit.getPlayer(uniqueID);
     }
 
     public float getBalance() {
         return get().getInt("balance");
+    }
+
+    public void setBalance(float balance) {
+        get().set("balance", balance);
+        saveConfig();
     }
 
     public void addBalance(float balance) {
@@ -164,7 +161,7 @@ public class Knocker {
         World world = Bukkit.getWorld(ArenaConfiguration.get().getString("mainlobby.world"));
         if (world != null) getPlayer().teleport(new Location(world, x, y, z));
         else {
-            String worldname =ArenaConfiguration.get().getString("mainlobby.world");
+            String worldname = ArenaConfiguration.get().getString("mainlobby.world");
             WorldCreator worldCreator = new WorldCreator(worldname);
             world = worldCreator.createWorld();
             getPlayer().teleport(new Location(world, x, y, z));
@@ -241,12 +238,14 @@ public class Knocker {
             return getLocation().getWorld().equals(Bukkit.getWorld(ArenaConfiguration.get().getString("mainlobby.world")));
         else return false;
     }
-    public void giveLobbyItems(){
-        getInventory().setItem(ItemConfiguration.get().getInt("LobbyItems.cosmetic.slot"),Items.COSMETICS_MENU.getItem());
+
+    public void giveLobbyItems() {
+        getInventory().setItem(ItemConfiguration.get().getInt("LobbyItems.cosmetic.slot"), Items.COSMETICS_MENU.getItem());
         getInventory().setItem(ItemConfiguration.get().getInt("LobbyItems.kits.slot"), Items.KITS_MENU.getItem());
         getInventory().setItem(ItemConfiguration.get().getInt("LobbyItems.shop.slot"), Items.SHOP_MENU.getItem());
     }
-    public Inventory getInventory(){
+
+    public Inventory getInventory() {
         return getPlayer().getInventory();
     }
 }
