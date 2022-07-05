@@ -1,11 +1,11 @@
 package me.gameisntover.knockbackffa.listener;
 
 import me.clip.placeholderapi.PlaceholderAPI;
+import me.gameisntover.knockbackffa.KnockbackFFA;
 import me.gameisntover.knockbackffa.arena.ArenaManager;
 import me.gameisntover.knockbackffa.configurations.Messages;
 import me.gameisntover.knockbackffa.configurations.ScoreboardConfiguration;
 import me.gameisntover.knockbackffa.configurations.Sounds;
-import me.gameisntover.knockbackffa.KnockbackFFA;
 import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

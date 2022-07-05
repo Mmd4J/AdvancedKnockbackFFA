@@ -1,10 +1,10 @@
 package me.gameisntover.knockbackffa.listener;
 
-import me.gameisntover.knockbackffa.util.KBFFAKit;
 import me.gameisntover.knockbackffa.KnockbackFFA;
 import me.gameisntover.knockbackffa.arena.ArenaConfiguration;
 import me.gameisntover.knockbackffa.arena.Cuboid;
 import me.gameisntover.knockbackffa.configurations.Messages;
+import me.gameisntover.knockbackffa.util.KBFFAKit;
 import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

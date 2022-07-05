@@ -1,4 +1,4 @@
-package me.gameisntover.knockbackffa.kit;
+package me.gameisntover.knockbackffa;
 
 import lombok.SneakyThrows;
 import me.gameisntover.knockbackffa.listener.JoinLeaveListeners;
@@ -40,12 +40,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public final class KnockbackFFALegacy extends JavaPlugin implements Listener {
-    public static KnockbackFFALegacy INSTANCE;
+public final class KnockbackFFA extends JavaPlugin implements Listener {
+    public static KnockbackFFA INSTANCE;
     int ArenaID = 0;
     public Integer timer = 0;
 
-    public static KnockbackFFALegacy getInstance() {
+    public static KnockbackFFA getInstance() {
         return INSTANCE;
     }
 
@@ -85,7 +85,7 @@ public final class KnockbackFFALegacy extends JavaPlugin implements Listener {
     private void loadConfig() {
         File dataFolder = getDataFolder();
         if (!dataFolder.exists()) {
-            getLogger().info("[KnockbackFFA] : Creating DataFolder");
+            getLogger().info("[me.gameisntover.knockbackffa.KnockbackFFA] : Creating DataFolder");
             dataFolder.mkdir();
         }
         File folder = new File(getDataFolder(), "Kits" + File.separator);
@@ -93,8 +93,8 @@ public final class KnockbackFFALegacy extends JavaPlugin implements Listener {
             folder.mkdir();
             File file = new File(getDataFolder(), "Kits" + File.separator + "Default.yml");
             file.createNewFile();
-            Files.copy(Objects.requireNonNull(KnockbackFFALegacy.getInstance().getResource("Default.yml")), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            getLogger().info("[KnockbackFFA] : Default Kit Created");
+            Files.copy(Objects.requireNonNull(KnockbackFFA.getInstance().getResource("Default.yml")), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            getLogger().info("[me.gameisntover.knockbackffa.KnockbackFFA] : Default Kit Created");
         }
         Cosmetic.setup();
         ArenaConfiguration.setup();
@@ -217,8 +217,8 @@ public final class KnockbackFFALegacy extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onSign(SignChangeEvent event) {
-        if (event.getLine(0).equalsIgnoreCase("[KnockbackFFA]") && event.getLine(1).equalsIgnoreCase("Join")) {
-            event.setLine(0, ChatColor.YELLOW + "[A]KnockbackFFA");
+        if (event.getLine(0).equalsIgnoreCase("[me.gameisntover.knockbackffa.KnockbackFFA]") && event.getLine(1).equalsIgnoreCase("Join")) {
+            event.setLine(0, ChatColor.YELLOW + "[A]me.gameisntover.knockbackffa.KnockbackFFA");
             event.setLine(1, ChatColor.GREEN + "Join");
         }
     }
@@ -232,7 +232,7 @@ public final class KnockbackFFALegacy extends JavaPlugin implements Listener {
                 Block block = e.getBlockPlaced();
                 BlockState bs = e.getBlockPlaced().getState();
                 Wool wool = (Wool) bs.getData();
-                block.setMetadata("block-type", new FixedMetadataValue(KnockbackFFALegacy.getInstance(), "BuildingBlock"));
+                block.setMetadata("block-type", new FixedMetadataValue(KnockbackFFA.getInstance(), "BuildingBlock"));
                 String arenaName = ArenaManager.getEnabledArena().getName();
                 BukkitRunnable runnable = new BukkitRunnable() {
                     @Override
@@ -258,7 +258,7 @@ public final class KnockbackFFALegacy extends JavaPlugin implements Listener {
                             }
                         } else {
                             block.setType(Material.AIR);
-                            block.setMetadata("block-type", new FixedMetadataValue(KnockbackFFALegacy.getInstance(), ""));
+                            block.setMetadata("block-type", new FixedMetadataValue(KnockbackFFA.getInstance(), ""));
                         }
                     }
                 };
@@ -266,12 +266,12 @@ public final class KnockbackFFALegacy extends JavaPlugin implements Listener {
             }
             if (e.getBlockPlaced().getType() == Material.GOLD_PLATE) {
                 Block block = e.getBlockPlaced();
-                block.setMetadata("block-type", new FixedMetadataValue(KnockbackFFALegacy.getInstance(), "jumpplate"));
+                block.setMetadata("block-type", new FixedMetadataValue(KnockbackFFA.getInstance(), "jumpplate"));
                 block.getDrops().clear();
                 BukkitScheduler blockTimer = Bukkit.getServer().getScheduler();
                 blockTimer.scheduleSyncDelayedTask(this, () -> {
                     e.getBlock().setType(Material.AIR);
-                    block.setMetadata("block-type", new FixedMetadataValue(KnockbackFFALegacy.getInstance(), ""));
+                    block.setMetadata("block-type", new FixedMetadataValue(KnockbackFFA.getInstance(), ""));
                 }, ItemConfiguration.get().getInt("SpecialItems.JumpPlate.removeafter") * 20L);
             }
         }
@@ -294,7 +294,7 @@ public final class KnockbackFFALegacy extends JavaPlugin implements Listener {
         if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             if (e.getClickedBlock() instanceof Sign) {
                 Sign sign = (Sign) e.getClickedBlock().getState();
-                if (sign.getLine(0).equalsIgnoreCase(ChatColor.YELLOW + "[A]KnockbackFFA")) {
+                if (sign.getLine(0).equalsIgnoreCase(ChatColor.YELLOW + "[A]me.gameisntover.knockbackffa.KnockbackFFA")) {
                     if (sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN + "Join")) {
                         if (knocker.isInGame()) knocker.sendMessage(Messages.ALREADY_IN_GAME.toString());
                         else player.chat("/join");
@@ -306,6 +306,6 @@ public final class KnockbackFFALegacy extends JavaPlugin implements Listener {
     }
 
     public static boolean BungeeMode() {
-        return KnockbackFFALegacy.getInstance().getConfig().getBoolean("Bungee-Mode");
+        return KnockbackFFA.getInstance().getConfig().getBoolean("Bungee-Mode");
     }
 }

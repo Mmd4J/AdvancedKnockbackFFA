@@ -55,4 +55,4 @@ KitName: Default
 KitIcon: STICK
 KitDescription:
 - "\xa77Default kit"
-- "\xa77Must be configured in plugins/KnockbackFFA/kits !"
+- "\xa77Must be configured in plugins/me.gameisntover.knockbackffa.KnockbackFFA/kits !"

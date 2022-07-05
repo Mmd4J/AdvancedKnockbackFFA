@@ -1,7 +1,7 @@
 package me.gameisntover.knockbackffa.cosmetics;
 
 import lombok.Getter;
-import me.gameisntover.knockbackffa.KnockbackFFA;
+import me.gameisntover.knockbackffa.*;
 import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

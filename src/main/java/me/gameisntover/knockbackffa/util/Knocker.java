@@ -4,7 +4,7 @@ import fr.mrmicky.fastboard.FastBoard;
 import lombok.Getter;
 import lombok.Setter;
 import me.clip.placeholderapi.PlaceholderAPI;
-import me.gameisntover.knockbackffa.KnockKit;
+import me.gameisntover.knockbackffa.KnockbackFFA;
 import me.gameisntover.knockbackffa.arena.Arena;
 import me.gameisntover.knockbackffa.arena.ArenaConfiguration;
 import me.gameisntover.knockbackffa.arena.ArenaManager;
@@ -16,7 +16,7 @@ import me.gameisntover.knockbackffa.cosmetics.Cosmetic;
 import me.gameisntover.knockbackffa.cosmetics.TrailCosmetic;
 import me.gameisntover.knockbackffa.gui.Items;
 import me.gameisntover.knockbackffa.gui.LightGUI;
-import me.gameisntover.knockbackffa.kit.KnockbackFFALegacy;
+import me.gameisntover.knockbackffa.kit.KnockKit;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
 public class Knocker {
     public File cfile;
     public FileConfiguration config;
-    public static File playersfolder = new File(KnockbackFFALegacy.getInstance().getDataFolder(), "player data" + File.separator);
+    public static File playersfolder = new File(KnockbackFFA.getInstance().getDataFolder(), "player data" + File.separator);
     private boolean inGame;
     private boolean inArena;
     private BukkitTask scoreboardTask;
@@ -197,7 +197,7 @@ public class Knocker {
                 if (!event.isCancelled())
                     getPlayer().teleport(new Location(world1, spawnLoc.getX(), spawnLoc.getY(), spawnLoc.getZ()));
             }
-        } else System.out.println("[KnockbackFFA] There are no arenas to teleport the player there!");
+        } else System.out.println("[me.gameisntover.knockbackffa.KnockbackFFA] There are no arenas to teleport the player there!");
 
     }
 
@@ -216,7 +216,7 @@ public class Knocker {
                     if (getPlayer().getScoreboard() != null) getPlayer().getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
                 }
             }
-        }.runTaskTimer(KnockbackFFALegacy.getInstance(), 5, 5);
+        }.runTaskTimer(KnockbackFFA.getInstance(), 5, 5);
     }
 
     public void giveKit(KnockKit kit) {

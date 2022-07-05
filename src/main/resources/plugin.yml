@@ -1,4 +1,4 @@
-name: KnockbackFFA
+name: me.gameisntover.knockbackffa.KnockbackFFA
 version: '${project.version}'
 main: me.gameisntover.knockbackffa.KnockbackFFALegacy
 authors: [ GaMeIsNtOvEr ]
