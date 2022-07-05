@@ -1,6 +1,6 @@
 package me.gameisntover.knockbackffa.cosmetics;
 
-import me.gameisntover.knockbackffa.kit.KnockbackFFALegacy;
+import me.gameisntover.knockbackffa.KnockbackFFA;
 import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -29,6 +29,6 @@ public class SoundCosmetic extends Cosmetic {
                         if (i[0] == sounds.size() - 1) cancel();
                         else i[0]++;
                 }
-            }.runTaskTimer(KnockbackFFALegacy.getInstance(),1L,Long.parseLong(sounds.get(i[0]).split(":")[3]));
+            }.runTaskTimer(KnockbackFFA.getInstance(),1L,Long.parseLong(sounds.get(i[0]).split(":")[3]));
     }
 }

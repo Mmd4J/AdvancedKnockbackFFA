@@ -1,6 +1,6 @@
 package me.gameisntover.knockbackffa.listener;
 
-import me.gameisntover.knockbackffa.KnockKit;
+import me.gameisntover.knockbackffa.kit.KnockKit;
 import me.gameisntover.knockbackffa.configurations.ItemConfiguration;
 import me.gameisntover.knockbackffa.configurations.Messages;
 import me.gameisntover.knockbackffa.configurations.Sounds;
@@ -41,7 +41,7 @@ public class GUIItemInteractListener implements Listener {
             if (itemMeta.hasItemFlag(ItemFlag.HIDE_ATTRIBUTES)) {
                 if (Items.KITS_MENU.getItem().equals(item)) {
                     e.setCancelled(true);
-                    LightGUI cosmeticMenu = new LightGUI("Cosmetic Menu", 54);
+                    LightGUI cosmeticMenu = new LightGUI(   "Cosmetic Menu", 5);
                     cosmeticMenu.setOpenEvent(event -> Knocker.getKnocker(e.getPlayer().getUniqueId()).playSound(Sounds.GUI_OPEN.getSound(), 1, 1));
                     cosmeticMenu.setCloseEvent(event -> Knocker.getKnocker(e.getPlayer().getUniqueId()).playSound(Sounds.GUI_CLOSE.getSound(), 1, 1));
                     cosmeticMenu.setDestroyOnClose(true);
@@ -110,11 +110,11 @@ public class GUIItemInteractListener implements Listener {
                 }
                 if (Items.SHOP_MENU.getItem().equals(item)) {
                     e.setCancelled(true);
-                    LightGUI shopMenu = new LightGUI("Shop Menu", 54);
+                    LightGUI shopMenu = new LightGUI("Shop Menu", 5);
                     String cIcon = ItemConfiguration.get().getString("ShopMenu.cosmetic.material");
                     String cName = ChatColor.translateAlternateColorCodes('&', ItemConfiguration.get().getString("ShopMenu.cosmetic.name"));
                     LightButton cosmeticItem = LightButtonManager.createButton(ItemBuilder.builder().material(Material.getMaterial(cIcon)).name(cName).coolMeta().build(), event -> {
-                        LightGUI cosmeticShop = new LightGUI("Cosmetic Shop", 54);
+                        LightGUI cosmeticShop = new LightGUI("Cosmetic Shop", 5);
                         List<String> cosmetics = Cosmetic.get().getList("registered-cosmetics").stream().map(Object::toString).collect(Collectors.toList());
                         List<String> cList = knocker.get().getStringList("owned-cosmetics");
                         for (String cosmetic : cosmetics) {
@@ -163,7 +163,7 @@ public class GUIItemInteractListener implements Listener {
                     String kIcon = ItemConfiguration.get().getString("ShopMenu.kit.material");
                     String kName = ChatColor.translateAlternateColorCodes('&', ItemConfiguration.get().getString("ShopMenu.kit.name"));
                     LightButton kitItem = LightButtonManager.createButton(ItemBuilder.builder().material(Material.getMaterial(kIcon)).name(kName).coolMeta().build(), event -> {
-                        LightGUI kitShop = new LightGUI("Kit Shop", 54);
+                        LightGUI kitShop = new LightGUI("Kit Shop", 5);
                         List<String> cosmetics = Arrays.stream(Objects.requireNonNull(KitManager.getfolder().list())).map(s -> s.replace(".yml", "")).collect(Collectors.toList());
                         List<String> cList = knocker.get().getStringList("owned-kits");
                         for (String cosmetic : cosmetics) {
@@ -221,7 +221,7 @@ public class GUIItemInteractListener implements Listener {
                 }
                 if (Items.KITS_MENU.getItem().equals(item)) {
                     e.setCancelled(true);
-                    LightGUI kitsMenu = new LightGUI("Kits Menu", 54);
+                    LightGUI kitsMenu = new LightGUI("Kits Menu", 5);
                     kitsMenu.setOpenEvent(event -> Knocker.getKnocker(e.getPlayer().getUniqueId()).playSound(Sounds.GUI_OPEN.getSound(), 1, 1));
                     kitsMenu.setCloseEvent(event -> Knocker.getKnocker(e.getPlayer().getUniqueId()).playSound(Sounds.GUI_CLOSE.getSound(), 1, 1));
 

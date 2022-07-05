@@ -1,7 +1,7 @@
 package me.gameisntover.knockbackffa.cosmetics;
 
 import lombok.Getter;
-import me.gameisntover.knockbackffa.kit.KnockbackFFALegacy;
+import me.gameisntover.knockbackffa.KnockbackFFA;
 import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -24,12 +24,12 @@ public abstract class Cosmetic {
     private static FileConfiguration configuration;
 
     public static void setup() {
-        file = new File(KnockbackFFALegacy.getInstance().getDataFolder(), "cosmetics.yml");
+        file = new File(KnockbackFFA.getInstance().getDataFolder(), "cosmetics.yml");
 
         if (!file.exists()) {
             try {
                 file.createNewFile();
-                Files.copy(KnockbackFFALegacy.getInstance().getResource("cosmetics.yml"), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(KnockbackFFA.getInstance().getResource("cosmetics.yml"), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
             }
         }

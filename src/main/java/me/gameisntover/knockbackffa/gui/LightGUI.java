@@ -2,7 +2,7 @@ package me.gameisntover.knockbackffa.gui;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.gameisntover.knockbackffa.kit.KnockbackFFALegacy;
+import me.gameisntover.knockbackffa.KnockbackFFA;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
@@ -27,7 +27,7 @@ public class LightGUI implements Listener {
     private boolean destroyOnClose = false;
     public LightGUI(String name, Integer slot) {
         inventory = Bukkit.createInventory(null, slot * 9, ChatColor.translateAlternateColorCodes('&', name));
-        Bukkit.getPluginManager().registerEvents(this, KnockbackFFALegacy.getInstance());
+        Bukkit.getPluginManager().registerEvents(this, KnockbackFFA.getInstance());
     }
     public void setOnDestroyClose(Boolean toggle){
     destroyOnClose = toggle;

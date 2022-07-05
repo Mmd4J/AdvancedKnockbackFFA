@@ -1,6 +1,6 @@
 package me.gameisntover.knockbackffa.configurations;
 
-import me.gameisntover.knockbackffa.kit.KnockbackFFALegacy;
+import me.gameisntover.knockbackffa.KnockbackFFA;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -31,15 +31,15 @@ public enum Messages {
     ARENA_JOIN("join-arena","&eYou have joined the game!"),
     ALREADY_IN_GAME("alreadyingame","&cYou're already in game isnt it?");
     private final String path,defaultmsg;
-    private static FileConfiguration messages = YamlConfiguration.loadConfiguration(new File(KnockbackFFALegacy.getInstance().getDataFolder(), "messages.yml"));
+    private static FileConfiguration messages = YamlConfiguration.loadConfiguration(new File(KnockbackFFA.getInstance().getDataFolder(), "messages.yml"));
     Messages(String path,String defaultmsg){
         this.path = path;
         this.defaultmsg = defaultmsg;
-        File file = new File(KnockbackFFALegacy.getInstance().getDataFolder(), "messages.yml");
+        File file = new File(KnockbackFFA.getInstance().getDataFolder(), "messages.yml");
         if (!file.exists()) {
             try {
                 file.createNewFile();
-                Files.copy(KnockbackFFALegacy.getInstance().getResource("messages.yml"), file.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(KnockbackFFA.getInstance().getResource("messages.yml"), file.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
 
             }
@@ -53,7 +53,7 @@ public enum Messages {
     }
     public static void save() {
         try {
-            messages.save(new File(KnockbackFFALegacy.getInstance().getDataFolder(), "messages.yml"));
+            messages.save(new File(KnockbackFFA.getInstance().getDataFolder(), "messages.yml"));
         } catch (IOException e) {
             System.out.println("Couldn't save file");
         }

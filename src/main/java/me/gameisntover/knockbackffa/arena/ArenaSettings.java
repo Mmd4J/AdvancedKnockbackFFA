@@ -1,6 +1,6 @@
 package me.gameisntover.knockbackffa.arena;
 
-import me.gameisntover.knockbackffa.KnockKit;
+import me.gameisntover.knockbackffa.kit.KnockKit;
 import me.gameisntover.knockbackffa.gui.Items;
 import me.gameisntover.knockbackffa.kit.KitManager;
 import me.gameisntover.knockbackffa.util.KBFFAKit;

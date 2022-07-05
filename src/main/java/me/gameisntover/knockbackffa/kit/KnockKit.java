@@ -1,6 +1,5 @@
-package me.gameisntover.knockbackffa;
+package me.gameisntover.knockbackffa.kit;
 
-import me.gameisntover.knockbackffa.kit.KitManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

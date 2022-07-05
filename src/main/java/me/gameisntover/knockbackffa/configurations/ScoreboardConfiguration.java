@@ -1,6 +1,6 @@
 package me.gameisntover.knockbackffa.configurations;
 
-import me.gameisntover.knockbackffa.kit.KnockbackFFALegacy;
+import me.gameisntover.knockbackffa.KnockbackFFA;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -15,11 +15,11 @@ public class ScoreboardConfiguration
     private static FileConfiguration messages;
 
     public static void setup() {
-        file = new File(KnockbackFFALegacy.getInstance().getDataFolder(), "scoreboard.yml");
+        file = new File(KnockbackFFA.getInstance().getDataFolder(), "scoreboard.yml");
         if (!file.exists()) {
             try {
                 file.createNewFile();
-                Files.copy(KnockbackFFALegacy.getInstance().getResource("scoreboard.yml"), file.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(KnockbackFFA.getInstance().getResource("scoreboard.yml"), file.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
 
             }

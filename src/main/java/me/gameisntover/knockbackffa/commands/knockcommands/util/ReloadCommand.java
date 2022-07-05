@@ -6,7 +6,7 @@ import me.gameisntover.knockbackffa.commands.KnockCommand;
 import me.gameisntover.knockbackffa.configurations.ItemConfiguration;
 import me.gameisntover.knockbackffa.configurations.ScoreboardConfiguration;
 import me.gameisntover.knockbackffa.cosmetics.Cosmetic;
-import me.gameisntover.knockbackffa.kit.KnockbackFFALegacy;
+import me.gameisntover.knockbackffa.KnockbackFFA;
 import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.permissions.PermissionDefault;
 
@@ -21,7 +21,7 @@ public class ReloadCommand extends KnockCommand {
 
     @Override
     public void run(String[] args, Knocker knocker) {
-        KnockbackFFALegacy.getInstance().reloadConfig();
+        KnockbackFFA.getInstance().reloadConfig();
         ArenaConfiguration.reload();
         ScoreboardConfiguration.reload();
         ItemConfiguration.reload();

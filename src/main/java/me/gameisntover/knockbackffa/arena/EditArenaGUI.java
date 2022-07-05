@@ -19,7 +19,7 @@ import java.util.List;
 
 public class EditArenaGUI extends LightGUI {
     public EditArenaGUI(String arenaname) {
-        super("Arena Editor",54);
+        super("Arena Editor",5);
         Arena arena =  ArenaManager.load(arenaname);
         LightGUI arenaGUI = this;
         LightButton blockBreak = LightButtonManager.createButton(ItemBuilder.builder().material(Material.DIAMOND_PICKAXE).name(ChatColor.GRAY + "Block Break").lore(ChatColor.GRAY + "Toggle whether or not players can break blocks").build(), e -> {

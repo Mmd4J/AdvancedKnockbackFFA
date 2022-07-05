@@ -1,6 +1,6 @@
 package me.gameisntover.knockbackffa.kit;
 
-import me.gameisntover.knockbackffa.KnockKit;
+import me.gameisntover.knockbackffa.KnockbackFFA;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KitManager {
-    public static File folder = new File(KnockbackFFALegacy.getInstance().getDataFolder(), "Kits" + File.separator);
+    public static File folder = new File(KnockbackFFA.getInstance().getDataFolder(), "Kits" + File.separator);
     public static File getfolder() {
         return folder;
     }

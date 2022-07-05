@@ -1,6 +1,6 @@
 package me.gameisntover.knockbackffa.configurations;
 
-import me.gameisntover.knockbackffa.kit.KnockbackFFALegacy;
+import me.gameisntover.knockbackffa.KnockbackFFA;
 import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -22,7 +22,7 @@ public enum Sounds {
     Sounds(String path, Sound defaultsound){
     this.sound = defaultsound;
     this.path = path;
-    file = new File(KnockbackFFALegacy.getInstance().getDataFolder(), "sound.yml");
+    file = new File(KnockbackFFA.getInstance().getDataFolder(), "sound.yml");
     if (!file.exists()) {
         try {
             file.createNewFile();

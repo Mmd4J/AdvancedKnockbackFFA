@@ -1,6 +1,6 @@
 package me.gameisntover.knockbackffa.arena;
 
-import me.gameisntover.knockbackffa.kit.KnockbackFFALegacy;
+import me.gameisntover.knockbackffa.KnockbackFFA;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -14,7 +14,7 @@ public class ArenaConfiguration
     private static FileConfiguration arenas;
 
     public static void setup() {
-        file = new File(KnockbackFFALegacy.getInstance().getDataFolder(), "zones.yml");
+        file = new File(KnockbackFFA.getInstance().getDataFolder(), "zones.yml");
         if (!file.exists()) {
             try {
                 file.createNewFile();

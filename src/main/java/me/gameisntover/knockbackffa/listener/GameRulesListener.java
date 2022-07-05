@@ -1,7 +1,7 @@
 package me.gameisntover.knockbackffa.listener;
 
 import me.gameisntover.knockbackffa.util.KBFFAKit;
-import me.gameisntover.knockbackffa.kit.KnockbackFFALegacy;
+import me.gameisntover.knockbackffa.KnockbackFFA;
 import me.gameisntover.knockbackffa.arena.ArenaConfiguration;
 import me.gameisntover.knockbackffa.arena.Cuboid;
 import me.gameisntover.knockbackffa.configurations.Messages;
@@ -67,7 +67,7 @@ public class GameRulesListener implements Listener {
                                 player.setLastDamageCause(new EntityDamageEvent(player, EntityDamageEvent.DamageCause.VOID, damage));
                             }
                         }
-                    }.runTaskTimer(KnockbackFFALegacy.getInstance(), 0, 20);
+                    }.runTaskTimer(KnockbackFFA.getInstance(), 0, 20);
 
                 }
             }
@@ -103,7 +103,7 @@ public class GameRulesListener implements Listener {
                                 timer = 10;
                             }
                         }
-                    }.runTaskTimer(KnockbackFFALegacy.getInstance(), 0, 20);
+                    }.runTaskTimer(KnockbackFFA.getInstance(), 0, 20);
             }
     }
 

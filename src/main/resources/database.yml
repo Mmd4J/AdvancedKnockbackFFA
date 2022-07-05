@@ -1,0 +1,10 @@
+type: SQLite
+#SQLite , MySQL
+MySQL:
+  ip: "localhost"
+  port: 3306
+  user: "root"
+  dbname: "knockbackffa"
+  password: ""
+SQLite:
+  dbname: "knockbackffa"

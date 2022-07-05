@@ -1,6 +1,6 @@
 package me.gameisntover.knockbackffa.configurations;
 
-import me.gameisntover.knockbackffa.kit.KnockbackFFALegacy;
+import me.gameisntover.knockbackffa.KnockbackFFA;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -16,12 +16,12 @@ public class ItemConfiguration
     private static FileConfiguration soundConfig;
 
     public static void setup() {
-        file = new File(KnockbackFFALegacy.getInstance().getDataFolder(), "items.yml");
+        file = new File(KnockbackFFA.getInstance().getDataFolder(), "items.yml");
 
         if (!file.exists()) {
             try {
                 file.createNewFile();
-                Files.copy(KnockbackFFALegacy.getInstance().getResource("Items.yml"), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(KnockbackFFA.getInstance().getResource("Items.yml"), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
             }
         }

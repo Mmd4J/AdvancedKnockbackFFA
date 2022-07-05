@@ -1,6 +1,6 @@
 package me.gameisntover.knockbackffa.arena;
 
-import me.gameisntover.knockbackffa.kit.KnockbackFFALegacy;
+import me.gameisntover.knockbackffa.KnockbackFFA;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -61,7 +61,7 @@ public class Arena {
 
             @Override
             public void run() {
-                int amountBlocksEachSec = KnockbackFFALegacy.getInstance().getConfig().getInt("autoresetcheck-blocks");
+                int amountBlocksEachSec = KnockbackFFA.getInstance().getConfig().getInt("autoresetcheck-blocks");
                 int startPoint = allBlocks - remainBlocks;
                 while (startPoint < blocks.size() && amountBlocksEachSec > 0 && remainBlocks > 0) {
                     Material material = Material.getMaterial(materials.get(startPoint));
@@ -76,7 +76,7 @@ public class Arena {
                     System.out.println(getName() + " has been reset!");
                 }
             }
-        }.runTaskTimer(KnockbackFFALegacy.getInstance(), 0, 20);
+        }.runTaskTimer(KnockbackFFA.getInstance(), 0, 20);
     }
 
 
