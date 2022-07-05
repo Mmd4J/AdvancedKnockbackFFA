@@ -27,7 +27,7 @@ public class CreateKitCommand extends KnockCommand {
             if (knocker.getPlayer().getInventory().getItemInHand().getType() != Material.AIR)
                 icon = knocker.getPlayer().getInventory().getItemInHand().getType().name();
             KitManager.create(args[0], Arrays.asList(Arrays.stream(knocker.getPlayer().getInventory().getContents()).toArray(ItemStack[]::new)), icon);
-            knocker.sendMessage("&aSuccessfully created the kit \"" + args[0] + "\" ! now you need to configure it! check out plugins/me.gameisntover.knockbackffa.KnockbackFFA/kits/" + args[0] + ".yml!");
+            knocker.sendMessage("&aSuccessfully created the kit \"" + args[0] + "\" ! now you need to configure it! check out plugins/KnockbackFFA/kits/" + args[0] + ".yml!");
         }
 
     }

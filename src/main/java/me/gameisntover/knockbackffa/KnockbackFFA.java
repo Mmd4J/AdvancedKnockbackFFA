@@ -85,7 +85,7 @@ public final class KnockbackFFA extends JavaPlugin implements Listener {
     private void loadConfig() {
         File dataFolder = getDataFolder();
         if (!dataFolder.exists()) {
-            getLogger().info("[me.gameisntover.knockbackffa.KnockbackFFA] : Creating DataFolder");
+            getLogger().info("[KnockbackFFA] : Creating DataFolder");
             dataFolder.mkdir();
         }
         File folder = new File(getDataFolder(), "Kits" + File.separator);
@@ -94,7 +94,7 @@ public final class KnockbackFFA extends JavaPlugin implements Listener {
             File file = new File(getDataFolder(), "Kits" + File.separator + "Default.yml");
             file.createNewFile();
             Files.copy(Objects.requireNonNull(KnockbackFFA.getInstance().getResource("Default.yml")), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            getLogger().info("[me.gameisntover.knockbackffa.KnockbackFFA] : Default Kit Created");
+            getLogger().info("[KnockbackFFA] : Default Kit Created");
         }
         Cosmetic.setup();
         ArenaConfiguration.setup();
@@ -217,8 +217,8 @@ public final class KnockbackFFA extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onSign(SignChangeEvent event) {
-        if (event.getLine(0).equalsIgnoreCase("[me.gameisntover.knockbackffa.KnockbackFFA]") && event.getLine(1).equalsIgnoreCase("Join")) {
-            event.setLine(0, ChatColor.YELLOW + "[A]me.gameisntover.knockbackffa.KnockbackFFA");
+        if (event.getLine(0).equalsIgnoreCase("[KnockbackFFA]") && event.getLine(1).equalsIgnoreCase("Join")) {
+            event.setLine(0, ChatColor.YELLOW + "[A]KnockbackFFA");
             event.setLine(1, ChatColor.GREEN + "Join");
         }
     }

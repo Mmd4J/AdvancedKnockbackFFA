@@ -182,7 +182,11 @@ public class Knocker {
 
 
     public void teleportPlayerToArena() {
-        if (ArenaManager.getfolder().list().length > 0) {
+        if (!ArenaManager.getfolder().exists()) {
+            System.out.println("Create an arena before trying to teleport player there :I");
+            sendMessage("&cThere was an error while trying to send you to game you might need to tell admins to check the console");
+        }
+        else if (ArenaManager.getfolder().list().length > 0) {
             PlayerJoinArenaEvent event = new PlayerJoinArenaEvent(this, ArenaManager.getEnabledArena());
             Bukkit.getPluginManager().callEvent(event);
             Location spawnLoc = ArenaManager.getEnabledArena().getSpawnLocation();
@@ -197,7 +201,7 @@ public class Knocker {
                 if (!event.isCancelled())
                     getPlayer().teleport(new Location(world1, spawnLoc.getX(), spawnLoc.getY(), spawnLoc.getZ()));
             }
-        } else System.out.println("[me.gameisntover.knockbackffa.KnockbackFFA] There are no arenas to teleport the player there!");
+        } else System.out.println("[KnockbackFFA] There are no arenas to teleport the player there!");
 
     }
 

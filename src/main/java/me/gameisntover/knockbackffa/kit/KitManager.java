@@ -27,7 +27,7 @@ public class KitManager {
         lore.add("this is a kit");
         List<String> defaultKitLore = new ArrayList<>();
         defaultKitLore.add(ChatColor.GRAY + "Another cool kit!");
-        defaultKitLore.add(ChatColor.GRAY + "Must be configured in plugins/me.gameisntover.knockbackffa.KnockbackFFA/kits/"+name+".yml !");
+        defaultKitLore.add(ChatColor.GRAY + "Must be configured in plugins/KnockbackFFA/kits/"+name+".yml !");
         kit.get().set("lore",defaultKitLore);
         kit.save();
         return kit;

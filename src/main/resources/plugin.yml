@@ -1,6 +1,6 @@
-name: me.gameisntover.knockbackffa.KnockbackFFA
+name: KnockbackFFA
 version: '${project.version}'
-main: me.gameisntover.knockbackffa.KnockbackFFALegacy
+main: me.gameisntover.knockbackffa.KnockbackFFA
 authors: [ GaMeIsNtOvEr ]
 softdepend:
   - 'PlaceholderAPI'

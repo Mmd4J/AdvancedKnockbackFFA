@@ -43,6 +43,7 @@ public class SQLite implements Database {
     public void insertData(Knocker knocker) {
         try {
             PreparedStatement stmt = connection.prepareStatement("INSERT OR IGNORE INTO kbffa(uuid,name,kills,deaths,elo,maxkillstreak,balance,selectedCosmetic,selectedTrail,selectedKit,ownedKits,ownedCosmetics) VALUES(?,?,?,?,?,?,?,?,?,?,?,?);");
+            stmt.setString(1,knocker.getUniqueID().toString());
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException throwables) {
@@ -65,6 +66,7 @@ public class SQLite implements Database {
                     "selectedKit = ?," +
                     "ownedKits = ?" +
                     "ownedCosmetics = ?;");
+
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException throwables) {
