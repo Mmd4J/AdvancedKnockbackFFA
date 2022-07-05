@@ -12,7 +12,7 @@ import org.bukkit.permissions.PermissionDefault;
 
 import java.util.List;
 
-@KFCommand(name = "kbffareload",syntax = "/kbffareload",permissionDefault = PermissionDefault.OP,description = "reloads the configs")
+@KFCommand(name = "kbffareload", syntax = "/kbffareload", permissionDefault = PermissionDefault.OP, description = "reloads the configs")
 public class ReloadCommand extends KnockCommand {
     @Override
     public List<String> performTab(String[] args, Knocker knocker) {

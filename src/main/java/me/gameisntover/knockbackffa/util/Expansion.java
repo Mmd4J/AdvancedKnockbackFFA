@@ -1,7 +1,7 @@
 package me.gameisntover.knockbackffa.util;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import me.gameisntover.knockbackffa.KnockbackFFA;
+import me.gameisntover.knockbackffa.kit.KnockbackFFALegacy;
 import me.gameisntover.knockbackffa.arena.ArenaManager;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -12,9 +12,9 @@ import java.util.List;
 
 public class Expansion extends PlaceholderExpansion
 {
-    private final KnockbackFFA plugin;
+    private final KnockbackFFALegacy plugin;
 
-    public Expansion(KnockbackFFA plugin) {
+    public Expansion(KnockbackFFALegacy plugin) {
         this.plugin = plugin;
     }
 
@@ -52,7 +52,7 @@ public class Expansion extends PlaceholderExpansion
              else return arenaName;
         }
         if (params.equalsIgnoreCase("timer_nextmap")){
-            int timer = KnockbackFFA.getInstance().timer;
+            int timer = KnockbackFFALegacy.getInstance().timer;
             int seconds = timer % 60;
             int minutes = timer / 60;
             return minutes + ":" + seconds;

@@ -15,9 +15,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class Arena {
-    private FileConfiguration config;
-    private String arenaName;
-    private File arenaFile;
+    private final FileConfiguration config;
+    private final String arenaName;
+    private final File arenaFile;
 
     public Arena(String name) {
         this.arenaName = name;
@@ -100,17 +100,16 @@ public class Arena {
     }
 
 
-
     /**
      * Deletes the arena file and changes the enabled arena
      * if that arena is the enabled arena.
      */
     public void removeArena() {
         arenaFile.delete();
-        while (ArenaManager.getEnabledArena().getName().equals(arenaName)) ArenaManager.setEnabledArena(ArenaManager.randomArena());
+        while (ArenaManager.getEnabledArena().getName().equals(arenaName))
+            ArenaManager.setEnabledArena(ArenaManager.randomArena());
         save();
     }
-
 
 
     /**
@@ -126,6 +125,7 @@ public class Arena {
         positions.add(getPos2());
         return positions;
     }
+
     /**
      * Returns the arena name
      *

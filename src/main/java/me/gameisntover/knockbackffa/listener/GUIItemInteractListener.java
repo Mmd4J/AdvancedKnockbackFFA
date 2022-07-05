@@ -245,7 +245,8 @@ public class GUIItemInteractListener implements Listener {
                                         player.closeInventory();
                                     });
                                     ItemMeta kitMeta = kitItem.getItem().getItemMeta();
-                                    if (kitItem.getItem().getType() == Material.AIR) kitItem.getItem().setType(Material.BARRIER);
+                                    if (kitItem.getItem().getType() == Material.AIR)
+                                        kitItem.getItem().setType(Material.BARRIER);
 
                                     kitMeta.setLore(kitItems.get().getStringList("KitDescription").stream().map(s -> s.replace("&", "§")).collect(Collectors.toList()));
                                     if (knocker.get().getString("selected-kit") == null) {

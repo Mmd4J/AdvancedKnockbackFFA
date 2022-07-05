@@ -1,7 +1,7 @@
 package me.gameisntover.knockbackffa.arena;
 
 import me.gameisntover.knockbackffa.util.KBFFAKit;
-import me.gameisntover.knockbackffa.KnockbackFFA;
+import me.gameisntover.knockbackffa.kit.KnockbackFFALegacy;
 import me.gameisntover.knockbackffa.configurations.Messages;
 import me.gameisntover.knockbackffa.configurations.Sounds;
 import me.gameisntover.knockbackffa.util.Knocker;
@@ -51,9 +51,9 @@ public class ArenaManager {
 
 
     public static Arena create(String arenaName, Location position1, Location position2, Location spawnPoint) {
-        File cfile = new File(KnockbackFFA.getInstance().getDataFolder(), "ArenaData" + File.separator + arenaName + ".yml");
-        if (!KnockbackFFA.getInstance().getDataFolder().exists())
-            KnockbackFFA.getInstance().getDataFolder().mkdir();
+        File cfile = new File(KnockbackFFALegacy.getInstance().getDataFolder(), "ArenaData" + File.separator + arenaName + ".yml");
+        if (!KnockbackFFALegacy.getInstance().getDataFolder().exists())
+            KnockbackFFALegacy.getInstance().getDataFolder().mkdir();
         if (!cfile.exists()) {
             try {
                 cfile.createNewFile();
@@ -91,7 +91,7 @@ public class ArenaManager {
     }
 
     public static File getfolder() {
-        return new File(KnockbackFFA.getInstance().getDataFolder(), "ArenaData" + File.separator);
+        return new File(KnockbackFFALegacy.getInstance().getDataFolder(), "ArenaData" + File.separator);
     }
 
     /**

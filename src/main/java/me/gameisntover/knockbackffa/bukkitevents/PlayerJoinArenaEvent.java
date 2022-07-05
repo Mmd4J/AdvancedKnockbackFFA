@@ -8,19 +8,27 @@ import org.bukkit.event.HandlerList;
 
 public final class PlayerJoinArenaEvent extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
-    private Arena arena;
-    private Knocker player;
+    private final Arena arena;
+    private final Knocker player;
     private boolean isCancelled;
-    public PlayerJoinArenaEvent(Knocker player , Arena arena){
+
+    public PlayerJoinArenaEvent(Knocker player, Arena arena) {
         this.player = player;
         this.arena = arena;
     }
-    public Arena getArena(){
+
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
+    public Arena getArena() {
         return arena;
     }
-    public Knocker getKnocker(){
+
+    public Knocker getKnocker() {
         return player;
     }
+
     @Override
     public boolean isCancelled() {
         return this.isCancelled;
@@ -32,10 +40,6 @@ public final class PlayerJoinArenaEvent extends Event implements Cancellable {
     }
 
     public HandlerList getHandlers() {
-        return handlers;
-    }
-
-    public static HandlerList getHandlerList() {
         return handlers;
     }
 

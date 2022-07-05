@@ -9,7 +9,7 @@ import org.bukkit.permissions.PermissionDefault;
 
 import java.util.List;
 
-@KFCommand(name = "setmainlobby",description = "sets the mainlobby",syntax = "/setmainlobby",permissionDefault = PermissionDefault.OP)
+@KFCommand(name = "setmainlobby", description = "sets the mainlobby", syntax = "/setmainlobby", permissionDefault = PermissionDefault.OP)
 public class SetMainLobbyCommand extends KnockCommand {
     @Override
     public List<String> performTab(String[] args, Knocker knocker) {

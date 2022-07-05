@@ -11,7 +11,7 @@ import org.bukkit.permissions.PermissionDefault;
 
 import java.util.List;
 
-@KFCommand(name = "kbffajoin",syntax = "/kbffajoin",description = "Joins the game",permissionDefault = PermissionDefault.TRUE)
+@KFCommand(name = "kbffajoin", syntax = "/kbffajoin", description = "Joins the game", permissionDefault = PermissionDefault.TRUE)
 public class JoinCommand extends KnockCommand {
 
     @Override

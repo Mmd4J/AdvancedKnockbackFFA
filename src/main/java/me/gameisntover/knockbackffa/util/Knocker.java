@@ -4,7 +4,7 @@ import fr.mrmicky.fastboard.FastBoard;
 import lombok.Getter;
 import lombok.Setter;
 import me.clip.placeholderapi.PlaceholderAPI;
-import me.gameisntover.knockbackffa.kit.KnockKit;
+import me.gameisntover.knockbackffa.KnockKit;
 import me.gameisntover.knockbackffa.arena.Arena;
 import me.gameisntover.knockbackffa.arena.ArenaConfiguration;
 import me.gameisntover.knockbackffa.arena.ArenaManager;
@@ -16,7 +16,7 @@ import me.gameisntover.knockbackffa.cosmetics.Cosmetic;
 import me.gameisntover.knockbackffa.cosmetics.TrailCosmetic;
 import me.gameisntover.knockbackffa.gui.Items;
 import me.gameisntover.knockbackffa.gui.LightGUI;
-import me.gameisntover.knockbackffa.KnockbackFFA;
+import me.gameisntover.knockbackffa.kit.KnockbackFFALegacy;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
 public class Knocker {
     public File cfile;
     public FileConfiguration config;
-    public static File playersfolder = new File(KnockbackFFA.getInstance().getDataFolder(), "player data" + File.separator);
+    public static File playersfolder = new File(KnockbackFFALegacy.getInstance().getDataFolder(), "player data" + File.separator);
     private boolean inGame;
     private boolean inArena;
     private BukkitTask scoreboardTask;
@@ -86,12 +86,14 @@ public class Knocker {
     }
 
     public static Knocker getKnocker(UUID uuid) {
-        if (!knockerMap.containsKey(uuid)) knockerMap.put(uuid,new Knocker(uuid));
-            return knockerMap.get(uuid);
+        if (knockerMap.containsKey(uuid)) return knockerMap.get(uuid);
+        else {
+            Knocker knocker = new Knocker(uuid);
+            knockerMap.put(uuid, knocker);
+            return knocker;
+        }
     }
-    public static Knocker getKnocker(Player player){
-        return getKnocker(player.getUniqueId());
-    }
+
     public static Knocker getKnocker(String name) {
         return getKnocker(Bukkit.getPlayer(name).getUniqueId());
     }
@@ -162,8 +164,8 @@ public class Knocker {
         World world = Bukkit.getWorld(ArenaConfiguration.get().getString("mainlobby.world"));
         if (world != null) getPlayer().teleport(new Location(world, x, y, z));
         else {
-            String worldName =ArenaConfiguration.get().getString("mainlobby.world");
-            WorldCreator worldCreator = new WorldCreator(worldName);
+            String worldname =ArenaConfiguration.get().getString("mainlobby.world");
+            WorldCreator worldCreator = new WorldCreator(worldname);
             world = worldCreator.createWorld();
             getPlayer().teleport(new Location(world, x, y, z));
             getPlayer().teleport(Bukkit.getWorld("world").getSpawnLocation());
@@ -214,7 +216,7 @@ public class Knocker {
                     if (getPlayer().getScoreboard() != null) getPlayer().getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
                 }
             }
-        }.runTaskTimer(KnockbackFFA.getInstance(), 5, 5);
+        }.runTaskTimer(KnockbackFFALegacy.getInstance(), 5, 5);
     }
 
     public void giveKit(KnockKit kit) {

@@ -1,6 +1,5 @@
 package me.gameisntover.knockbackffa.commands;
 
-import jdk.nashorn.internal.ir.annotations.Reference;
 import org.bukkit.permissions.PermissionDefault;
 
 import java.lang.annotation.ElementType;

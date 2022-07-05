@@ -1,7 +1,7 @@
 package me.gameisntover.knockbackffa.listener;
 
 import me.clip.placeholderapi.PlaceholderAPI;
-import me.gameisntover.knockbackffa.KnockbackFFA;
+import me.gameisntover.knockbackffa.kit.KnockbackFFALegacy;
 import me.gameisntover.knockbackffa.configurations.Messages;
 import me.gameisntover.knockbackffa.util.KBFFAKit;
 import me.gameisntover.knockbackffa.util.Knocker;
@@ -75,7 +75,7 @@ public class DeathListener implements Listener {
                 knocker.teleportPlayerToArena();
                 cancel();
             }
-        }.runTaskTimer(KnockbackFFA.getInstance(), 0, 1);
+        }.runTaskTimer(KnockbackFFALegacy.getInstance(), 0, 1);
         World world = player.getWorld();
         List<Entity> entList = world.getEntities();
         for (Entity current : entList)
@@ -86,7 +86,7 @@ public class DeathListener implements Listener {
         if (damager != null && damager != player) {
             Knocker damageKnocker = Knocker.getKnocker(damager.getUniqueId());
             knocker.loadCosmetic(damageKnocker.getSelectedCosmetic());
-            float prize = KnockbackFFA.getInstance().getConfig().getInt("killprize");
+            float prize = KnockbackFFALegacy.getInstance().getConfig().getInt("killprize");
             damager.sendMessage(Messages.PRIZE.toString().replace("%prize%", prize + ""));
             damageKnocker.addBalance(prize);
             damageKnocker.get().set("kills", damageKnocker.get().getInt("kills") + 1);
