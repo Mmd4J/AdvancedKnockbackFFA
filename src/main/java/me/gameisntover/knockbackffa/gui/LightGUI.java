@@ -27,7 +27,7 @@ public class LightGUI implements Listener {
     private boolean destroyOnClose = false;
 
     public LightGUI(String name, Integer slot) {
-        inventory = Bukkit.createInventory(null, slot * 9, ChatColor.translateAlternateColorCodes('&', name));
+        inventory = Bukkit.createInventory(null, slot * 5, ChatColor.translateAlternateColorCodes('&', name));
         Bukkit.getPluginManager().registerEvents(this, KnockbackFFALegacy.getInstance());
     }
 
