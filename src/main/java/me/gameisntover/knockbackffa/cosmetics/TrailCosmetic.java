@@ -13,15 +13,24 @@ import java.util.List;
 public class TrailCosmetic extends Cosmetic{
     private PlayerMoveEvent e;
     List<String> blocks;
-    public TrailCosmetic(String name, String description, Double price, Material icon,List<String> blocks) {
-        super(CosmeticType.TRAIL, name, description, price, icon);
+    public TrailCosmetic(String name,Knocker knocker,List<String> blocks) {
+        super(name,knocker,true);
+        this.blocks = blocks;
+    }
+    public TrailCosmetic(String name,Knocker knocker,List<String> blocks,boolean no) {
+        super(name,knocker,no);
         this.blocks = blocks;
     }
 
     @Override
-    public void onLoad(Knocker knocker) {
+    public CosmeticType getType() {
+        return CosmeticType.TRAIL;
+    }
 
-            Block block = knocker.getLocation().getWorld().getBlockAt(e.getFrom().getBlockX(), e.getFrom().getBlockY() - 1, e.getFrom().getBlockZ());
+    @Override
+    public void onLoad() {
+
+            Block block = owner.getLocation().getWorld().getBlockAt(e.getFrom().getBlockX(), e.getFrom().getBlockY() - 1, e.getFrom().getBlockZ());
             if (block.getMetadata("block-type")==null || block.getMetadata("block-type").get(0).asString().equals("")) {
                 if (block.getType() != Material.AIR) {
                     block.setMetadata("block-type",new FixedMetadataValue(KnockbackFFA.getInstance(),block.getType().name()));
@@ -60,7 +69,6 @@ public class TrailCosmetic extends Cosmetic{
                 }
         }
     }
-
     public void setMoveEvent(PlayerMoveEvent e){
         this.e = e;
     }

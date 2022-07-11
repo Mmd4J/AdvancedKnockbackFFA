@@ -66,4 +66,7 @@ public class LightGUI implements Listener {
             if (destroyOnClose) HandlerList.unregisterAll(this);
         }
     }
+    public void destroy(){
+        HandlerList.unregisterAll(this);
+    }
 }

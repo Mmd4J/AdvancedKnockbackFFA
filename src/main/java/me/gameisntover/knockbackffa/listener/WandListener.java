@@ -1,8 +1,7 @@
 package me.gameisntover.knockbackffa.listener;
 
+import me.gameisntover.knockbackffa.gui.Items;
 import me.gameisntover.knockbackffa.util.Knocker;
-import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,7 +12,7 @@ public class WandListener implements Listener {
     public void wandSelection1(PlayerInteractEvent e) {
         Player player = e.getPlayer();
         Knocker knocker = Knocker.getKnocker(e.getPlayer().getUniqueId());
-        if (!player.getInventory().getItemInHand().getType().equals(Material.BLAZE_ROD) && !player.getInventory().getItemInHand().getItemMeta().hasEnchant(Enchantment.DURABILITY))
+        if (!player.getInventory().getItemInHand().equals(Items.WAND.getItem()))
             return;
         switch (e.getAction()) {
             case LEFT_CLICK_BLOCK:

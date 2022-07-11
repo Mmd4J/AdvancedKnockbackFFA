@@ -1,12 +1,11 @@
 package me.gameisntover.knockbackffa.commands.knockcommands.util;
 
+import me.gameisntover.knockbackffa.KnockbackFFA;
 import me.gameisntover.knockbackffa.arena.ArenaConfiguration;
 import me.gameisntover.knockbackffa.commands.KFCommand;
 import me.gameisntover.knockbackffa.commands.KnockCommand;
 import me.gameisntover.knockbackffa.configurations.ItemConfiguration;
 import me.gameisntover.knockbackffa.configurations.ScoreboardConfiguration;
-import me.gameisntover.knockbackffa.cosmetics.Cosmetic;
-import me.gameisntover.knockbackffa.KnockbackFFA;
 import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.permissions.PermissionDefault;
 
@@ -25,7 +24,6 @@ public class ReloadCommand extends KnockCommand {
         ArenaConfiguration.reload();
         ScoreboardConfiguration.reload();
         ItemConfiguration.reload();
-        Cosmetic.reload();
         knocker.sendMessageWithPrefix("Configs are reloaded!");
     }
 }

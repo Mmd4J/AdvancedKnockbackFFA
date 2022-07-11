@@ -81,4 +81,16 @@ public class KnockKit {
         get().set("price", price);
         save();
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    public static KnockKit getFromString(String name){
+        return KitManager.load(name);
+    }
+    public static KnockKit defaultKit(){
+        return KitManager.load("Default");
+    }
 }

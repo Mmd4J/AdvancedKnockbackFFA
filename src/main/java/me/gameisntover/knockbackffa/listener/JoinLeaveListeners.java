@@ -6,6 +6,7 @@ import me.gameisntover.knockbackffa.arena.ArenaManager;
 import me.gameisntover.knockbackffa.configurations.Messages;
 import me.gameisntover.knockbackffa.configurations.ScoreboardConfiguration;
 import me.gameisntover.knockbackffa.configurations.Sounds;
+import me.gameisntover.knockbackffa.database.Database;
 import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -47,6 +48,6 @@ public class JoinLeaveListeners implements Listener
         if (KnockbackFFA.getInstance().getConfig().getBoolean("leavemessage")) e.setQuitMessage(PlaceholderAPI.setPlaceholders(e.getPlayer(), Messages.LEAVE_MESSAGE.toString()));
         knocker.toggleScoreBoard(false);
         knocker.setInGame(false);
-
+        Database.getDatabase().updateData(knocker);
     }
 }

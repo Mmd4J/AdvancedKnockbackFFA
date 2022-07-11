@@ -81,21 +81,19 @@ public class DeathListener implements Listener {
         for (Entity current : entList)
             if (current instanceof Item) current.remove();
         killStreak.put(player, 0);
-        knocker.get().set("deaths", knocker.get().getInt("deaths") + 1);
-        knocker.saveConfig();
+        knocker.setDeaths(knocker.getDeaths()+1);
         if (damager != null && damager != player) {
             Knocker damageKnocker = Knocker.getKnocker(damager.getUniqueId());
             knocker.loadCosmetic(damageKnocker.getSelectedCosmetic());
             float prize = KnockbackFFA.getInstance().getConfig().getInt("killprize");
             damager.sendMessage(Messages.PRIZE.toString().replace("%prize%", prize + ""));
             damageKnocker.addBalance(prize);
-            damageKnocker.get().set("kills", damageKnocker.get().getInt("kills") + 1);
+            damageKnocker.setKills(damageKnocker.getKills() + 1);
             killStreak.merge(damager, 1, Integer::sum);
-            if (killStreak.get(damager) > damageKnocker.get().getInt("best-ks")) {
-                damageKnocker.sendMessage(Messages.KILLSTREAK_RECORD.toString().replace("%killstreak%", damageKnocker.get().getInt("best-ks") + ""));
-                damageKnocker.get().set("best-ks", killStreak.get(damager));
+            if (killStreak.get(damager) > damageKnocker.getMaxks()) {
+                damageKnocker.sendMessage(Messages.KILLSTREAK_RECORD.toString().replace("%killstreak%", damageKnocker.getMaxks() + ""));
+                damageKnocker.setMaxks(killStreak.get(damager));
             }
-            damageKnocker.saveConfig();
             e.setDeathMessage(PlaceholderAPI.setPlaceholders(e.getEntity(), Messages.DEATH_MESSAGE.toString().replace("%killer%", damager.getName())));
         } else {
             player.sendMessage(Messages.SUICIDE.toString());

@@ -14,12 +14,11 @@ import me.gameisntover.knockbackffa.configurations.ItemConfiguration;
 import me.gameisntover.knockbackffa.configurations.ScoreboardConfiguration;
 import me.gameisntover.knockbackffa.cosmetics.Cosmetic;
 import me.gameisntover.knockbackffa.cosmetics.TrailCosmetic;
+import me.gameisntover.knockbackffa.database.Database;
 import me.gameisntover.knockbackffa.gui.Items;
 import me.gameisntover.knockbackffa.gui.LightGUI;
 import me.gameisntover.knockbackffa.kit.KnockKit;
 import org.bukkit.*;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.Inventory;
@@ -28,40 +27,23 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scoreboard.DisplaySlot;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Getter
 @Setter
 public class Knocker {
-    public File cfile;
-    public FileConfiguration config;
-    public static File playersfolder = new File(KnockbackFFA.getInstance().getDataFolder(), "player data" + File.separator);
     private boolean inGame;
     private boolean inArena;
     private BukkitTask scoreboardTask;
-
-    public File getfile() {
-        return cfile;
-    }
-
-
-    public FileConfiguration get() {
-        return config;
-    }
-
-    public void saveConfig() {
-        try {
-            config.save(cfile);
-        } catch (Exception e) {
-            Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Error saving " + cfile.getName() + "!");
-        }
-    }
+    private Cosmetic selectedCosmetic = Cosmetic.fromString("none",this);
+    private TrailCosmetic selectedTrail =  (TrailCosmetic) Cosmetic.fromString("nonetrail",this);
+    private List<Cosmetic> ownedCosmetics = new ArrayList<>();
+    private List<KnockKit> ownedKits = new ArrayList<>();
+    private KnockKit selectedKit = KnockKit.defaultKit();
+    private int kills, deaths, maxks = 0;
+    private int elo = 600;
+    private double balance = 0;
 
     private final UUID uniqueID;
     public static Map<UUID, Knocker> knockerMap = new HashMap<>();
@@ -70,15 +52,8 @@ public class Knocker {
 
     protected Knocker(UUID uuid) {
         this.uniqueID = uuid;
-        cfile = new File(playersfolder, uuid + ".yml");
-        if (!cfile.exists()) {
-            try {
-                cfile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        config = YamlConfiguration.loadConfiguration(cfile);
+        Database.getDatabase().insertData(this);
+        Database.getDatabase().loadData(this);
     }
 
     public Player getPlayer() {
@@ -98,17 +73,9 @@ public class Knocker {
         return getKnocker(Bukkit.getPlayer(name).getUniqueId());
     }
 
-    public void setBalance(float balance) {
-        get().set("balance", balance);
-        saveConfig();
-    }
 
-    public float getBalance() {
-        return get().getInt("balance");
-    }
-
-    public void addBalance(float balance) {
-        setBalance(getBalance() + balance);
+    public void addBalance(double bal) {
+        setBalance(balance + bal);
     }
 
     public void removeBalance(int balance) {
@@ -139,22 +106,16 @@ public class Knocker {
         getPlayer().openInventory(gui.getInventory());
     }
 
-    public Cosmetic getSelectedCosmetic() {
-        return Cosmetic.getFromString(get().getString("selected-cosmetic"));
-    }
 
     public void loadCosmetic(Cosmetic cosmetic) {
-        cosmetic.onLoad(this);
+        cosmetic.onLoad();
     }
 
     public void loadTrails(TrailCosmetic cosmetic, PlayerMoveEvent e) {
         cosmetic.setMoveEvent(e);
-        cosmetic.onLoad(this);
+        cosmetic.onLoad();
     }
 
-    public String selectedKit() {
-        return get().getString("selected-kit");
-    }
 
     public void leaveCurrentArena() {
         if (ArenaConfiguration.get().getString("mainlobby.world") == null) return;
@@ -224,7 +185,6 @@ public class Knocker {
     }
 
     public void giveKit(KnockKit kit) {
-        if (!cfile.exists()) return;
         if (kit.get().isSet("contents")) {
             List<ItemStack> kitContents = kit.getItems();
             getPlayer().getInventory().setContents(kitContents.toArray(new ItemStack[0]));
@@ -234,10 +194,7 @@ public class Knocker {
                 if (item.getType().name().contains("Leggings")) getPlayer().getInventory().setLeggings(item);
                 if (item.getType().name().contains("Boots")) getPlayer().getInventory().setBoots(item);
             }
-        } else {
-            get().set("owned-kits", get().getStringList("owned-kits").stream().filter(s -> s.contains(kit.getName())).collect(Collectors.toList()));
-            saveConfig();
-        }
+        } else setOwnedKits(getOwnedKits().stream().filter(s -> s.getName().contains(kit.getName())).collect(Collectors.toList()));
     }
 
     public boolean isInMainLobby() {

@@ -42,8 +42,8 @@ public class Expansion extends PlaceholderExpansion
     public String onRequest(OfflinePlayer player, String params) {
         Player player1 = player.getPlayer();
         Knocker knocker = Knocker.getKnocker(player1.getUniqueId());
-        if (params.equalsIgnoreCase("player_kills")) return String.valueOf(knocker.get().getInt("kills"));
-        if (params.equalsIgnoreCase("player_deaths")) return String.valueOf(knocker.get().getInt("deaths"));
+        if (params.equalsIgnoreCase("player_kills")) return String.valueOf(knocker.getKills());
+        if (params.equalsIgnoreCase("player_deaths")) return String.valueOf(knocker.getDeaths());
         if (params.equalsIgnoreCase("player_balance")) return knocker.getBalance()+"";
 
         if (params.equalsIgnoreCase("current_map")) {

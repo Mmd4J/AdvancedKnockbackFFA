@@ -1,9 +1,7 @@
 package me.gameisntover.knockbackffa.arena;
 
-import me.gameisntover.knockbackffa.kit.KnockKit;
 import me.gameisntover.knockbackffa.gui.Items;
-import me.gameisntover.knockbackffa.kit.KitManager;
-import me.gameisntover.knockbackffa.util.KBFFAKit;
+import me.gameisntover.knockbackffa.kit.KnockKit;
 import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -53,16 +51,15 @@ public class ArenaSettings implements Listener {
             Arena arena = ArenaManager.getEnabledArena();
             knocker.setInGame(true);
             if (!arena.contains(player.getLocation())) return;
-            if (knocker.get().getString("selected-kit") == null) {
-                List<String> ownedKits = knocker.get().getStringList("owned-kits");
-                if (ownedKits.contains("Default")) {
-                    ownedKits.add("Default");
-                    knocker.get().set("owned-kits", ownedKits);
+            if (knocker.getSelectedKit() == null) {
+                List<KnockKit> ownedKits = knocker.getOwnedKits();
+                if (!ownedKits.contains(KnockKit.getFromString("Default"))) {
+                    ownedKits.add(KnockKit.getFromString("Default"));
+                    knocker.setOwnedKits(ownedKits);
                 }
-                knocker.get().set("selected-kit", "Default");
+                knocker.setSelectedKit(KnockKit.getFromString("Default"));
             }
-            KnockKit kit = KitManager.load(knocker.get().getString("selected-kit"));
-            KBFFAKit kits = new KBFFAKit();
+            KnockKit kit = knocker.getSelectedKit();
             for (ItemStack item : player.getInventory().getContents()) {
                 if (item != null && item.getType() != Material.AIR && item.getItemMeta() != null && item.getItemMeta().getDisplayName() != null) {
                     if (Items.COSMETICS_MENU.getItem().equals(item) || Items.SHOP_MENU.getItem().equals(item) || Items.KITS_MENU.getItem().equals(item)) {

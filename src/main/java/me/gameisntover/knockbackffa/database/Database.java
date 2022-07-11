@@ -4,7 +4,7 @@ import me.gameisntover.knockbackffa.util.Config;
 import me.gameisntover.knockbackffa.util.Knocker;
 
 public interface Database {
-    Config config = new Config("database.yml");
+    Config config = new Config("database");
 
     void insertData(Knocker knocker);
 
@@ -12,7 +12,7 @@ public interface Database {
 
     void loadData(Knocker knocker);
 
-    public static Database getDatabase() {
+     static Database getDatabase() {
         Database db = null;
         switch (DatabaseType.valueOf(config.getString("type"))) {
             case MySQL:

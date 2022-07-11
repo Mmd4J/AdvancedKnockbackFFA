@@ -6,15 +6,19 @@ import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class KitManager {
     public static File folder = new File(KnockbackFFA.getInstance().getDataFolder(), "Kits" + File.separator);
     public static File getfolder() {
         return folder;
     }
+    private static Map<String,KnockKit> knockKitMap = new HashMap<>();
     public static KnockKit load(String kitsName) {
-        return new KnockKit(kitsName);
+        if (!knockKitMap.containsKey(kitsName)) knockKitMap.put(kitsName,new KnockKit(kitsName));
+        return knockKitMap.get(kitsName);
     }
 
     public static KnockKit create(String name, List<ItemStack> kitItems,String icon) {
@@ -30,6 +34,7 @@ public class KitManager {
         defaultKitLore.add(ChatColor.GRAY + "Must be configured in plugins/KnockbackFFA/kits/"+name+".yml !");
         kit.get().set("lore",defaultKitLore);
         kit.save();
+        knockKitMap.put(name,kit);
         return kit;
     }
 }

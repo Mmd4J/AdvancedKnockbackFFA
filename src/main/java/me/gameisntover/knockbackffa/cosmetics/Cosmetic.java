@@ -1,69 +1,97 @@
 package me.gameisntover.knockbackffa.cosmetics;
 
 import lombok.Getter;
-import me.gameisntover.knockbackffa.*;
+import me.gameisntover.knockbackffa.KnockbackFFA;
 import me.gameisntover.knockbackffa.util.Knocker;
-import org.bukkit.ChatColor;
+import me.gameisntover.knockbackffa.util.YamlData;
 import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 
 @Getter
 public abstract class Cosmetic {
-    private static File file;
-    private static FileConfiguration configuration;
-    private String name;
-    private String description;
-    private Material icon;
-    private CosmeticType type;
-    private Double price;
-
-    public Cosmetic(CosmeticType cosmeticType, String name, String description, Double price, Material icon) {
-
+    @Nullable
+    protected YamlData data;
+    protected String name = "none";
+    protected String description = "no cosmetic is selected. cool!";
+    protected Material icon = Material.BARRIER;
+    protected float price = 0;
+    protected String displayName = "&cNo cosmetic is selected!";
+    @Nullable
+    protected Knocker owner;
+    @Getter
+    protected static final File folder = new File(KnockbackFFA.getInstance().getDataFolder(), "cosmetics");
+    public Cosmetic(String name,Knocker knocker,boolean hasData) {
+        if (name == null) return;
+        if (hasData){
+            data = new YamlData(folder,name);
+            this.price = data.getInt("price");
+            this.icon = Material.valueOf(data.getString("icon"));
+            this.description = data.getString("description");
+            this.displayName = data.getString("display-name");
+        }
+        this.name = name;
+        owner = knocker;
     }
+    public abstract CosmeticType getType();
 
-    public static void setup() {
-        file = new File(KnockbackFFA.getInstance().getDataFolder(), "cosmetics.yml");
-
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-                Files.copy(KnockbackFFA.getInstance().getResource("cosmetics.yml"), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            } catch (IOException e) {
+    public static Cosmetic fromString(String name,Knocker knocker){
+        Cosmetic cosmetic = null;
+        if (name.equalsIgnoreCase("none")) cosmetic = new NullCosmetic(knocker);
+        else if (name.equalsIgnoreCase("nonetrail")) cosmetic = new NullTCosmetic(knocker);
+        else {
+            YamlData data = new YamlData(folder, name);
+            switch (CosmeticType.valueOf(data.getString("type"))) {
+                case TRAIL:
+                    cosmetic = new TrailCosmetic(name, knocker, data.getStringList("blocks"));
+                    break;
+                case SOUND:
+                    cosmetic = new SoundCosmetic(name, knocker, data.getStringList("sounds"));
+                    break;
+                case NULL:
+                    cosmetic = new NullCosmetic(knocker);
+                    break;
             }
         }
-        configuration = YamlConfiguration.loadConfiguration(file);
+        return cosmetic;
     }
 
-    public static FileConfiguration get() {
-        return configuration;
-    }
+    public abstract void onLoad();
 
-    public static void save() {
-        try {
-            configuration.save(file);
-        } catch (IOException e) {
-            System.out.println("Couldn't save file");
+    @Override
+    public String toString() {
+        return name;
+    }
+    public static class NullCosmetic extends Cosmetic{
+        public NullCosmetic(Knocker knocker) {
+            super("none", knocker,false);
+        }
+
+        @Override
+        public CosmeticType getType() {
+            return CosmeticType.NULL;
+        }
+
+        @Override
+        public void onLoad() {
+
         }
     }
+    public static class NullTCosmetic extends TrailCosmetic{
+        public NullTCosmetic(Knocker knocker) {
+            super("nonetrail", knocker, new ArrayList<>(),false);
+        }
 
-    public static void reload() {
-        configuration = YamlConfiguration.loadConfiguration(file);
+        @Override
+        public CosmeticType getType() {
+            return CosmeticType.NULL;
+        }
+
+        @Override
+        public void onLoad() {
+
+        }
     }
-
-    public static Cosmetic getFromString(String name) {
-        CosmeticType cosmeticType = CosmeticType.valueOf(get().getString(name + ".type"));
-        if (cosmeticType.equals(CosmeticType.SOUND))
-            return new SoundCosmetic(ChatColor.translateAlternateColorCodes('&', get().getString(name + ".name")), ChatColor.translateAlternateColorCodes('&', get().getString(name + ".lore")), get().getDouble(name + "price"), Material.getMaterial(get().getString(name + ".icon")), get().getStringList(name + "sounds"));
-        else if (cosmeticType.equals(CosmeticType.TRAIL))
-            return new TrailCosmetic(ChatColor.translateAlternateColorCodes('&', name), ChatColor.translateAlternateColorCodes('&', get().getString(name + ".lore")), get().getDouble(name + "price"), Material.getMaterial(get().getString(name + ".icon")), get().getStringList("blocks"));
-        else return null;
-    }
-
-    public abstract void onLoad(Knocker knocker);
 }

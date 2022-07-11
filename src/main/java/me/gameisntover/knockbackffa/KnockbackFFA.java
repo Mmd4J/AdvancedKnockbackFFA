@@ -1,14 +1,16 @@
 package me.gameisntover.knockbackffa;
 
 import lombok.SneakyThrows;
-import me.gameisntover.knockbackffa.listener.JoinLeaveListeners;
 import me.gameisntover.knockbackffa.arena.ArenaConfiguration;
 import me.gameisntover.knockbackffa.arena.ArenaManager;
 import me.gameisntover.knockbackffa.arena.ArenaSettings;
 import me.gameisntover.knockbackffa.commands.CommandManager;
-import me.gameisntover.knockbackffa.configurations.*;
-import me.gameisntover.knockbackffa.cosmetics.Cosmetic;
+import me.gameisntover.knockbackffa.configurations.ItemConfiguration;
+import me.gameisntover.knockbackffa.configurations.Messages;
+import me.gameisntover.knockbackffa.configurations.ScoreboardConfiguration;
+import me.gameisntover.knockbackffa.configurations.Sounds;
 import me.gameisntover.knockbackffa.listener.*;
+import me.gameisntover.knockbackffa.util.Config;
 import me.gameisntover.knockbackffa.util.Expansion;
 import me.gameisntover.knockbackffa.util.KBFFAKit;
 import me.gameisntover.knockbackffa.util.Knocker;
@@ -25,7 +27,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.material.Wool;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -96,11 +97,12 @@ public final class KnockbackFFA extends JavaPlugin implements Listener {
             Files.copy(Objects.requireNonNull(KnockbackFFA.getInstance().getResource("Default.yml")), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
             getLogger().info("[KnockbackFFA] : Default Kit Created");
         }
-        Cosmetic.setup();
         ArenaConfiguration.setup();
         ScoreboardConfiguration.setup();
         ItemConfiguration.setup();
+        new Config("database");
         saveDefaultConfig();
+        try { Class.forName("org.sqlite.JDBC").newInstance(); } catch(Exception e) {e.printStackTrace();};
 
     }
 
@@ -200,19 +202,6 @@ public final class KnockbackFFA extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-    }
-
-    @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
-        Knocker knocker = Knocker.getKnocker(player.getUniqueId());
-        if (knocker.get().getString("deaths") == null) {
-            knocker.get().set("deaths", 0);
-            knocker.get().set("kills", 0);
-            knocker.get().set("owned-kits", knocker.get().getStringList("owned-kits").add("Default"));
-            knocker.get().set("selected-kit", "Default");
-            knocker.saveConfig();
-        }
     }
 
     @EventHandler
