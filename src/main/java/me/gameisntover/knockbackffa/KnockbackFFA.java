@@ -9,6 +9,8 @@ import me.gameisntover.knockbackffa.configurations.ItemConfiguration;
 import me.gameisntover.knockbackffa.configurations.Messages;
 import me.gameisntover.knockbackffa.configurations.ScoreboardConfiguration;
 import me.gameisntover.knockbackffa.configurations.Sounds;
+import me.gameisntover.knockbackffa.cosmetics.Cosmetic;
+import me.gameisntover.knockbackffa.kit.KitManager;
 import me.gameisntover.knockbackffa.listener.*;
 import me.gameisntover.knockbackffa.util.Config;
 import me.gameisntover.knockbackffa.util.Expansion;
@@ -100,9 +102,14 @@ public final class KnockbackFFA extends JavaPlugin implements Listener {
         ArenaConfiguration.setup();
         ScoreboardConfiguration.setup();
         ItemConfiguration.setup();
+        if (!Cosmetic.getFolder().exists()) Cosmetic.getFolder().mkdir();
+        if (!KitManager.folder.exists()) KitManager.folder.mkdir();
+        if (!ArenaManager.getfolder().exists()) ArenaManager.getfolder().mkdir();
         new Config("database");
         saveDefaultConfig();
-        try { Class.forName("org.sqlite.JDBC").newInstance(); } catch(Exception e) {e.printStackTrace();};
+        try {
+            Class.forName("org.sqlite.JDBC").newInstance();
+        } catch(Exception e) {e.printStackTrace();};
 
     }
 
