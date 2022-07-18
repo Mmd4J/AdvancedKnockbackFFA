@@ -1,4 +1,4 @@
-package me.gameisntover.knockbackffa.arena;
+package me.gameisntover.knockbackffa.arena.world;
 
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;

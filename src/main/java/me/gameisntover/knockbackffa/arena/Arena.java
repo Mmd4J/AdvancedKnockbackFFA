@@ -18,7 +18,6 @@ public class Arena {
     private final FileConfiguration config;
     private final String arenaName;
     private final File arenaFile;
-
     public Arena(String name) {
         this.arenaName = name;
         this.arenaFile = new File(ArenaManager.getfolder(), name + ".yml");

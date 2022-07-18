@@ -62,11 +62,7 @@ public class ArenaManager {
             }
         }
         Arena arena = load(arenaName);
-        arena.getConfig().set("block-break", false);
-        arena.getConfig().set("item-drop", true);
         arena.getConfig().set("world-border", false);
-        arena.getConfig().set("block-break", false);
-        arena.getConfig().set("item-drop", false);
         arena.getConfig().set("world-border", false);
         arena.getConfig().set("auto-reset", false);
         arena.getConfig().set("arena.pos1.x", position1.getX());

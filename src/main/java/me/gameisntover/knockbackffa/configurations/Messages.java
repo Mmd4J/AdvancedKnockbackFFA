@@ -29,7 +29,9 @@ public enum Messages {
     PURCHASE_SUCCESS("purchase-success","&aYou have successfully purchased %cosmetic%"),
     NO_READY_ARENA("no-arena-ready","&c&lSorry! &f&6but there is no arena ready to play ..."),
     ARENA_JOIN("join-arena","&eYou have joined the game!"),
-    ALREADY_IN_GAME("alreadyingame","&cYou're already in game isnt it?");
+    ALREADY_IN_GAME("alreadyingame","&cYou're already in game isnt it?"),
+    NEED_MORE_ARGS("","You need more args for using this command! syntax"),
+    INVALID_ARG("","Some of the command args are invalid! syntax");
     private final String path,defaultmsg;
     private static FileConfiguration messages = YamlConfiguration.loadConfiguration(new File(KnockbackFFA.getInstance().getDataFolder(), "messages.yml"));
     Messages(String path,String defaultmsg){

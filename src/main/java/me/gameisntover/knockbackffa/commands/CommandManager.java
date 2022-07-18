@@ -5,8 +5,6 @@ import lombok.SneakyThrows;
 import me.gameisntover.knockbackffa.commands.knockcommands.arena.*;
 import me.gameisntover.knockbackffa.commands.knockcommands.game.JoinCommand;
 import me.gameisntover.knockbackffa.commands.knockcommands.game.LeaveCommand;
-import me.gameisntover.knockbackffa.commands.knockcommands.kits.CreateKitCommand;
-import me.gameisntover.knockbackffa.commands.knockcommands.kits.DelKitCommand;
 import me.gameisntover.knockbackffa.commands.knockcommands.util.ReloadCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
@@ -22,8 +20,7 @@ public class CommandManager {
     private final Field f;
     @SneakyThrows
     public CommandManager(){
-        commands = Arrays.asList(new CreateArenaCommand(),new GotoWorldCommand(),new EditArenaCommand(),new ResetArenaCommand(),
-                new WandCommand(), new CreateWorldCommand(),new ReloadCommand(),new LeaveCommand(),new JoinCommand(),new SetMainLobbyCommand(),new CreateKitCommand(),new DelKitCommand());
+        commands = Arrays.asList(new WandCommand(),new ReloadCommand(),new LeaveCommand(),new JoinCommand(),new SetMainLobbyCommand());
         f = Bukkit.getServer().getClass().getDeclaredField("commandMap");
         f.setAccessible(true);
         commandMap = (CommandMap) f.get(Bukkit.getServer());

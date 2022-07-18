@@ -51,4 +51,5 @@ public abstract class KnockCommand extends Command {
     public abstract List<String> performTab(String[] args, Knocker knocker);
 
     public abstract void run(String[] args, Knocker knocker);
+
 }

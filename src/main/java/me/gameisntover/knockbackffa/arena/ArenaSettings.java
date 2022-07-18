@@ -17,29 +17,12 @@ import java.util.List;
 public class ArenaSettings implements Listener {
     @EventHandler
     public void onBlockBreak(org.bukkit.event.block.BlockBreakEvent e) {
-        Player player = e.getPlayer();
-        Knocker knocker = Knocker.getKnocker(player.getUniqueId());
-        if (knocker.isInArena()) {
-            String[] arenaList = ArenaManager.getfolder().list();
-            for (String arenaName : arenaList) {
-                Arena arena = ArenaManager.load(arenaName.replace(".yml", ""));
-                e.setCancelled(!arena.getConfig().getBoolean("block-break"));
-            }
-        } else if (knocker.isInMainLobby()) e.setCancelled(true);
-    }
+                e.setCancelled(!e.getPlayer().isOp());
+        }
 
     @EventHandler
     public void onItemDrop(PlayerDropItemEvent e) {
-        Player player = e.getPlayer();
-        Knocker knocker = Knocker.getKnocker(player.getUniqueId());
-        if (knocker.isInGame()) {
-            String[] arenaList = ArenaManager.getfolder().list();
-            assert arenaList != null;
-            for (String arenaName : arenaList) {
-                Arena arena = ArenaManager.load(arenaName.replace(".yml", ""));
-                e.setCancelled(knocker.isInArena() && !arena.getConfig().getBoolean("item-drop"));
-            }
-        }
+        e.setCancelled(!e.getPlayer().isOp());
     }
 
     @EventHandler

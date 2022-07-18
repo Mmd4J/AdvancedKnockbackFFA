@@ -8,7 +8,7 @@ import me.gameisntover.knockbackffa.KnockbackFFA;
 import me.gameisntover.knockbackffa.arena.Arena;
 import me.gameisntover.knockbackffa.arena.ArenaConfiguration;
 import me.gameisntover.knockbackffa.arena.ArenaManager;
-import me.gameisntover.knockbackffa.arena.VoidChunkGenerator;
+import me.gameisntover.knockbackffa.arena.world.VoidChunkGenerator;
 import me.gameisntover.knockbackffa.bukkitevents.PlayerJoinArenaEvent;
 import me.gameisntover.knockbackffa.configurations.ItemConfiguration;
 import me.gameisntover.knockbackffa.configurations.ScoreboardConfiguration;
@@ -209,5 +209,9 @@ public class Knocker {
     }
     public Inventory getInventory(){
         return getPlayer().getInventory();
+    }
+
+    public void closeGUI(){
+        getPlayer().closeInventory();
     }
 }

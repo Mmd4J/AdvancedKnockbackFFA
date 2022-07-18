@@ -16,21 +16,12 @@ import me.gameisntover.knockbackffa.util.Config;
 import me.gameisntover.knockbackffa.util.Expansion;
 import me.gameisntover.knockbackffa.util.KBFFAKit;
 import me.gameisntover.knockbackffa.util.Knocker;
-import org.bukkit.*;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
-import org.bukkit.block.Sign;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.block.SignChangeEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.material.Wool;
-import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -43,7 +34,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public final class KnockbackFFA extends JavaPlugin implements Listener {
+public final class KnockbackFFA extends JavaPlugin {
     public static KnockbackFFA INSTANCE;
     int ArenaID = 0;
     public Integer timer = 0;
@@ -78,7 +69,6 @@ public final class KnockbackFFA extends JavaPlugin implements Listener {
         }
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            Bukkit.getPluginManager().registerEvents(this, this);
             new Expansion(this).register();
         } else getLogger().warning("Could not find placeholder API. This plugin is needed!");
 
@@ -189,13 +179,9 @@ public final class KnockbackFFA extends JavaPlugin implements Listener {
     }
 
     private void loadListeners() {
-        getServer().getPluginManager().registerEvents(new JoinLeaveListeners(), this);
-        getServer().getPluginManager().registerEvents(new DeathListener(), this);
-        getServer().getPluginManager().registerEvents(new WandListener(), this);
-        getServer().getPluginManager().registerEvents(new GameRulesListener(), this);
-        getServer().getPluginManager().registerEvents(new GUIItemInteractListener(), this);
-        getServer().getPluginManager().registerEvents(new KBFFAKit(), this);
-        getServer().getPluginManager().registerEvents(new ArenaSettings(), this);
+        Arrays.asList(new JoinLeaveListeners(),new DeathListener(),new WandListener(),
+                new GameRulesListener(),new GUIItemInteractListener(),new KBFFAKit(),
+                new ArenaSettings()).forEach(listener -> Bukkit.getPluginManager().registerEvents(listener , this));
     }
 
     private void loadCommands() {
@@ -211,95 +197,8 @@ public final class KnockbackFFA extends JavaPlugin implements Listener {
         // Plugin shutdown logic
     }
 
-    @EventHandler
-    public void onSign(SignChangeEvent event) {
-        if (event.getLine(0).equalsIgnoreCase("[KnockbackFFA]") && event.getLine(1).equalsIgnoreCase("Join")) {
-            event.setLine(0, ChatColor.YELLOW + "[A]KnockbackFFA");
-            event.setLine(1, ChatColor.GREEN + "Join");
-        }
-    }
 
-    @EventHandler
-    public void onBlockPlace(BlockPlaceEvent e) {
-        Player player = e.getPlayer();
-        Knocker knocker = Knocker.getKnocker(player.getUniqueId());
-        if (BungeeMode() || knocker.isInGame()) {
-            if (e.getBlockPlaced().getType() == Material.WOOL) {
-                Block block = e.getBlockPlaced();
-                BlockState bs = e.getBlockPlaced().getState();
-                Wool wool = (Wool) bs.getData();
-                block.setMetadata("block-type", new FixedMetadataValue(KnockbackFFA.getInstance(), "BuildingBlock"));
-                String arenaName = ArenaManager.getEnabledArena().getName();
-                BukkitRunnable runnable = new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        if (Objects.equals(ArenaManager.getEnabledArena().getName(), arenaName)) {
-                            switch (wool.getColor()) {
-                                case WHITE:
-                                    wool.setColor(DyeColor.YELLOW);
-                                    bs.update();
-                                    break;
-                                case YELLOW:
-                                    wool.setColor(DyeColor.ORANGE);
-                                    bs.update();
-                                    break;
-                                case ORANGE:
-                                    wool.setColor(DyeColor.RED);
-                                    bs.update();
-                                    break;
-                                case RED:
-                                    block.setType(Material.AIR);
-                                    cancel();
-                                    break;
-                            }
-                        } else {
-                            block.setType(Material.AIR);
-                            block.setMetadata("block-type", new FixedMetadataValue(KnockbackFFA.getInstance(), ""));
-                        }
-                    }
-                };
-                runnable.runTaskTimer(this, 10L, 20L);
-            }
-            if (e.getBlockPlaced().getType() == Material.GOLD_PLATE) {
-                Block block = e.getBlockPlaced();
-                block.setMetadata("block-type", new FixedMetadataValue(KnockbackFFA.getInstance(), "jumpplate"));
-                block.getDrops().clear();
-                BukkitScheduler blockTimer = Bukkit.getServer().getScheduler();
-                blockTimer.scheduleSyncDelayedTask(this, () -> {
-                    e.getBlock().setType(Material.AIR);
-                    block.setMetadata("block-type", new FixedMetadataValue(KnockbackFFA.getInstance(), ""));
-                }, ItemConfiguration.get().getInt("SpecialItems.JumpPlate.removeafter") * 20L);
-            }
-        }
-    }
 
-    @EventHandler
-    public void onPressureButton(PlayerInteractEvent e) {
-        Player player = e.getPlayer();
-        Knocker knocker = Knocker.getKnocker(e.getPlayer().getUniqueId());
-        if (knocker.isInGame()) {
-            if (e.getAction().equals(Action.PHYSICAL)) {
-                if (e.getClickedBlock().getType().equals(Material.GOLD_PLATE)) {
-                    Block block = e.getClickedBlock();
-                    block.getDrops().clear();
-                    player.setVelocity(player.getLocation().getDirection().setY(ItemConfiguration.get().getInt("SpecialItems.JumpPlate.jumpLevel")));
-                    Knocker.getKnocker(player.getUniqueId()).playSound(Sounds.JUMP_PLATE.getSound(), 1, 1);
-                }
-            }
-        }else{
-        if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-            if (e.getClickedBlock() instanceof Sign) {
-                Sign sign = (Sign) e.getClickedBlock().getState();
-                if (sign.getLine(0).equalsIgnoreCase(ChatColor.YELLOW + "[A]me.gameisntover.knockbackffa.KnockbackFFA")) {
-                    if (sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN + "Join")) {
-                        if (knocker.isInGame()) knocker.sendMessage(Messages.ALREADY_IN_GAME.toString());
-                        else player.chat("/join");
-                    }
-                }
-            }
-        }
-        }
-    }
 
     public static boolean BungeeMode() {
         return KnockbackFFA.getInstance().getConfig().getBoolean("Bungee-Mode");

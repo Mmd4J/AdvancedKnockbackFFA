@@ -24,7 +24,8 @@ public class LightGUI implements Listener {
     private Inventory inventory;
     private Consumer<InventoryOpenEvent> openEvent;
     private Consumer<InventoryCloseEvent> closeEvent;
-    private boolean destroyOnClose = false;
+    private boolean destroyOnClose = true;
+    private boolean isOpenedOnce = false;
     public LightGUI(String name, Integer slot) {
         inventory = Bukkit.createInventory(null, slot * 9, ChatColor.translateAlternateColorCodes('&', name));
         Bukkit.getPluginManager().registerEvents(this, KnockbackFFA.getInstance());
@@ -56,14 +57,18 @@ public class LightGUI implements Listener {
     }
     @EventHandler
     public void onInventoryOpen(InventoryOpenEvent e){
-        if (e.getInventory() == inventory && openEvent != null) openEvent.accept(e);
+        if (e.getInventory() == inventory){
+            if (openEvent != null)
+            openEvent.accept(e);
+            isOpenedOnce = true;
+        }
     }
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent e){
         if (e.getInventory() == inventory ){
             if (closeEvent != null)
             closeEvent.accept(e);
-            if (destroyOnClose) HandlerList.unregisterAll(this);
+            if (destroyOnClose && isOpenedOnce) HandlerList.unregisterAll(this);
         }
     }
     public void destroy(){

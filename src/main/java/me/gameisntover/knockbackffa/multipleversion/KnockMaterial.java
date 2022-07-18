@@ -11,6 +11,7 @@ public enum KnockMaterial {
     KnockMaterial(String legacy, String nonLegacy) {
         this.legacy = legacy;
         this.nonLegacy = nonLegacy;
+        Material.getMaterial(3);
     }
 
     public Material toMaterial() {

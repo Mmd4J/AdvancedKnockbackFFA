@@ -17,10 +17,10 @@ public class KnockKit {
     private final String name;
     public File cfile;
     public FileConfiguration config;
-
+    public static File folder = KitManager.folder;
     public KnockKit(String name) {
         this.name = name;
-        cfile = new File(KitManager.folder, name + ".yml");
+        cfile = new File(folder, name + ".yml");
         config = YamlConfiguration.loadConfiguration(cfile);
     }
 
