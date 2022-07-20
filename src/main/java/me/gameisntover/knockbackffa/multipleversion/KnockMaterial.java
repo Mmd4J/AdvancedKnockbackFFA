@@ -35,7 +35,13 @@ public enum KnockMaterial{
     AIR("AIR",new MaterialData(Material.AIR)),
     BOW("BOW",new MaterialData(Material.BOW)),
     ARROW("ARROW",new MaterialData(Material.ARROW)),
-    ENDER_PEARL("ENDER_PEARL",new MaterialData(Material.ENDER_PEARL));
+    ENDER_PEARL("ENDER_PEARL",new MaterialData(Material.ENDER_PEARL)),
+    NOTE_BLOCK("NOTE_BLOCK",new MaterialData(Material.NOTE_BLOCK)),
+    WHITE_TERRACOTTA("WHITE_TERRACOTTA",new MaterialData(Material.HARD_CLAY)),
+    DISPENSER("DISPENSER",new MaterialData(Material.DISPENSER)),
+    NETHER_STAR("NETHER_STAR",new MaterialData(Material.NETHER_STAR)),
+    REDSTONE("REDSTONE",new MaterialData(Material.REDSTONE)),
+    REDSTONE_BLOCK("REDSTONE_BLOCK",new MaterialData(Material.REDSTONE_BLOCK));
     public final MaterialData legacy;
     public final String nonLegacy;
 

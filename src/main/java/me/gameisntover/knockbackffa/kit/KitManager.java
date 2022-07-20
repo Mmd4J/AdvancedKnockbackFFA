@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class KitManager {
-    public static File folder = new File(KnockbackFFA.getInstance().getDataFolder(), "Kits" + File.separator);
+    public static File folder = new File(KnockbackFFA.getInstance().getDataFolder(), "kits" + File.separator);
     public static File getfolder() {
         return folder;
     }

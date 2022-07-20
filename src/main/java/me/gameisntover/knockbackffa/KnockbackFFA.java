@@ -12,9 +12,12 @@ import me.gameisntover.knockbackffa.configurations.Sounds;
 import me.gameisntover.knockbackffa.cosmetics.Cosmetic;
 import me.gameisntover.knockbackffa.kit.KitManager;
 import me.gameisntover.knockbackffa.listener.*;
-import me.gameisntover.knockbackffa.util.*;
+import me.gameisntover.knockbackffa.multipleversion.KnockMaterial;
+import me.gameisntover.knockbackffa.util.Config;
+import me.gameisntover.knockbackffa.util.Expansion;
+import me.gameisntover.knockbackffa.util.Items;
+import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
@@ -64,7 +67,7 @@ public final class KnockbackFFA extends JavaPlugin {
         getLogger().info("Enjoy using plugin :)");
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (BungeeMode() || Knocker.getKnocker(p.getUniqueId()).isInGame()) {
-                if (p.getInventory().contains(Material.BOW) && !p.getInventory().contains(Material.ARROW))
+                if (p.getInventory().contains(KnockMaterial.BOW.toMaterial()) && !p.getInventory().contains(KnockMaterial.ARROW.toMaterial()))
                     p.getInventory().addItem(Items.KB_ARROW.item);
             }
         }
@@ -82,10 +85,10 @@ public final class KnockbackFFA extends JavaPlugin {
             getLogger().info("[KnockbackFFA] : Creating DataFolder");
             dataFolder.mkdir();
         }
-        File folder = new File(getDataFolder(), "Kits" + File.separator);
+        File folder = new File(getDataFolder(), "kits" + File.separator);
         if (!folder.exists()) {
             folder.mkdir();
-            File file = new File(getDataFolder(), "Kits" + File.separator + "Default.yml");
+            File file = new File(getDataFolder(), "kits" + File.separator + "Default.yml");
             file.createNewFile();
             Files.copy(Objects.requireNonNull(KnockbackFFA.getInstance().getResource("Default.yml")), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
             getLogger().info("[KnockbackFFA] : Default Kit Created");
@@ -97,7 +100,6 @@ public final class KnockbackFFA extends JavaPlugin {
         if (!KitManager.folder.exists()) KitManager.folder.mkdir();
         if (!ArenaManager.getFolder().exists()) ArenaManager.getFolder().mkdir();
         new Config("database");
-        new Config("bots");
         saveDefaultConfig();
         try {
             Class.forName("org.sqlite.JDBC").newInstance();
@@ -152,7 +154,7 @@ public final class KnockbackFFA extends JavaPlugin {
 
                         for (Entity current : entList)
                             if (current instanceof Item)
-                                if (((Item) current).getItemStack().getType() == Material.GOLD_PLATE) current.remove();
+                                if (((Item) current).getItemStack().getType() == KnockMaterial.GOLD_PLATE.toMaterial()) current.remove();
                     }
                 }
             }

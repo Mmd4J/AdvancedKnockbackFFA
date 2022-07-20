@@ -34,18 +34,17 @@ public class CosmeticCommands extends KnockCommand {
             knocker.sendMessageWithPrefix(Messages.NEED_MORE_ARGS.toString().replace("syntax",getUsage()));
             return;
         }
-        switch (args[0]){
-                case "create":
-                    LightGUI gui = new LightGUI("Select a cosmetic type",1);
-                    for (CosmeticType type : CosmeticType.values())
-                        if (!type.equals(CosmeticType.NULL)) {
-                            LightButton button = LightButtonManager.createButton(type.item,e -> {
-                                Cosmetic.createCosmetic(type,args[1],"&7cool cosmetic!","&e" + args[1], type.item.getType(),0);
-                                knocker.sendMessageWithPrefix("Cosmetic with the name of " + args[1] + "has been successfully created! check plugins/KnockbackFFA/cosmetics/"+args[1]+".yml for more info.");
-                            });
-                            gui.addButton(button);
-                            knocker.openGUI(gui);
-                        }
+        switch (args[0]) {
+            case "create":
+                LightGUI gui = new LightGUI("Select a cosmetic type", 1);
+                for (CosmeticType type : CosmeticType.values()) {
+                    LightButton button = LightButtonManager.createButton(type.item, e -> {
+                        Cosmetic.createCosmetic(type, args[1], "&7cool cosmetic!", "&e" + args[1], type.item.getType(), 0);
+                        knocker.sendMessageWithPrefix("Cosmetic with the name of " + args[1] + "has been successfully created! check plugins/KnockbackFFA/cosmetics/" + args[1] + ".yml for more info.");
+                    });
+                gui.addButton(button);
+                knocker.openGUI(gui);
+        }
                     break;
             case "edit":
                 // TODO: 7/12/2022  

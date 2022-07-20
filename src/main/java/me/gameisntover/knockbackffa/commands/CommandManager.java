@@ -3,9 +3,12 @@ package me.gameisntover.knockbackffa.commands;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import me.gameisntover.knockbackffa.commands.knockcommands.arena.*;
+import me.gameisntover.knockbackffa.commands.knockcommands.game.CosmeticCommands;
 import me.gameisntover.knockbackffa.commands.knockcommands.game.JoinCommand;
 import me.gameisntover.knockbackffa.commands.knockcommands.game.LeaveCommand;
+import me.gameisntover.knockbackffa.commands.knockcommands.kits.KitCommands;
 import me.gameisntover.knockbackffa.commands.knockcommands.util.ReloadCommand;
+import me.gameisntover.knockbackffa.commands.knockcommands.util.SpecialItems;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 
@@ -20,7 +23,8 @@ public class CommandManager {
     private final Field f;
     @SneakyThrows
     public CommandManager(){
-        commands = Arrays.asList(new WandCommand(),new ReloadCommand(),new LeaveCommand(),new JoinCommand(),new SetMainLobbyCommand());
+        commands = Arrays.asList(new WandCommand(),new ReloadCommand(),new LeaveCommand(),new JoinCommand(),new SetMainLobbyCommand(),
+                new SpecialItems(),new KitCommands(),new ArenaCommands(),new CosmeticCommands());
         f = Bukkit.getServer().getClass().getDeclaredField("commandMap");
         f.setAccessible(true);
         commandMap = (CommandMap) f.get(Bukkit.getServer());

@@ -91,6 +91,6 @@ public class KnockKit {
         return KitManager.load(name);
     }
     public static KnockKit defaultKit(){
-        return KitManager.load("Default");
+        return KitManager.load("default");
     }
 }

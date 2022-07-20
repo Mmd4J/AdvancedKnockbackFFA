@@ -1,11 +1,11 @@
 package me.gameisntover.knockbackffa.arena;
 
-import me.gameisntover.knockbackffa.KnockbackFFA;
-import org.bukkit.*;
-import org.bukkit.block.Block;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,40 +43,6 @@ public class Arena {
         }
     }
 
-    /**
-     * resets arena blocks to the original state
-     */
-    public void resetArena() {
-        Location loc1 = getPos1();
-        Location loc2 = getPos2();
-        assert loc2 != null;
-        assert loc1 != null;
-        Cuboid region = new Cuboid(loc1, loc2);
-        List<String> materials = config.getStringList("blocks");
-        List<Block> blocks = region.getBlocks();
-        new BukkitRunnable() {
-            private final int allBlocks = region.getBlocks().size();
-            private int remainBlocks = region.getBlocks().size();
-
-            @Override
-            public void run() {
-                int amountBlocksEachSec = KnockbackFFA.getInstance().getConfig().getInt("autoresetcheck-blocks");
-                int startPoint = allBlocks - remainBlocks;
-                while (startPoint < blocks.size() && amountBlocksEachSec > 0 && remainBlocks > 0) {
-                    Material material = Material.getMaterial(materials.get(startPoint));
-                    Block block = blocks.get(startPoint);
-                    block.setType(material);
-                    amountBlocksEachSec--;
-                    remainBlocks--;
-                    startPoint = allBlocks - remainBlocks;
-                }
-                if (remainBlocks <= 0) {
-                    cancel();
-                    System.out.println(getName() + " has been reset!");
-                }
-            }
-        }.runTaskTimer(KnockbackFFA.getInstance(), 0, 20);
-    }
 
 
     /**

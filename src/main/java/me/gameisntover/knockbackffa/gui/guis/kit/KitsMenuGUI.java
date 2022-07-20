@@ -30,7 +30,7 @@ public class KitsMenuGUI extends LightGUI {
             for (String kit : kitsList) {
                 if (kit != null) {
                     KnockKit kitItems = KitManager.load(kit);
-                    if (kitItems.get().getString("icon") != null || !Objects.equals(kitItems.get().getString("KitIcon"), "AIR")) {
+                    if (kitItems.get().getString("icon") != null || !Objects.equals(kitItems.get().getString("icon"), "AIR")) {
                         String icon = kitItems.get().getString("icon");
                         String name = Knocktils.translateColors(kitItems.get().getString("name"));
                         LightButton kitItem = LightButtonManager.createButton(ItemBuilder.builder().material(Material.getMaterial(icon)).name(name).buttonMeta().build(), event -> {

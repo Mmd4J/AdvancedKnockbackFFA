@@ -8,7 +8,6 @@ import org.bukkit.Material;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,8 +45,7 @@ public abstract class Cosmetic {
 
     public static Cosmetic fromString(String name, Knocker knocker) {
         Cosmetic cosmetic = null;
-        if (name.equalsIgnoreCase("none")) cosmetic = new NullCosmetic(knocker);
-        else if (name.equalsIgnoreCase("nonetrail")) cosmetic = new NullTCosmetic(knocker);
+        if (Arrays.asList("nonetrail","none","").contains(name)) cosmetic = null;
         else {
             YamlData data = new YamlData(folder, name);
             switch (CosmeticType.valueOf(data.getString("type"))) {
@@ -57,10 +55,7 @@ public abstract class Cosmetic {
                 case SOUND:
                     cosmetic = new SoundCosmetic(name, knocker, data.getStringList("sounds"));
                     break;
-                case NULL:
-                    cosmetic = new NullCosmetic(knocker);
-                    break;
-            }
+                }
         }
         return cosmetic;
     }
@@ -70,22 +65,6 @@ public abstract class Cosmetic {
     @Override
     public String toString() {
         return name;
-    }
-
-    public static class NullCosmetic extends Cosmetic {
-        public NullCosmetic(Knocker knocker) {
-            super("none", knocker, false);
-        }
-
-        @Override
-        public CosmeticType getType() {
-            return CosmeticType.NULL;
-        }
-
-        @Override
-        public void onLoad() {
-
-        }
     }
 
     public static void createCosmetic(CosmeticType type, String name, String description, String displayname, Material icon, float price) {
@@ -106,20 +85,4 @@ public abstract class Cosmetic {
         data.save();
     }
 
-
-    public static class NullTCosmetic extends TrailCosmetic{
-        public NullTCosmetic(Knocker knocker) {
-            super("nonetrail", knocker, new ArrayList<>(),false);
-        }
-
-        @Override
-        public CosmeticType getType() {
-            return CosmeticType.NULL;
-        }
-
-        @Override
-        public void onLoad() {
-
-        }
-    }
 }

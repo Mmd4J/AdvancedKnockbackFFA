@@ -42,9 +42,6 @@ public class CosmeticMenuGUI extends LightGUI {
                                 knocker.setSelectedTrail(null);
                             else knocker.setSelectedTrail((TrailCosmetic) Cosmetic.fromString(selC,knocker));
                             break;
-                        case NULL:
-                            knocker.setSelectedTrail(null);
-                            break;
                     }
                     knocker.closeGUI();
                     destroy();

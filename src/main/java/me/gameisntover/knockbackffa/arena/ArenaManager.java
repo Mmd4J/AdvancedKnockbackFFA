@@ -52,7 +52,7 @@ public class ArenaManager {
 
 
     public static Arena create(String arenaName, Location position1, Location position2, Location spawnPoint) {
-        File cfile = new File(KnockbackFFA.getInstance().getDataFolder(), "ArenaData" + File.separator + arenaName + ".yml");
+        File cfile = new File(KnockbackFFA.getInstance().getDataFolder(), "arenas" + File.separator + arenaName + ".yml");
         if (!KnockbackFFA.getInstance().getDataFolder().exists())
             KnockbackFFA.getInstance().getDataFolder().mkdir();
         if (!cfile.exists()) {
@@ -88,7 +88,7 @@ public class ArenaManager {
     }
 
     public static File getFolder() {
-        return new File(KnockbackFFA.getInstance().getDataFolder(), "ArenaData" + File.separator);
+        return new File(KnockbackFFA.getInstance().getDataFolder(), "arenas" + File.separator);
     }
 
     /**

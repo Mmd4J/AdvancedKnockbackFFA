@@ -1,4 +1,4 @@
-KitContents:
+contents:
 - ==: org.bukkit.inventory.ItemStack
   type: STICK
   meta:
@@ -50,9 +50,9 @@ KitContents:
     ==: ItemMeta
     meta-type: UNSPECIFIC
     display-name: "\xa7bKnockback Arrow"
-Price: 0
-KitName: Default
-KitIcon: STICK
-KitDescription:
+price: 0
+name: Default
+icon: STICK
+lore:
 - "\xa77Default kit"
 - "\xa77Must be configured in plugins/KnockbackFFA/kits !"

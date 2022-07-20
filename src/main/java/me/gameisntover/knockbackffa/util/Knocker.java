@@ -35,8 +35,8 @@ public class Knocker {
     private boolean inGame;
     private boolean inArena;
     private BukkitTask scoreboardTask;
-    private Cosmetic selectedCosmetic = Cosmetic.fromString("none",this);
-    private TrailCosmetic selectedTrail =  (TrailCosmetic) Cosmetic.fromString("nonetrail",this);
+    private Cosmetic selectedCosmetic = null;
+    private TrailCosmetic selectedTrail =  null;
     private List<Cosmetic> ownedCosmetics = new ArrayList<>();
     private List<KnockKit> ownedKits = new ArrayList<>();
     private KnockKit selectedKit = KnockKit.defaultKit();
@@ -107,10 +107,12 @@ public class Knocker {
 
 
     public void loadCosmetic(Cosmetic cosmetic) {
+        if (cosmetic == null) return;
         cosmetic.onLoad();
     }
 
     public void loadTrails(TrailCosmetic cosmetic, PlayerMoveEvent e) {
+        if (cosmetic == null) return;
         cosmetic.setMoveEvent(e);
         cosmetic.onLoad();
     }

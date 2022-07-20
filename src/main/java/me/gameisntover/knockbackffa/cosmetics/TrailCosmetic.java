@@ -1,6 +1,7 @@
 package me.gameisntover.knockbackffa.cosmetics;
 
 import me.gameisntover.knockbackffa.KnockbackFFA;
+import me.gameisntover.knockbackffa.multipleversion.KnockMaterial;
 import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -32,7 +33,7 @@ public class TrailCosmetic extends Cosmetic{
 
             Block block = owner.getLocation().getWorld().getBlockAt(e.getFrom().getBlockX(), e.getFrom().getBlockY() - 1, e.getFrom().getBlockZ());
             if (block.getMetadata("block-type")==null || block.getMetadata("block-type").get(0).asString().equals("")) {
-                if (block.getType() != Material.AIR) {
+                if (block.getType() != KnockMaterial.AIR.toMaterial()) {
                     block.setMetadata("block-type",new FixedMetadataValue(KnockbackFFA.getInstance(),block.getType().name()));
                     if (blocks.size() == 1) {
                         Material material = Material.getMaterial(blocks.get(0).split(":")[0]);

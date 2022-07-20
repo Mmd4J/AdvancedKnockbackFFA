@@ -30,10 +30,10 @@ public class KitShopGUI extends LightGUI {
                 String kitName = Knocktils.translateColors(kit.get().getString("name"));
                 LightButton kitsItem = LightButtonManager.createButton(ItemBuilder.builder().material(Material.getMaterial(kitIcon)).name(kitName).buttonMeta().build(), event1 -> {
                     double playerBal = knocker.getBalance();
-                    if (playerBal >= kit.get().getInt("Price")) {
+                    if (playerBal >= kit.get().getInt("price")) {
                         List<KnockKit> ownedKits = knocker.getOwnedKits();
                         if (!ownedKits.contains(KnockKit.getFromString(cosmetics.get(event1.getSlot())))) {
-                            knocker.removeBalance(kit.get().getInt("Price"));
+                            knocker.removeBalance(kit.get().getInt("price"));
                             ownedKits.add(KnockKit.getFromString(cosmetics.get(event1.getSlot())));
                             knocker.setOwnedKits(ownedKits);
                             knocker.closeGUI();
@@ -50,8 +50,8 @@ public class KitShopGUI extends LightGUI {
                 if (kitsItem.getItem().getType() == Material.AIR)
                     kitsItem.getItem().setType(Material.BARRIER);
                 ItemMeta kitsMeta = kitsItem.getItem().getItemMeta();
-                List<String> lore = kit.get().getStringList("KitDescription").stream().map(s -> s.replace("&", "§")).collect(Collectors.toList());
-                lore.add("§7Cost: §a" + kit.get().getInt("Price"));
+                List<String> lore = kit.get().getStringList("lore").stream().map(s -> s.replace("&", "§")).collect(Collectors.toList());
+                lore.add("§7Cost: §a" + kit.get().getInt("price"));
                 kitsMeta.setLore(lore);
                 if (cList.contains(cosmetic)) {
                     kitsMeta.addEnchant(Enchantment.DURABILITY, 1, true);
