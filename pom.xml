@@ -31,7 +31,10 @@
                         <relocation>
                             <pattern>org.bstats</pattern>
                             <shadedPattern>me.gameisntover.knockbackffa</shadedPattern>
+                        </relocation>
+                        <relocation>
                             <pattern>fr.mrmicky.fastboard</pattern>
+                            <shadedPattern>me.gameisntover.knockbackffa</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>

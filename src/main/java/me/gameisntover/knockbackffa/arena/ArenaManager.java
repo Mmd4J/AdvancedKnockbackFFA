@@ -1,10 +1,10 @@
 package me.gameisntover.knockbackffa.arena;
 
 import me.gameisntover.knockbackffa.KnockbackFFA;
-import me.gameisntover.knockbackffa.util.KBFFAKit;
 import me.gameisntover.knockbackffa.configurations.Messages;
 import me.gameisntover.knockbackffa.configurations.Sounds;
 import me.gameisntover.knockbackffa.util.Knocker;
+import me.gameisntover.knockbackffa.util.Knocktils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -19,9 +19,12 @@ public class ArenaManager {
     /**
      * Changes the arena to another arena
      *
-     * @param @arena
+     * @param arena the arena
      */
     public static void changeArena(Arena arena) {
+        ArenaChangeEvent changeEvent = new ArenaChangeEvent(arena,getEnabledArena());
+        Bukkit.getPluginManager().callEvent(changeEvent);
+        if (changeEvent.isCancelled()) return;
         String arenaName = arena.getName();
         setEnabledArena(arenaName);
         for (Player p : Bukkit.getServer().getOnlinePlayers()) {
@@ -29,19 +32,17 @@ public class ArenaManager {
             if (knocker.isInGame()) {
                 p.closeInventory();
                 p.getInventory().clear();
-                KBFFAKit kitManager = new KBFFAKit();
                 knocker.giveLobbyItems();
                 knocker.teleportPlayerToArena();
                 p.playSound(p.getLocation(), Sounds.ARENACHANGE.getSound(), 1, 1);
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.ARENA_CHANGE.toString().replace("%arena%", arenaName)));
+                p.sendMessage(Knocktils.translateColors(Messages.ARENA_CHANGE.toString().replace("%arena%", arenaName)));
             }
-            if (arena.getConfig().getBoolean("auto-reset")) arena.resetArena();
         }
     }
 
     public static List<Arena> getArenaList() {
         List<Arena> arenas = new ArrayList<>();
-        for (String arena : getfolder().list()) {
+        for (String arena : getFolder().list()) {
             arenas.add(load(arena.replace(".yml", "")));
         }
         return arenas;
@@ -86,7 +87,7 @@ public class ArenaManager {
         return arenaMap.get(arenaName);
     }
 
-    public static File getfolder() {
+    public static File getFolder() {
         return new File(KnockbackFFA.getInstance().getDataFolder(), "ArenaData" + File.separator);
     }
 
@@ -116,7 +117,7 @@ public class ArenaManager {
      * @return String
      */
     public static String randomArena() {
-        String[] arenas = getfolder().list();
+        String[] arenas = getFolder().list();
         int random = new Random().nextInt(arenas.length);
         return arenas[random];
     }

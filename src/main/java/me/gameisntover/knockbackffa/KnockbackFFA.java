@@ -56,6 +56,12 @@ public final class KnockbackFFA extends JavaPlugin {
         loadConfig();
         getLogger().info("Loading Java Classes");
         loadListeners();
+        getLogger().info("Loading example cosmetics if not exists");
+        List<String> cosmetics = Arrays.asList("piano.yml","frozentrail.yml");
+        cosmetics.forEach(s -> {
+           if (!new File(getDataFolder(),s).exists()) saveResource(s,true);
+             new File(getDataFolder(),s).renameTo(new File(Cosmetic.getFolder(),s));
+        });
         getLogger().info("Loading Tasks");
         loadTasks();
         getLogger().info("Enjoy using plugin :)");
@@ -94,20 +100,20 @@ public final class KnockbackFFA extends JavaPlugin {
         ItemConfiguration.setup();
         if (!Cosmetic.getFolder().exists()) Cosmetic.getFolder().mkdir();
         if (!KitManager.folder.exists()) KitManager.folder.mkdir();
-        if (!ArenaManager.getfolder().exists()) ArenaManager.getfolder().mkdir();
+        if (!ArenaManager.getFolder().exists()) ArenaManager.getFolder().mkdir();
         new Config("database");
         saveDefaultConfig();
         try {
             Class.forName("org.sqlite.JDBC").newInstance();
-        } catch(Exception e) {e.printStackTrace();};
+        } catch(Exception e) {e.printStackTrace();}
 
     }
 
     private void loadTasks() {
-        if (ArenaManager.getfolder().listFiles() != null) {
+        if (ArenaManager.getFolder().listFiles() != null && ArenaManager.getFolder().listFiles().length != 0) {
             ArenaManager.setEnabledArena(ArenaManager.getArenaList().get(0));
-            timer = getConfig().getInt("ArenaChangeTimer");
-            List<String> arenaList = Arrays.stream(Objects.requireNonNull(ArenaManager.getfolder().list())).map(String::toLowerCase).filter(s -> s.endsWith(".yml")).collect(Collectors.toList());
+            timer = getConfig().getInt("arena.change-timer");
+            List<String> arenaList = Arrays.stream(Objects.requireNonNull(ArenaManager.getFolder().list())).map(String::toLowerCase).filter(s -> s.endsWith(".yml")).collect(Collectors.toList());
             new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -116,7 +122,6 @@ public final class KnockbackFFA extends JavaPlugin {
                         ArenaManager.changeArena(ArenaManager.load(arenaName));
                         cancel();
                         if (ArenaManager.getArenaList().size() > 1) ArenaID++;
-
                     }
                 }
             }.runTaskTimer(this, 0, 1);
@@ -125,17 +130,16 @@ public final class KnockbackFFA extends JavaPlugin {
                 public void run() {
                     timer--;
                     if (timer == 0) {
-                        //what should happen when timer is up
-                        timer = getConfig().getInt("ArenaChangeTimer");
-                        if (ArenaManager.getArenaList().size() > 1) { //checking if Arena.getArenaList() even has arenas
+                        timer = getConfig().getInt("arena.change-timer");
+                        if (ArenaManager.getArenaList().size() > 1) {
                             ArenaID++;
                             if (ArenaID <= ArenaManager.getArenaList().size())
                                 ArenaManager.changeArena(ArenaManager.load(arenaList.get(ArenaID - 1).replace(".yml", "")));
                             else {
-                                //arena changes to the first arena
                                 ArenaID = 1;
                                 ArenaManager.changeArena(ArenaManager.load(arenaList.get(0).replace(".yml", "")));
-                            }
+
+                           }
                         } else if (ArenaManager.getArenaList().size() == 1)
                             ArenaManager.setEnabledArena(ArenaManager.getArenaList().get(0).getName());
                     }
@@ -159,7 +163,7 @@ public final class KnockbackFFA extends JavaPlugin {
         }.runTaskTimer(this, 0, 5);
 
         BukkitScheduler scheduler1 = Bukkit.getServer().getScheduler();
-        if (getConfig().getBoolean("ClearItems.enabled")) {
+        if (getConfig().getBoolean("arena.clear-items.enabled")) {
             scheduler1.scheduleSyncRepeatingTask(this, () -> {
                 for (Player p : Bukkit.getServer().getOnlinePlayers()) {
                     Knocker knocker = Knocker.getKnocker(p.getUniqueId());
@@ -174,7 +178,7 @@ public final class KnockbackFFA extends JavaPlugin {
 
                     }
                 }
-            }, getConfig().getInt("ClearItems.delay"), getConfig().getInt("ClearItems.period") * 20L);
+            }, getConfig().getInt("arena.clear-items.delay"), getConfig().getInt("arena.clear-items.period") * 20L);
         }
     }
 
@@ -201,6 +205,6 @@ public final class KnockbackFFA extends JavaPlugin {
 
 
     public static boolean BungeeMode() {
-        return KnockbackFFA.getInstance().getConfig().getBoolean("Bungee-Mode");
+        return KnockbackFFA.getInstance().getConfig().getBoolean("bungee-mode");
     }
 }

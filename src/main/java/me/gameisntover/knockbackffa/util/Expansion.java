@@ -58,10 +58,10 @@ public class Expansion extends PlaceholderExpansion
             return minutes + ":" + seconds;
         }
         if (params.equalsIgnoreCase("next_map")){
-            if (ArenaManager.getfolder().list()!=null && ArenaManager.getfolder().list().length>1){
+            if (ArenaManager.getFolder().list()!=null && ArenaManager.getFolder().list().length>1){
                 String arenaName = ArenaManager.getEnabledArena().getName();
 
-                List<String> arenaList = Arrays.asList(ArenaManager.getfolder().list());
+                List<String> arenaList = Arrays.asList(ArenaManager.getFolder().list());
                 int index = arenaList.indexOf(arenaName);
                 if (arenaList.size() == 1){
                     return arenaList.get(0).replace(".yml","");

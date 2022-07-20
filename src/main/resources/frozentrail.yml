@@ -1,0 +1,12 @@
+type: 'TRAIL'
+speed: 1
+name: "frozentrail"
+price: 200.0
+display-name: "&bFrost walker"
+lore:
+  - '&4Freeze the arena while walking!'
+icon: "PACKED_ICE"
+blocks:
+  - 'PACKED_ICE:20'
+#Valid blocks are ↓↓↓
+#BLOCKNAME:DELAY

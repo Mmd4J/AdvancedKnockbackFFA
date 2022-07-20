@@ -1,11 +1,12 @@
 #It would changes arena when you give it a time so it would change the arena after that time. the default time is 900 or 15 minutes.
-ArenaChangeTimer: 900
-ClearItems:
- enabled: true
- delay: 0
- period: 60
+arena:
+ change-timer: 900
+ clear-items:
+  enabled: true
+  delay: 0
+  period: 60
 #Clearing items after a time. the default time is 60 seconds or 1 minutes.
-Bungee-Mode: false
+bungee-mode: false
 #Bungee-Mode would make players join to the game when they join your server (You don't need save-inventory-on-join and mainlobby if this is true)
 joinmessage: true
 leavemessage: true
