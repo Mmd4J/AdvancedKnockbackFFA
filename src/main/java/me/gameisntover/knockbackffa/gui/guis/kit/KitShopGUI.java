@@ -28,7 +28,7 @@ public class KitShopGUI extends LightGUI {
                 KnockKit kit = KitManager.load(cosmetic);
                 String kitIcon = kit.get().getString("icon");
                 String kitName = Knocktils.translateColors(kit.get().getString("name"));
-                LightButton kitsItem = LightButtonManager.createButton(ItemBuilder.builder().material(Material.getMaterial(kitIcon)).name(kitName).coolMeta().build(), event1 -> {
+                LightButton kitsItem = LightButtonManager.createButton(ItemBuilder.builder().material(Material.getMaterial(kitIcon)).name(kitName).buttonMeta().build(), event1 -> {
                     double playerBal = knocker.getBalance();
                     if (playerBal >= kit.get().getInt("Price")) {
                         List<KnockKit> ownedKits = knocker.getOwnedKits();

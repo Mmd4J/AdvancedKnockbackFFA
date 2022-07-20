@@ -33,7 +33,7 @@ public class KitsMenuGUI extends LightGUI {
                     if (kitItems.get().getString("icon") != null || !Objects.equals(kitItems.get().getString("KitIcon"), "AIR")) {
                         String icon = kitItems.get().getString("icon");
                         String name = Knocktils.translateColors(kitItems.get().getString("name"));
-                        LightButton kitItem = LightButtonManager.createButton(ItemBuilder.builder().material(Material.getMaterial(icon)).name(name).coolMeta().build(), event -> {
+                        LightButton kitItem = LightButtonManager.createButton(ItemBuilder.builder().material(Material.getMaterial(icon)).name(name).buttonMeta().build(), event -> {
                             String selC = kitsList.get(event.getSlot());
                             if (event.getCurrentItem().getItemMeta().hasEnchant(Enchantment.DURABILITY))
                                 knocker.setSelectedKit(null);

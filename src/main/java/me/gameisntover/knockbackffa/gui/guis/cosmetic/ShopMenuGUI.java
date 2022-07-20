@@ -19,7 +19,7 @@ public class ShopMenuGUI extends LightGUI {
         super("Shop Menu", 5);
         String cIcon = ItemConfiguration.get().getString("ShopMenu.cosmetic.material");
         String cName = Knocktils.translateColors(ItemConfiguration.get().getString("ShopMenu.cosmetic.name"));
-        LightButton cosmeticItem = LightButtonManager.createButton(ItemBuilder.builder().material(Material.getMaterial(cIcon)).name(cName).coolMeta().build(), event -> {
+        LightButton cosmeticItem = LightButtonManager.createButton(ItemBuilder.builder().material(Material.getMaterial(cIcon)).name(cName).buttonMeta().build(), event -> {
             LightGUI cosmeticShop = new CosmeticShopGUI(knocker);
             knocker.openGUI(cosmeticShop);
         });
@@ -30,7 +30,7 @@ public class ShopMenuGUI extends LightGUI {
         setButton(cosmeticItem, ItemConfiguration.get().getInt("ShopMenu.cosmetic.slot"));
         String kIcon = ItemConfiguration.get().getString("ShopMenu.kit.material");
         String kName = ChatColor.translateAlternateColorCodes('&', ItemConfiguration.get().getString("ShopMenu.kit.name"));
-        LightButton kitItem = LightButtonManager.createButton(ItemBuilder.builder().material(Material.getMaterial(kIcon)).name(kName).coolMeta().build(), event -> {
+        LightButton kitItem = LightButtonManager.createButton(ItemBuilder.builder().material(Material.getMaterial(kIcon)).name(kName).buttonMeta().build(), event -> {
             LightGUI kitShop = new KitShopGUI(knocker);
             knocker.openGUI(kitShop);
         });

@@ -153,7 +153,7 @@ public final class KnockbackFFA extends JavaPlugin {
                     if (BungeeMode() || Knocker.getKnocker(p.getUniqueId()).isInGame()) {
                         World world = p.getWorld();
                         List<Entity> entList = world.getEntities();
-
+                        
                         for (Entity current : entList)
                             if (current instanceof Item)
                                 if (((Item) current).getItemStack().getType() == Material.GOLD_PLATE) current.remove();

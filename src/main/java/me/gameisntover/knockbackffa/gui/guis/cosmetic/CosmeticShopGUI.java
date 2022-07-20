@@ -22,7 +22,7 @@ public class CosmeticShopGUI extends LightGUI {
         List<String> cosmetics = Arrays.stream(Cosmetic.getFolder().list()).map(s -> s.replace(".yml","")).collect(Collectors.toList());
         List<Cosmetic> cList = knocker.getOwnedCosmetics();
         for (String cosmetic : cosmetics) {
-            LightButton cosmeticsItem = LightButtonManager.createButton(ItemBuilder.builder().material(Material.getMaterial(Cosmetic.fromString(cosmetic,knocker).getData().getString("icon"))).name(Cosmetic.fromString(cosmetic,knocker).getData().getString("name")).coolMeta().build(), event1 -> {
+            LightButton cosmeticsItem = LightButtonManager.createButton(ItemBuilder.builder().material(Material.getMaterial(Cosmetic.fromString(cosmetic,knocker).getData().getString("icon"))).name(Cosmetic.fromString(cosmetic,knocker).getData().getString("name")).buttonMeta().build(), event1 -> {
                 double playerBal = knocker.getBalance();
                 if (playerBal >= Cosmetic.fromString(cosmetic,knocker).getData().getInt("price")) {
                     List<Cosmetic> ownedCosmetics = knocker.getOwnedCosmetics();

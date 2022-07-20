@@ -1,6 +1,8 @@
 package me.gameisntover.knockbackffa.gui;
 
+import me.gameisntover.knockbackffa.multipleversion.KnockMaterial;
 import me.gameisntover.knockbackffa.util.Knocktils;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
@@ -61,7 +63,23 @@ public class ItemBuilder {
             return this;
         }
 
-        public ItemBuilderBuilder lore(String ... lore) {
+        /**
+         * made for legacy & non legacy support
+         *
+         * @param knockMaterial
+         * @return
+         */
+        public ItemBuilderBuilder material(KnockMaterial knockMaterial) {
+            if (Bukkit.getServer().getVersion().contains("1.8") || Bukkit.getServer().getVersion().contains("1.9") ||
+                    Bukkit.getServer().getVersion().contains("1.10") || Bukkit.getServer().getVersion().contains("1.11") ||
+                    Bukkit.getServer().getVersion().contains("1.12")) {
+                item.setType(knockMaterial.legacy.toItemStack().getType());
+                item.setData(knockMaterial.legacy);
+            } else item.setType(Material.getMaterial(knockMaterial.nonLegacy));
+            return this;
+        }
+
+        public ItemBuilderBuilder lore(String... lore) {
             meta.setLore(Arrays.asList(lore));
             item.setItemMeta(meta);
             return this;
@@ -75,15 +93,17 @@ public class ItemBuilder {
         }
 
         /**
-         * instead
+         * made for buttons option
          *
          * @return this
          */
-        public ItemBuilderBuilder coolMeta() {
+        public ItemBuilderBuilder buttonMeta() {
             meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_DESTROYS);
             meta.spigot().setUnbreakable(true);
             item.setItemMeta(meta);
             return this;
         }
+
+
     }
 }

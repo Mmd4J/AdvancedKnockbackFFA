@@ -28,7 +28,7 @@ public class CosmeticMenuGUI extends LightGUI {
                 String displayName = Knocktils.translateColors(cosmetic.getName());
                 assert cosmetic.getData() != null;
                 List<String> lore = cosmetic.getData().getStringList("lore").stream().map(s -> s.replace("&", "§")).collect(Collectors.toList());
-                LightButton cosmeticItem = LightButtonManager.createButton(ItemBuilder.builder().material(cosmetic.getIcon()).name(displayName).coolMeta().build(), event -> {
+                LightButton cosmeticItem = LightButtonManager.createButton(ItemBuilder.builder().material(cosmetic.getIcon()).name(displayName).buttonMeta().build(), event -> {
                     String selC = cList.get(event.getSlot()).getName();
                     CosmeticType cosmeticType = CosmeticType.valueOf(cosmetic.getData().getString("type"));
                     switch (cosmeticType) {

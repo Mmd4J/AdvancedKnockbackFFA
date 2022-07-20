@@ -26,17 +26,14 @@
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.2.4</version>
                 <configuration>
-                    <createDependencyReducedPom>false</createDependencyReducedPom>
                     <relocations>
                         <relocation>
                             <pattern>org.bstats</pattern>
                             <shadedPattern>me.gameisntover.knockbackffa</shadedPattern>
-                        </relocation>
-                        <relocation>
                             <pattern>fr.mrmicky.fastboard</pattern>
-                            <shadedPattern>me.gameisntover.knockbackffa</shadedPattern>
                         </relocation>
                     </relocations>
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
                 </configuration>
                 <executions>
                     <execution>
