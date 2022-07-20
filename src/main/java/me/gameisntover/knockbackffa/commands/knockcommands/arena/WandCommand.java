@@ -2,7 +2,7 @@ package me.gameisntover.knockbackffa.commands.knockcommands.arena;
 
 import me.gameisntover.knockbackffa.commands.KFCommand;
 import me.gameisntover.knockbackffa.commands.KnockCommand;
-import me.gameisntover.knockbackffa.gui.Items;
+import me.gameisntover.knockbackffa.util.Items;
 import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.permissions.PermissionDefault;
 

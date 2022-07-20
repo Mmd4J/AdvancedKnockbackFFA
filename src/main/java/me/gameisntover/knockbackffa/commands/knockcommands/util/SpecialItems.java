@@ -2,7 +2,7 @@ package me.gameisntover.knockbackffa.commands.knockcommands.util;
 
 import me.gameisntover.knockbackffa.commands.KFCommand;
 import me.gameisntover.knockbackffa.commands.KnockCommand;
-import me.gameisntover.knockbackffa.util.KBFFAKit;
+import me.gameisntover.knockbackffa.util.Items;
 import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
@@ -20,13 +20,12 @@ public class SpecialItems extends KnockCommand {
     @Override
     public void run(String[] args, Knocker knocker) {
         Inventory specialItems = Bukkit.createInventory(null, 9, "Special Items");
-        KBFFAKit kits = new KBFFAKit();
-        specialItems.addItem(kits.kbStick());
-        specialItems.addItem(kits.kbBow());
-        specialItems.addItem(kits.kbbowArrow());
-        specialItems.addItem(kits.JumpPlate());
-        specialItems.addItem(kits.EnderPearl());
-        specialItems.addItem(kits.BuildingBlock());
+        specialItems.addItem(Items.KB_STICK.item);
+        specialItems.addItem(Items.KB_BOW.item);
+        specialItems.addItem(Items.KB_ARROW.item);
+        specialItems.addItem(Items.JUMP_PLATE.item);
+        specialItems.addItem(Items.ENDER_PEARL.item);
+        specialItems.addItem(Items.BUILDING_BLOCK.item);
         knocker.getPlayer().openInventory(specialItems);
     }
 }

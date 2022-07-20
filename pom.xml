@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.gameisntover</groupId>
-    <artifactId>KnockbackFFALegacy</artifactId>
+    <artifactId>KnockbackFFA</artifactId>
     <version>2.9.8</version>
     <packaging>jar</packaging>
 
-    <name>KnockbackFFALegacy</name>
+    <name>KnockbackFFA</name>
 
     <description>Knockback FFA is a cool plugin which players should knock each other to the void (LEGACY VERSION 1.8 -
         1.12

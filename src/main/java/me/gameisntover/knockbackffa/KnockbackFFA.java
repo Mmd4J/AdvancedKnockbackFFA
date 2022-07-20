@@ -12,10 +12,7 @@ import me.gameisntover.knockbackffa.configurations.Sounds;
 import me.gameisntover.knockbackffa.cosmetics.Cosmetic;
 import me.gameisntover.knockbackffa.kit.KitManager;
 import me.gameisntover.knockbackffa.listener.*;
-import me.gameisntover.knockbackffa.util.Config;
-import me.gameisntover.knockbackffa.util.Expansion;
-import me.gameisntover.knockbackffa.util.KBFFAKit;
-import me.gameisntover.knockbackffa.util.Knocker;
+import me.gameisntover.knockbackffa.util.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -67,10 +64,8 @@ public final class KnockbackFFA extends JavaPlugin {
         getLogger().info("Enjoy using plugin :)");
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (BungeeMode() || Knocker.getKnocker(p.getUniqueId()).isInGame()) {
-                if (p.getInventory().contains(Material.BOW) && !p.getInventory().contains(Material.ARROW)) {
-                    KBFFAKit kitManager = new KBFFAKit();
-                    p.getInventory().addItem(kitManager.kbbowArrow());
-                }
+                if (p.getInventory().contains(Material.BOW) && !p.getInventory().contains(Material.ARROW))
+                    p.getInventory().addItem(Items.KB_ARROW.item);
             }
         }
 
@@ -102,6 +97,7 @@ public final class KnockbackFFA extends JavaPlugin {
         if (!KitManager.folder.exists()) KitManager.folder.mkdir();
         if (!ArenaManager.getFolder().exists()) ArenaManager.getFolder().mkdir();
         new Config("database");
+        new Config("bots");
         saveDefaultConfig();
         try {
             Class.forName("org.sqlite.JDBC").newInstance();
@@ -153,7 +149,7 @@ public final class KnockbackFFA extends JavaPlugin {
                     if (BungeeMode() || Knocker.getKnocker(p.getUniqueId()).isInGame()) {
                         World world = p.getWorld();
                         List<Entity> entList = world.getEntities();
-                        
+
                         for (Entity current : entList)
                             if (current instanceof Item)
                                 if (((Item) current).getItemStack().getType() == Material.GOLD_PLATE) current.remove();
@@ -184,7 +180,7 @@ public final class KnockbackFFA extends JavaPlugin {
 
     private void loadListeners() {
         Arrays.asList(new JoinLeaveListeners(),new DeathListener(),new WandListener(),
-                new GameRulesListener(),new GUIItemInteractListener(),new KBFFAKit(),
+                new GameRulesListener(),new GUIItemInteractListener(),
                 new ArenaSettings()).forEach(listener -> Bukkit.getPluginManager().registerEvents(listener , this));
     }
 

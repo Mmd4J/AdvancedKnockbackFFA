@@ -8,18 +8,21 @@ import me.gameisntover.knockbackffa.arena.Cuboid;
 import me.gameisntover.knockbackffa.configurations.ItemConfiguration;
 import me.gameisntover.knockbackffa.configurations.Messages;
 import me.gameisntover.knockbackffa.configurations.Sounds;
-import me.gameisntover.knockbackffa.util.KBFFAKit;
+import me.gameisntover.knockbackffa.multipleversion.KnockMaterial;
+import me.gameisntover.knockbackffa.util.Items;
 import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
+import org.bukkit.entity.Endermite;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.SignChangeEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
@@ -106,8 +109,7 @@ public class GameRulesListener implements Listener {
                             }
                             if (timer == 0) {
                                 if (!player.getInventory().contains(Material.ARROW) && player.getInventory().contains(Material.BOW)) {
-                                    KBFFAKit kitManager = new KBFFAKit();
-                                    player.getInventory().addItem(kitManager.kbbowArrow());
+                                    player.getInventory().addItem(Items.KB_ARROW.item);
                                     player.sendMessage(Messages.ARROW_GET.toString());
                                 }
                                 cancel();
@@ -193,7 +195,7 @@ public class GameRulesListener implements Listener {
         Knocker knocker = Knocker.getKnocker(e.getPlayer().getUniqueId());
         if (knocker.isInGame()) {
             if (e.getAction().equals(Action.PHYSICAL)) {
-                if (e.getClickedBlock().getType().equals(Material.GOLD_PLATE)) {
+                if (e.getClickedBlock().getType().equals(KnockMaterial.GOLD_PLATE.toMaterial())) {
                     Block block = e.getClickedBlock();
                     block.getDrops().clear();
                     player.setVelocity(player.getLocation().getDirection().setY(ItemConfiguration.get().getInt("SpecialItems.JumpPlate.jumpLevel")));
@@ -204,15 +206,16 @@ public class GameRulesListener implements Listener {
             if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
                 if (e.getClickedBlock() instanceof Sign) {
                     Sign sign = (Sign) e.getClickedBlock().getState();
-                    if (sign.getLine(0).equalsIgnoreCase(ChatColor.YELLOW + "[A]me.gameisntover.knockbackffa.KnockbackFFA")) {
-                        if (sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN + "Join")) {
+                    if (sign.getLine(0).equalsIgnoreCase(ChatColor.YELLOW + "[A]KnockbackFFA"))
+                        if (sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN + "Join"))
                             if (knocker.isInGame()) knocker.sendMessage(Messages.ALREADY_IN_GAME.toString());
-                            else player.chat("/join");
-                        }
-                    }
+                                else player.chat("/join");
                 }
             }
         }
     }
-
+    @EventHandler
+    public void onEndermiteSpawn(CreatureSpawnEvent e) {
+        if (e.getEntity() instanceof Endermite) e.setCancelled(true);
+    }
 }

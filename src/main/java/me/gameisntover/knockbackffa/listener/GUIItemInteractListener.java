@@ -1,6 +1,6 @@
 package me.gameisntover.knockbackffa.listener;
 
-import me.gameisntover.knockbackffa.gui.Items;
+import me.gameisntover.knockbackffa.util.Items;
 import me.gameisntover.knockbackffa.gui.LightGUI;
 import me.gameisntover.knockbackffa.gui.guis.cosmetic.CosmeticMenuGUI;
 import me.gameisntover.knockbackffa.gui.guis.cosmetic.ShopMenuGUI;

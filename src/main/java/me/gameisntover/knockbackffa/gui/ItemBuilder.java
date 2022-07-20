@@ -47,7 +47,11 @@ public class ItemBuilder {
             enchants.forEach(enchant -> meta.addEnchant(enchant.getEnchantment(), enchant.getLevel(), true));
             return this;
         }
-
+        public ItemBuilderBuilder enchants(KEnchant... enchants) {
+            for (KEnchant en : enchants)
+                meta.addEnchant(en.getEnchantment(), en.getLevel(), true);
+            return this;
+        }
         public ItemBuilderBuilder itemflags(List<ItemFlag> itemflags) {
             itemflags.forEach(itemflag -> meta.addItemFlags(itemflag));
             return this;

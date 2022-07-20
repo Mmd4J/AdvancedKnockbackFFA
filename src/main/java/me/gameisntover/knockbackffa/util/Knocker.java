@@ -15,7 +15,6 @@ import me.gameisntover.knockbackffa.configurations.ScoreboardConfiguration;
 import me.gameisntover.knockbackffa.cosmetics.Cosmetic;
 import me.gameisntover.knockbackffa.cosmetics.TrailCosmetic;
 import me.gameisntover.knockbackffa.database.Database;
-import me.gameisntover.knockbackffa.gui.Items;
 import me.gameisntover.knockbackffa.gui.LightGUI;
 import me.gameisntover.knockbackffa.kit.KnockKit;
 import org.bukkit.*;

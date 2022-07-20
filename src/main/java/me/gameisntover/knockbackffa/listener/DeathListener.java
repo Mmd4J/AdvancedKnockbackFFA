@@ -3,7 +3,6 @@ package me.gameisntover.knockbackffa.listener;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.gameisntover.knockbackffa.KnockbackFFA;
 import me.gameisntover.knockbackffa.configurations.Messages;
-import me.gameisntover.knockbackffa.util.KBFFAKit;
 import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.World;
 import org.bukkit.entity.*;
@@ -70,7 +69,6 @@ public class DeathListener implements Listener {
             @Override
             public void run() {
                 player.spigot().respawn();
-                KBFFAKit kitManager = new KBFFAKit();
                 knocker.giveLobbyItems();
                 knocker.teleportPlayerToArena();
                 cancel();
