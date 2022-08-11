@@ -91,7 +91,7 @@ public final class KnockbackFFA extends JavaPlugin {
             File file = new File(getDataFolder(), "kits" + File.separator + "default.yml");
             file.createNewFile();
             Files.copy(KnockbackFFA.getInstance().getResource("default.yml"), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            getLogger().info("[KnockbackFFA] : Default Kit Created");
+            getLogger().info("[KnockbackFFA] : default Kit Created");
         }
         ArenaConfiguration.setup();
         ScoreboardConfiguration.setup();

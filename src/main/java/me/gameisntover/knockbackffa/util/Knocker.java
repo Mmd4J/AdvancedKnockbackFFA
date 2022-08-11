@@ -3,6 +3,7 @@ package me.gameisntover.knockbackffa.util;
 import fr.mrmicky.fastboard.FastBoard;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.gameisntover.knockbackffa.KnockbackFFA;
 import me.gameisntover.knockbackffa.arena.Arena;
@@ -17,6 +18,7 @@ import me.gameisntover.knockbackffa.cosmetics.TrailCosmetic;
 import me.gameisntover.knockbackffa.database.Database;
 import me.gameisntover.knockbackffa.gui.LightGUI;
 import me.gameisntover.knockbackffa.kit.KnockKit;
+import me.gameisntover.knockbackffa.nms.NMSUtil;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -215,4 +217,10 @@ public class Knocker {
     public void closeGUI(){
         getPlayer().closeInventory();
     }
+
+    @SneakyThrows
+    public Object getHandle(){
+        return NMSUtil.getConnection(getPlayer());
+    }
+
 }

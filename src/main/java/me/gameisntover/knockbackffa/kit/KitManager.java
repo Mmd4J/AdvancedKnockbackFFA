@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class KitManager {
     public static File folder = new File(KnockbackFFA.getInstance().getDataFolder(), "kits" + File.separator);
-    public static File getfolder() {
+    public static File getFolder() {
         return folder;
     }
     private static Map<String,KnockKit> knockKitMap = new HashMap<>();
