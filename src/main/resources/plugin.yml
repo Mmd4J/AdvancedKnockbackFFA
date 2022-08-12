@@ -1,7 +1,3 @@
-name: KnockbackFFA
+name: KnockbackFFA_1_12_2_R1
 version: '${project.version}'
-main: me.gameisntover.knockbackffa.KnockbackFFA
-authors: [ GaMeIsNtOvEr ]
-softdepend:
-  - 'PlaceholderAPI'
-description: Knockback ffa is a gamemode which gives every players knockback stick and some other stuffs which makes the game more fun!
+main: me.gameisntover.knockbackffa_1_12_2_r1.KnockbackFFA_1_12_2_R1

@@ -11,9 +11,7 @@
 
     <name>KnockbackFFA</name>
 
-    <description>Knockback FFA is a cool plugin which players should knock each other to the void (LEGACY VERSION 1.8 -
-        1.12
-    </description>
+    <description>Knockback FFA is a cool plugin which players should knock each other to the void</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -113,6 +111,11 @@
             <artifactId>bstats-bukkit</artifactId>
             <version>3.0.0</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>me.gameisntover</groupId>
+            <artifactId>KnockbackFFA_1_8_R3</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 </project>
