@@ -138,12 +138,12 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- dependency>
+        <dependency>
             <groupId>com.github.cryptomorin</groupId>
             <artifactId>XSeries</artifactId>
             <version>9.0.0</version>
             <scope>compile</scope>
-        </dependency -->
+        </dependency>
 
     </dependencies>
 </project>
