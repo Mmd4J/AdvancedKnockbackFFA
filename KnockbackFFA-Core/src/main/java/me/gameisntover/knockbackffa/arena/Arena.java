@@ -15,9 +15,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class Arena {
+
     private final FileConfiguration config;
     private final String arenaName;
     private final File arenaFile;
+
     public Arena(String name) {
         this.arenaName = name;
         this.arenaFile = new File(ArenaManager.getFolder(), name + ".yml");
@@ -84,7 +86,7 @@ public class Arena {
      *
      * @return List<Location>
      */
-    public List getArenaPositions() {
+    public List<Location> getArenaPositions() {
         List<Location> positions = new ArrayList<>();
         positions.add(getPos1());
         positions.add(getPos2());

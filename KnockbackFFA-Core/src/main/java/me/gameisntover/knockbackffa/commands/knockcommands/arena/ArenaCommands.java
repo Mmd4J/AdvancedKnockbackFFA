@@ -71,10 +71,10 @@ public class ArenaCommands extends KnockCommand {
                     } else knocker.sendMessageWithPrefix("Before using this command please consider selecting two positions with wand! /knockbackffa:kbffawand");
                     break;
                 case "delete":
-                    ArenaManager.arenaMap.remove(args[1]);
+                    ArenaManager.ARENA_MAP.remove(args[1]);
                     File file = new File(ArenaManager.getFolder(),args[1] + ".yml");
                     file.delete();
-                    if (ArenaManager.getEnabledArena().equals(ArenaManager.arenaMap.get(args[1]))){
+                    if (ArenaManager.getEnabledArena().equals(ArenaManager.ARENA_MAP.get(args[1]))){
                         ArenaManager.setEnabledArena(ArenaManager.randomArena());
                     }
                     break;

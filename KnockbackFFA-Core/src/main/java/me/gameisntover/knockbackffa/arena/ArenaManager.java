@@ -14,7 +14,8 @@ import java.io.File;
 import java.util.*;
 
 public class ArenaManager {
-    public static Map<String, Arena> arenaMap = new HashMap<>();
+
+    public static final Map<String, Arena> ARENA_MAP = new HashMap<>();
 
     /**
      * Changes the arena to another arena
@@ -83,8 +84,8 @@ public class ArenaManager {
     }
 
     public static Arena load(String arenaName) {
-        if (!arenaMap.containsKey(arenaName)) arenaMap.put(arenaName, new Arena(arenaName));
-        return arenaMap.get(arenaName);
+        if (!ARENA_MAP.containsKey(arenaName)) ARENA_MAP.put(arenaName, new Arena(arenaName));
+        return ARENA_MAP.get(arenaName);
     }
 
     public static File getFolder() {

@@ -10,7 +10,8 @@ import java.io.IOException;
 
 @Getter
 public class Config extends YamlConfiguration {
-    private File file;
+
+    private final File file;
 
     public Config(File parent, String name) {
         file = new File(parent, name + ".yml");

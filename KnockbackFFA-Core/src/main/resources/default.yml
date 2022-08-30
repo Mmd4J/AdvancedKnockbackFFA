@@ -1,3 +1,4 @@
+# we will kinda remove this because we gonna use XMaterials lol
 contents:
 - ==: org.bukkit.inventory.ItemStack
   type: STICK

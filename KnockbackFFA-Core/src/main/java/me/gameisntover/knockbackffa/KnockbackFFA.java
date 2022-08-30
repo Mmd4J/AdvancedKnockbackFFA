@@ -35,6 +35,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public final class KnockbackFFA extends JavaPlugin {
+
     public static KnockbackFFA INSTANCE;
     int ArenaID = 0;
     public Integer timer = 0;
@@ -47,9 +48,11 @@ public final class KnockbackFFA extends JavaPlugin {
     @Override
     public void onEnable() {
         INSTANCE = this;
-        if (Bukkit.getOnlinePlayers().size() > 0)
-            for (Player player : Bukkit.getOnlinePlayers())
-                Knocker.getKnocker(player.getUniqueId()).setInGame(BungeeMode());
+
+        for(Player player : Bukkit.getOnlinePlayers()) {
+            Knocker.getKnocker(player.getUniqueId()).setInGame(BungeeMode());
+        }
+
         getLogger().info("Loading Commands");
         loadCommands();
         getLogger().info("Loading Configuration Files");
@@ -60,7 +63,7 @@ public final class KnockbackFFA extends JavaPlugin {
         List<String> cosmetics = Arrays.asList("piano.yml","frozentrail.yml");
         cosmetics.forEach(s -> {
            if (!new File(getDataFolder(),s).exists()) saveResource(s,true);
-             new File(getDataFolder(),s).renameTo(new File(Cosmetic.getFolder(),s));
+           new File(getDataFolder(),s).renameTo(new File(Cosmetic.getFolder(),s));
         });
         getLogger().info("Loading Tasks");
         loadTasks();

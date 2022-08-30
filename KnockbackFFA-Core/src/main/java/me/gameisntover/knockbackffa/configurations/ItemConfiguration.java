@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
 public class ItemConfiguration {
+
     private static File file;
 
     private static FileConfiguration soundConfig;
@@ -21,8 +22,7 @@ public class ItemConfiguration {
             try {
                 file.createNewFile();
                 Files.copy(KnockbackFFA.getInstance().getResource("Items.yml"), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            } catch (IOException e) {
-            }
+            } catch (IOException ignored) {}
         }
         soundConfig = YamlConfiguration.loadConfiguration(file);
     }
