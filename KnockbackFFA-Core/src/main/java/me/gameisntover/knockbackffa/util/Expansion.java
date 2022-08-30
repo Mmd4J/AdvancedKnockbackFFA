@@ -12,11 +12,6 @@ import java.util.List;
 
 public class Expansion extends PlaceholderExpansion
 {
-    private final KnockbackFFA plugin;
-
-    public Expansion(KnockbackFFA plugin) {
-        this.plugin = plugin;
-    }
 
     @Override
     public @NotNull String getAuthor() {
@@ -58,17 +53,17 @@ public class Expansion extends PlaceholderExpansion
             return minutes + ":" + seconds;
         }
         if (params.equalsIgnoreCase("next_map")){
-            if (ArenaManager.getFolder().list()!=null && ArenaManager.getFolder().list().length>1){
+            if (ArenaManager.folder.list()!=null && ArenaManager.folder.list().length>1){
                 String arenaName = ArenaManager.getEnabledArena().getName();
 
-                List<String> arenaList = Arrays.asList(ArenaManager.getFolder().list());
+                List<String> arenaList = Arrays.asList(ArenaManager.folder.list());
                 int index = arenaList.indexOf(arenaName);
                 if (arenaList.size() == 1){
                     return arenaList.get(0).replace(".yml","");
-                }else {
+                } else {
                     return arenaList.get(index+1).replace(".yml","");
                 }
-            }else {
+            } else {
                 return "No Arena";
             }
         }

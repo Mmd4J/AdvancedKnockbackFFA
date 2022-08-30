@@ -34,6 +34,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 public class Knocker {
+
     private boolean inGame;
     private boolean inArena;
     private BukkitTask scoreboardTask;
@@ -146,11 +147,11 @@ public class Knocker {
 
 
     public void teleportPlayerToArena() {
-        if (!ArenaManager.getFolder().exists()) {
+        if (!ArenaManager.folder.exists()) {
             System.out.println("Create an arena before trying to teleport player there :I");
             sendMessage("&cThere was an error while trying to send you to game you might need to tell admins to check the console");
         }
-        else if (ArenaManager.getFolder().list().length > 0) {
+        else if (ArenaManager.folder.list().length > 0) {
             PlayerJoinArenaEvent event = new PlayerJoinArenaEvent(this, ArenaManager.getEnabledArena());
             Bukkit.getPluginManager().callEvent(event);
             Location spawnLoc = ArenaManager.getEnabledArena().getSpawnLocation();

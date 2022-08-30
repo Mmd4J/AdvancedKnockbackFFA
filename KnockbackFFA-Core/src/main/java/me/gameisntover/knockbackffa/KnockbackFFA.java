@@ -101,7 +101,7 @@ public final class KnockbackFFA extends JavaPlugin {
         ItemConfiguration.setup();
         if (!Cosmetic.getFolder().exists()) Cosmetic.getFolder().mkdir();
         if (!KitManager.folder.exists()) KitManager.folder.mkdir();
-        if (!ArenaManager.getFolder().exists()) ArenaManager.getFolder().mkdir();
+        if (!ArenaManager.folder.exists()) ArenaManager.folder.mkdir();
         new Config("database");
         saveDefaultConfig();
         try {
@@ -111,10 +111,10 @@ public final class KnockbackFFA extends JavaPlugin {
     }
 
     private void loadTasks() {
-        if (ArenaManager.getFolder().listFiles() != null && ArenaManager.getFolder().listFiles().length != 0) {
+        if (ArenaManager.folder.listFiles() != null && ArenaManager.folder.listFiles().length != 0) {
             ArenaManager.setEnabledArena(ArenaManager.getArenaList().get(0));
             timer = getConfig().getInt("arena.change-timer");
-            List<String> arenaList = Arrays.stream(Objects.requireNonNull(ArenaManager.getFolder().list())).map(String::toLowerCase).filter(s -> s.endsWith(".yml")).collect(Collectors.toList());
+            List<String> arenaList = Arrays.stream(Objects.requireNonNull(ArenaManager.folder.list())).map(String::toLowerCase).filter(s -> s.endsWith(".yml")).collect(Collectors.toList());
             new BukkitRunnable() {
                 @Override
                 public void run() {

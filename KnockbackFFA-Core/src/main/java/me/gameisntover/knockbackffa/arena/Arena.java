@@ -22,7 +22,7 @@ public class Arena {
 
     public Arena(String name) {
         this.arenaName = name;
-        this.arenaFile = new File(ArenaManager.getFolder(), name + ".yml");
+        this.arenaFile = new File(ArenaManager.folder, name + ".yml");
         if (!arenaFile.exists()) {
             try {
                 arenaFile.createNewFile();
@@ -53,7 +53,7 @@ public class Arena {
      * @return true if the arena is ready
      */
     public boolean isReady() {
-        List<String> arenaList = Arrays.asList(Objects.requireNonNull(ArenaManager.getFolder().list()));
+        List<String> arenaList = Arrays.asList(Objects.requireNonNull(ArenaManager.folder.list()));
         return arenaList.contains(arenaName);
     }
 

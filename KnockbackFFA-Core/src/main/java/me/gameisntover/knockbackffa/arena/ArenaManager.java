@@ -17,19 +17,23 @@ public class ArenaManager {
 
     public static final Map<String, Arena> ARENA_MAP = new HashMap<>();
 
+    public static final File folder = new File(KnockbackFFA.getInstance().getDataFolder(), "arenas" + File.separator);
+
     /**
      * Changes the arena to another arena
      *
      * @param arena the arena
      */
     public static void changeArena(Arena arena) {
-        ArenaChangeEvent changeEvent = new ArenaChangeEvent(arena,getEnabledArena());
+        ArenaChangeEvent changeEvent = new ArenaChangeEvent(arena, getEnabledArena());
         Bukkit.getPluginManager().callEvent(changeEvent);
         if (changeEvent.isCancelled()) return;
         String arenaName = arena.getName();
         setEnabledArena(arenaName);
         for (Player p : Bukkit.getServer().getOnlinePlayers()) {
             Knocker knocker = Knocker.getKnocker(p.getUniqueId());
+            // null safety
+            if(knocker == null) continue;
             if (knocker.isInGame()) {
                 p.closeInventory();
                 p.getInventory().clear();
@@ -43,7 +47,11 @@ public class ArenaManager {
 
     public static List<Arena> getArenaList() {
         List<Arena> arenas = new ArrayList<>();
-        for (String arena : getFolder().list()) {
+        String[] folderList = folder.list();
+        if(folderList == null) {
+            return arenas;
+        }
+        for (String arena : folderList) {
             arenas.add(load(arena.replace(".yml", "")));
         }
         return arenas;
@@ -65,7 +73,6 @@ public class ArenaManager {
         }
         Arena arena = load(arenaName);
         arena.getConfig().set("world-border", false);
-        arena.getConfig().set("world-border", false);
         arena.getConfig().set("auto-reset", false);
         arena.getConfig().set("arena.pos1.x", position1.getX());
         arena.getConfig().set("arena.pos2.x", position2.getX());
@@ -86,10 +93,6 @@ public class ArenaManager {
     public static Arena load(String arenaName) {
         if (!ARENA_MAP.containsKey(arenaName)) ARENA_MAP.put(arenaName, new Arena(arenaName));
         return ARENA_MAP.get(arenaName);
-    }
-
-    public static File getFolder() {
-        return new File(KnockbackFFA.getInstance().getDataFolder(), "arenas" + File.separator);
     }
 
     /**
@@ -118,7 +121,7 @@ public class ArenaManager {
      * @return String
      */
     public static String randomArena() {
-        String[] arenas = getFolder().list();
+        String[] arenas = folder.list();
         int random = new Random().nextInt(arenas.length);
         return arenas[random];
     }

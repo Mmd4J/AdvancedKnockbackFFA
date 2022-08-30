@@ -24,8 +24,8 @@ public class ArenaCommands extends KnockCommand {
     public List<String> performTab(String[] args, Knocker knocker) {
         if (args.length == 0)
         return Arrays.asList("create","edit","delete","pos1","pos2");
-        else if (ArenaManager.getFolder().exists()&& ArenaManager.getFolder().list().length != 0)
-            return Arrays.stream(ArenaManager.getFolder().list()).map(s -> s = s.replace(".yml","")).collect(Collectors.toList());
+        else if (ArenaManager.folder.exists()&& ArenaManager.folder.list().length != 0)
+            return Arrays.stream(ArenaManager.folder.list()).map(s -> s = s.replace(".yml","")).collect(Collectors.toList());
         else return Collections.singletonList("no arena");
     }
 
@@ -61,7 +61,7 @@ public class ArenaCommands extends KnockCommand {
                         }
                         arena.getConfig().set("blocks", blocks);
                         arena.save();
-                        if (ArenaManager.getFolder().list().length == 1) {
+                        if (ArenaManager.folder.list().length == 1) {
                             ArenaManager.setEnabledArena(args[0]);
                             ArenaConfiguration.save();
                         }
@@ -72,14 +72,14 @@ public class ArenaCommands extends KnockCommand {
                     break;
                 case "delete":
                     ArenaManager.ARENA_MAP.remove(args[1]);
-                    File file = new File(ArenaManager.getFolder(),args[1] + ".yml");
+                    File file = new File(ArenaManager.folder,args[1] + ".yml");
                     file.delete();
                     if (ArenaManager.getEnabledArena().equals(ArenaManager.ARENA_MAP.get(args[1]))){
                         ArenaManager.setEnabledArena(ArenaManager.randomArena());
                     }
                     break;
                 case "edit":
-                    List<String> arenaList = Arrays.asList(ArenaManager.getFolder().list());
+                    List<String> arenaList = Arrays.asList(ArenaManager.folder.list());
                     if (!arenaList.contains(args[0] + ".yml")) knocker.sendMessage("&cThat arena name does not exist!");
                     else {
                         knocker.sendMessage("&aYou are now editing " + args[0]);

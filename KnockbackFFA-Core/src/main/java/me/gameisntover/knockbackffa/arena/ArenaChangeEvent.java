@@ -3,14 +3,17 @@ package me.gameisntover.knockbackffa.arena;
 import org.bukkit.event.HandlerList;
 
 public class ArenaChangeEvent extends ArenaEvent {
+
     private final Arena arena;
     private final Arena previousArena;
     private boolean cancelled;
+
     public ArenaChangeEvent(Arena arena,Arena previousArena){
         this.arena = arena;
         this.previousArena = previousArena;
         cancelled = false;
     }
+
     @Override
     public Arena getArena() {
         return arena;
@@ -34,4 +37,5 @@ public class ArenaChangeEvent extends ArenaEvent {
     public void setCancelled(boolean cancel) {
         this.cancelled = cancel;
     }
+
 }

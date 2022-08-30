@@ -1,4 +1,4 @@
-package me.gameisntover.knockbackffa_1_8_r3.mobs;
+package me.gameisntover.v1_8_r3.mobs;
 
 import net.minecraft.server.v1_8_R3.EntityZombie;
 import org.bukkit.Location;
