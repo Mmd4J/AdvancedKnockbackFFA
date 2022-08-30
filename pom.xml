@@ -22,4 +22,13 @@
         <module>KnockbackFFA_1_8_R3</module>
     </modules>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>23.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
 </project>
