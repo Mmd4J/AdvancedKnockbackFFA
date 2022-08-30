@@ -76,7 +76,7 @@ public final class KnockbackFFA extends JavaPlugin {
         }
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            new Expansion(this).register();
+            new Expansion().register();
         } else getLogger().warning("Could not find placeholder API. This plugin is needed!");
 
     }
