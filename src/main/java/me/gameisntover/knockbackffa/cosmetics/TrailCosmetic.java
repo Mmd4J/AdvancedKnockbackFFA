@@ -1,7 +1,7 @@
 package me.gameisntover.knockbackffa.cosmetics;
 
+import com.cryptomorin.xseries.XMaterial;
 import me.gameisntover.knockbackffa.KnockbackFFA;
-import me.gameisntover.knockbackffa.multipleversion.KnockMaterial;
 import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -33,17 +33,17 @@ public class TrailCosmetic extends Cosmetic{
 
             Block block = owner.getLocation().getWorld().getBlockAt(e.getFrom().getBlockX(), e.getFrom().getBlockY() - 1, e.getFrom().getBlockZ());
             if (block.getMetadata("block-type")==null || block.getMetadata("block-type").get(0).asString().equals("")) {
-                if (block.getType() != KnockMaterial.AIR.toMaterial()) {
+                if (!block.getType().equals(XMaterial.AIR.parseMaterial())) {
                     block.setMetadata("block-type",new FixedMetadataValue(KnockbackFFA.getInstance(),block.getType().name()));
                     if (blocks.size() == 1) {
-                        Material material = Material.getMaterial(blocks.get(0).split(":")[0]);
+                        XMaterial material = XMaterial.matchXMaterial(blocks.get(0).split(":")[0]).get();
                         long timer = Long.parseLong(blocks.get(0).split(":")[1]);
-                        block.setType(material);
+                        block.setType(material.parseMaterial());
                         block.setMetadata("block-type",new FixedMetadataValue(KnockbackFFA.getInstance(),"trail"));
                         new BukkitRunnable() {
                             @Override
                             public void run() {
-                                block.setType(Material.getMaterial(block.getMetadata("material").get(0).asString()));
+                                block.setType(XMaterial.matchXMaterial(block.getMetadata("material").get(0).asString()).get().parseMaterial());
                                 block.setMetadata("block-type",new FixedMetadataValue(KnockbackFFA.getInstance(),""));
                                 cancel();
                             }

@@ -1,5 +1,6 @@
 package me.gameisntover.knockbackffa.listener;
 
+import com.cryptomorin.xseries.XMaterial;
 import lombok.SneakyThrows;
 import me.gameisntover.knockbackffa.KnockbackFFA;
 import me.gameisntover.knockbackffa.arena.ArenaConfiguration;
@@ -8,12 +9,10 @@ import me.gameisntover.knockbackffa.arena.Cuboid;
 import me.gameisntover.knockbackffa.configurations.ItemConfiguration;
 import me.gameisntover.knockbackffa.configurations.Messages;
 import me.gameisntover.knockbackffa.configurations.Sounds;
-import me.gameisntover.knockbackffa.multipleversion.KnockMaterial;
 import me.gameisntover.knockbackffa.util.Items;
 import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.*;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Endermite;
 import org.bukkit.entity.Player;
@@ -30,7 +29,6 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
-import org.bukkit.material.Wool;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -94,7 +92,7 @@ public class GameRulesListener implements Listener {
             Knocker knocker = Knocker.getKnocker(e.getEntity().getUniqueId());
             Player player = (Player) e.getEntity().getShooter();
             if (!knocker.isInGame())  return;
-                if (player.getInventory().getItemInHand().getType().equals(Material.BOW)) return;
+                if (player.getInventory().getItemInHand().getType().equals(XMaterial.BOW.parseMaterial())) return;
                     player.sendMessage(Messages.BOW_USE.toString());
                     new BukkitRunnable() {
                         int timer = 10;
@@ -108,7 +106,7 @@ public class GameRulesListener implements Listener {
                                 }
                             }
                             if (timer == 0) {
-                                if (!player.getInventory().contains(Material.ARROW) && player.getInventory().contains(Material.BOW)) {
+                                if (!player.getInventory().contains(XMaterial.ARROW.parseMaterial()) && player.getInventory().contains(Material.BOW)) {
                                     player.getInventory().addItem(Items.KB_ARROW.item);
                                     player.sendMessage(Messages.ARROW_GET.toString());
                                 }
@@ -140,49 +138,44 @@ public class GameRulesListener implements Listener {
         Player player = e.getPlayer();
         Knocker knocker = Knocker.getKnocker(player.getUniqueId());
         if (KnockbackFFA.BungeeMode() || knocker.isInGame()) {
-            if (e.getBlockPlaced().getType() == Material.WOOL) {
+            if (e.getBlockPlaced().getType() == XMaterial.WHITE_WOOL.parseMaterial()) {
                 Block block = e.getBlockPlaced();
-                BlockState bs = e.getBlockPlaced().getState();
-                Wool wool = (Wool) bs.getData();
                 block.setMetadata("block-type", new FixedMetadataValue(KnockbackFFA.getInstance(), "BuildingBlock"));
                 String arenaName = ArenaManager.getEnabledArena().getName();
                 BukkitRunnable runnable = new BukkitRunnable() {
                     @Override
                     public void run() {
                         if (ArenaManager.getEnabledArena().getName().equalsIgnoreCase(arenaName)) {
-                            switch (wool.getColor()) {
-                                case WHITE:
-                                    wool.setColor(DyeColor.YELLOW);
-                                    bs.update();
+                            switch (XMaterial.matchXMaterial(block.getType())) {
+                                case WHITE_WOOL:
+                                    block.setType(XMaterial.YELLOW_WOOL.parseMaterial());
                                     break;
-                                case YELLOW:
-                                    wool.setColor(DyeColor.ORANGE);
-                                    bs.update();
+                                case YELLOW_WOOL:
+                                    block.setType(XMaterial.ORANGE_WOOL.parseMaterial());
                                     break;
-                                case ORANGE:
-                                    wool.setColor(DyeColor.RED);
-                                    bs.update();
+                                case ORANGE_WOOL:
+                                    block.setType(XMaterial.RED_WOOL.parseMaterial());
                                     break;
-                                case RED:
-                                    block.setType(Material.AIR);
+                                case RED_WOOL:
+                                    block.setType(XMaterial.AIR.parseMaterial());
                                     cancel();
                                     break;
                             }
                         } else {
-                            block.setType(Material.AIR);
+                            block.setType(XMaterial.AIR.parseMaterial());
                             block.setMetadata("block-type", new FixedMetadataValue(KnockbackFFA.getInstance(), ""));
                         }
                     }
                 };
                 runnable.runTaskTimer(KnockbackFFA.getInstance(), 10L, 20L);
             }
-            if (e.getBlockPlaced().getType() == Material.GOLD_PLATE) {
+            if (e.getBlockPlaced().getType() == XMaterial.LIGHT_WEIGHTED_PRESSURE_PLATE.parseMaterial()) {
                 Block block = e.getBlockPlaced();
                 block.setMetadata("block-type", new FixedMetadataValue(KnockbackFFA.getInstance(), "jumpplate"));
                 block.getDrops().clear();
                 BukkitScheduler blockTimer = Bukkit.getServer().getScheduler();
                 blockTimer.scheduleSyncDelayedTask(KnockbackFFA.getInstance(), () -> {
-                    e.getBlock().setType(Material.AIR);
+                    e.getBlock().setType(XMaterial.AIR.parseMaterial());
                     block.setMetadata("block-type", new FixedMetadataValue(KnockbackFFA.getInstance(), ""));
                 }, ItemConfiguration.get().getInt("SpecialItems.JumpPlate.removeafter") * 20L);
             }
@@ -195,7 +188,7 @@ public class GameRulesListener implements Listener {
         Knocker knocker = Knocker.getKnocker(e.getPlayer().getUniqueId());
         if (knocker.isInGame()) {
             if (e.getAction().equals(Action.PHYSICAL)) {
-                if (e.getClickedBlock().getType().equals(KnockMaterial.GOLD_PLATE.toMaterial())) {
+                if (e.getClickedBlock().getType().equals(XMaterial.LIGHT_WEIGHTED_PRESSURE_PLATE.parseMaterial())) {
                     Block block = e.getClickedBlock();
                     block.getDrops().clear();
                     player.setVelocity(player.getLocation().getDirection().setY(ItemConfiguration.get().getInt("SpecialItems.JumpPlate.jumpLevel")));

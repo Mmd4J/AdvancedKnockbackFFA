@@ -1,8 +1,7 @@
 package me.gameisntover.knockbackffa.gui;
 
-import me.gameisntover.knockbackffa.multipleversion.KnockMaterial;
+import com.cryptomorin.xseries.XMaterial;
 import me.gameisntover.knockbackffa.util.Knocktils;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
@@ -22,7 +21,8 @@ public class ItemBuilder {
         private boolean unbreakable = true;
 
         public ItemBuilderBuilder() {
-            item = new ItemStack(Material.STONE);
+            assert XMaterial.STONE.parseItem() != null;
+            item = new ItemStack(XMaterial.STONE.parseItem());
             meta = item.getItemMeta();
         }
 
@@ -67,22 +67,6 @@ public class ItemBuilder {
             return this;
         }
 
-        /**
-         * made for legacy & non legacy support
-         *
-         * @param knockMaterial
-         * @return
-         */
-        public ItemBuilderBuilder material(KnockMaterial knockMaterial) {
-            if (Bukkit.getServer().getVersion().contains("1.8") || Bukkit.getServer().getVersion().contains("1.9") ||
-                    Bukkit.getServer().getVersion().contains("1.10") || Bukkit.getServer().getVersion().contains("1.11") ||
-                    Bukkit.getServer().getVersion().contains("1.12")) {
-                item.setType(knockMaterial.legacy.toItemStack().getType());
-                item.setData(knockMaterial.legacy);
-            } else item.setType(Material.getMaterial(knockMaterial.nonLegacy));
-            return this;
-        }
-
         public ItemBuilderBuilder lore(String... lore) {
             meta.setLore(Arrays.asList(lore));
             item.setItemMeta(meta);
@@ -109,5 +93,10 @@ public class ItemBuilder {
         }
 
 
+        public ItemBuilderBuilder material(XMaterial mat) {
+            material(mat.parseMaterial());
+            item.setData(mat.parseItem().getData());
+            return this;
+        }
     }
 }

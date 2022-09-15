@@ -1,7 +1,7 @@
 package me.gameisntover.knockbackffa.arena;
 
+import com.cryptomorin.xseries.XMaterial;
 import me.gameisntover.knockbackffa.kit.KnockKit;
-import me.gameisntover.knockbackffa.multipleversion.KnockMaterial;
 import me.gameisntover.knockbackffa.util.Items;
 import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.entity.Player;
@@ -44,7 +44,7 @@ public class ArenaSettings implements Listener {
             }
             KnockKit kit = knocker.getSelectedKit();
             for (ItemStack item : player.getInventory().getContents()) {
-                if (item != null && item.getType() != KnockMaterial.AIR.toMaterial() && item.getItemMeta() != null && item.getItemMeta().getDisplayName() != null) {
+                if (item != null && item.getType().equals(XMaterial.AIR.parseMaterial()) && item.getItemMeta() != null && item.getItemMeta().getDisplayName() != null) {
                     if (Items.COSMETICS_MENU.getItem().equals(item) || Items.SHOP_MENU.getItem().equals(item) || Items.KITS_MENU.getItem().equals(item)) {
                         player.getInventory().clear();
                         knocker.giveKit(kit);

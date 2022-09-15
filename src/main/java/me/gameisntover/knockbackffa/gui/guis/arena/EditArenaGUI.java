@@ -1,5 +1,6 @@
 package me.gameisntover.knockbackffa.gui.guis.arena;
 
+import com.cryptomorin.xseries.XMaterial;
 import me.gameisntover.knockbackffa.arena.Arena;
 import me.gameisntover.knockbackffa.arena.ArenaManager;
 import me.gameisntover.knockbackffa.arena.Cuboid;
@@ -7,7 +8,6 @@ import me.gameisntover.knockbackffa.gui.ItemBuilder;
 import me.gameisntover.knockbackffa.gui.LightButton;
 import me.gameisntover.knockbackffa.gui.LightButtonManager;
 import me.gameisntover.knockbackffa.gui.LightGUI;
-import me.gameisntover.knockbackffa.multipleversion.KnockMaterial;
 import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -25,7 +25,7 @@ public class EditArenaGUI extends LightGUI {
         super("Arena Editor",3);
         Arena arena =  ArenaManager.load(arenaName);
         LightGUI arenaGUI = this;
-        LightButton setspawn = LightButtonManager.createButton(ItemBuilder.builder().material(KnockMaterial.NETHER_STAR).name(ChatColor.GRAY + "Set spawnpoint").build(), e -> {
+        LightButton setspawn = LightButtonManager.createButton(ItemBuilder.builder().material(XMaterial.NETHER_STAR.parseMaterial()).name(ChatColor.GRAY + "Set spawnpoint").build(), e -> {
             Player player = (Player) e.getWhoClicked();
             arena.getConfig().set("arena.spawn.x", player.getLocation().getX());
             arena.getConfig().set("arena.spawn.y", player.getLocation().getY());
@@ -34,7 +34,7 @@ public class EditArenaGUI extends LightGUI {
             arena.save();
             player.sendMessage(ChatColor.GREEN + "Arena spawn location set!");
         });
-        LightButton autoReset = LightButtonManager.createButton(ItemBuilder.builder().material(KnockMaterial.DISPENSER).name(ChatColor.GRAY + "Auto Reset").lore(ChatColor.GRAY + "Toggle whether or not the arena will reset blocks placed or broke automatically").build(), e -> {
+        LightButton autoReset = LightButtonManager.createButton(ItemBuilder.builder().material(XMaterial.DISPENSER.parseMaterial()).name(ChatColor.GRAY + "Auto Reset").lore(ChatColor.GRAY + "Toggle whether or not the arena will reset blocks placed or broke automatically").build(), e -> {
             arena.getConfig().set("auto-reset", !arena.getConfig().getBoolean("auto-reset"));
             if (arena.getConfig().getString("blocks")==null) {
                 Location loc1 = arena.getPos1();
@@ -47,7 +47,7 @@ public class EditArenaGUI extends LightGUI {
             }
             arena.save();
         });
-        LightButton setpos = LightButtonManager.createButton(ItemBuilder.builder().material(KnockMaterial.REDSTONE_BLOCK).name(ChatColor.GRAY + "Set arena positions").lore(ChatColor.GRAY + "Sets the arena positions you need a 2 positions selected with the wand you have in your hand").build(), e -> {
+        LightButton setpos = LightButtonManager.createButton(ItemBuilder.builder().material(XMaterial.REDSTONE_BLOCK.parseMaterial()).name(ChatColor.GRAY + "Set arena positions").lore(ChatColor.GRAY + "Sets the arena positions you need a 2 positions selected with the wand you have in your hand").build(), e -> {
             Knocker knocker = Knocker.getKnocker(e.getWhoClicked().getUniqueId());
             if (knocker.getPositionA() != null && knocker.getPositionB() != null) {
                 Location loc1 = knocker.getPositionA();

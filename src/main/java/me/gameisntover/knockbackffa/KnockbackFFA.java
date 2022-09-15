@@ -1,5 +1,6 @@
 package me.gameisntover.knockbackffa;
 
+import com.cryptomorin.xseries.XMaterial;
 import lombok.SneakyThrows;
 import me.gameisntover.knockbackffa.arena.ArenaConfiguration;
 import me.gameisntover.knockbackffa.arena.ArenaManager;
@@ -12,7 +13,6 @@ import me.gameisntover.knockbackffa.configurations.Sounds;
 import me.gameisntover.knockbackffa.cosmetics.Cosmetic;
 import me.gameisntover.knockbackffa.kit.KitManager;
 import me.gameisntover.knockbackffa.listener.*;
-import me.gameisntover.knockbackffa.multipleversion.KnockMaterial;
 import me.gameisntover.knockbackffa.util.Config;
 import me.gameisntover.knockbackffa.util.Expansion;
 import me.gameisntover.knockbackffa.util.Items;
@@ -70,7 +70,7 @@ public final class KnockbackFFA extends JavaPlugin {
         getLogger().info("Enjoy using plugin :)");
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (BungeeMode() || Knocker.getKnocker(p.getUniqueId()).isInGame()) {
-                if (p.getInventory().contains(KnockMaterial.BOW.toMaterial()) && !p.getInventory().contains(KnockMaterial.ARROW.toMaterial()))
+                if (p.getInventory().contains(XMaterial.BOW.parseMaterial()) && !p.getInventory().contains(XMaterial.ARROW.parseMaterial()))
                     p.getInventory().addItem(Items.KB_ARROW.item);
             }
         }
@@ -157,7 +157,7 @@ public final class KnockbackFFA extends JavaPlugin {
 
                         for (Entity current : entList)
                             if (current instanceof Item)
-                                if (((Item) current).getItemStack().getType() == KnockMaterial.GOLD_PLATE.toMaterial()) current.remove();
+                                if (((Item) current).getItemStack().getType().equals(XMaterial.LIGHT_WEIGHTED_PRESSURE_PLATE.parseMaterial())) current.remove();
                     }
                 }
             }
