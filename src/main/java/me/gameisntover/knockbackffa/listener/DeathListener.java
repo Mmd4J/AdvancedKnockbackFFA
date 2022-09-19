@@ -2,8 +2,10 @@ package me.gameisntover.knockbackffa.listener;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.gameisntover.knockbackffa.KnockbackFFA;
+import me.gameisntover.knockbackffa.bukkitevents.PlayerKillEvent;
 import me.gameisntover.knockbackffa.configurations.Messages;
 import me.gameisntover.knockbackffa.util.Knocker;
+import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -64,6 +66,8 @@ public class DeathListener implements Listener {
         Knocker knocker = Knocker.getKnocker(player.getUniqueId());
         killer.remove(player);
         knocker.setInArena(false);
+        PlayerKillEvent ev = new PlayerKillEvent(Knocker.getKnocker(damager.getUniqueId()),knocker);
+        Bukkit.getPluginManager().callEvent(ev);
         if (knocker.isInGame()) return;
         new BukkitRunnable() {
             @Override
