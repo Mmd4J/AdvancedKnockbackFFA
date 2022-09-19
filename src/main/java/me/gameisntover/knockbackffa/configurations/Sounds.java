@@ -1,5 +1,6 @@
 package me.gameisntover.knockbackffa.configurations;
 
+import com.cryptomorin.xseries.XSound;
 import me.gameisntover.knockbackffa.KnockbackFFA;
 import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -9,12 +10,12 @@ import java.io.File;
 import java.io.IOException;
 
 public enum Sounds {
-    ARENACHANGE("arenachange",Sound.NOTE_PLING),
-    ITEM_REMOVED("itemremoved",Sound.NOTE_BASS),
-    JUMP_PLATE("jumpplate",Sound.BAT_TAKEOFF),
-    PLAYER_JOIN("join",Sound.LEVEL_UP),
-    GUI_CLOSE("guiclose",Sound.CHEST_CLOSE),
-    GUI_OPEN("guiopen",Sound.CHEST_OPEN);
+    ARENACHANGE("arenachange", XSound.BLOCK_NOTE_BLOCK_PLING.parseSound()),
+    ITEM_REMOVED("itemremoved",XSound.BLOCK_NOTE_BLOCK_BASS.parseSound()),
+    JUMP_PLATE("jumpplate",XSound.ENTITY_BAT_TAKEOFF.parseSound()),
+    PLAYER_JOIN("join",XSound.ENTITY_PLAYER_LEVELUP.parseSound()),
+    GUI_CLOSE("guiclose",XSound.BLOCK_CHEST_CLOSE.parseSound()),
+    GUI_OPEN("guiopen",XSound.BLOCK_CHEST_OPEN.parseSound());
     private String path;
     private Sound sound;
     private FileConfiguration config;
