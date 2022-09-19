@@ -1,9 +1,9 @@
 package me.gameisntover.knockbackffa.listener;
 
-import me.gameisntover.knockbackffa.gui.LightGUI;
-import me.gameisntover.knockbackffa.gui.guis.cosmetic.CosmeticMenuGUI;
-import me.gameisntover.knockbackffa.gui.guis.cosmetic.ShopMenuGUI;
-import me.gameisntover.knockbackffa.gui.guis.kit.KitsMenuGUI;
+import me.gameisntover.knockbackffa.kit.gui.LightGUI;
+import me.gameisntover.knockbackffa.kit.gui.guis.cosmetic.CosmeticMenuGUI;
+import me.gameisntover.knockbackffa.kit.gui.guis.cosmetic.ShopMenuGUI;
+import me.gameisntover.knockbackffa.kit.gui.guis.kit.KitsMenuGUI;
 import me.gameisntover.knockbackffa.util.Items;
 import me.gameisntover.knockbackffa.util.Knocker;
 import org.bukkit.event.EventHandler;

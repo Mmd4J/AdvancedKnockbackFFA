@@ -2,8 +2,8 @@ package me.gameisntover.knockbackffa.util;
 
 import com.cryptomorin.xseries.XMaterial;
 import me.gameisntover.knockbackffa.configurations.ItemConfiguration;
-import me.gameisntover.knockbackffa.gui.ItemBuilder;
-import me.gameisntover.knockbackffa.gui.KEnchant;
+import me.gameisntover.knockbackffa.kit.gui.ItemBuilder;
+import me.gameisntover.knockbackffa.kit.gui.KEnchant;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;

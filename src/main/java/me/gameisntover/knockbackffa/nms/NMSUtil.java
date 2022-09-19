@@ -16,7 +16,14 @@ public class NMSUtil {
         return nmsClass;
     }
 
-    public static Object getConnection(Player player) throws SecurityException, NoSuchMethodException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InvocationTargetException {
+    public static Class<?> getKMSClass(String kmsClassString) throws ClassNotFoundException{
+        String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3] + ".";
+        String name = "net.minecraft.server.knockbackffa_" + version + kmsClassString;
+        Class<?> kmsClass = Class.forName(name);
+        return kmsClass;
+    }
+
+    public static Object getConnection(Player player) throws SecurityException, NoSuchMethodException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException, InvocationTargetException {
         Method getHandle = player.getClass().getMethod("getHandle");
         Object nmsPlayer = getHandle.invoke(player);
         Field conField = nmsPlayer.getClass().getField("playerConnection");
