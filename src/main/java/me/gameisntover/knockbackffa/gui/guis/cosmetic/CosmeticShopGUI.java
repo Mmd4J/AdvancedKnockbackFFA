@@ -1,13 +1,13 @@
-package me.gameisntover.knockbackffa.kit.gui.guis.cosmetic;
+package me.gameisntover.knockbackffa.gui.guis.cosmetic;
 
 import me.gameisntover.knockbackffa.configurations.ItemConfiguration;
 import me.gameisntover.knockbackffa.configurations.Messages;
 import me.gameisntover.knockbackffa.cosmetics.Cosmetic;
-import me.gameisntover.knockbackffa.kit.gui.ItemBuilder;
-import me.gameisntover.knockbackffa.kit.gui.LightButton;
-import me.gameisntover.knockbackffa.kit.gui.LightButtonManager;
-import me.gameisntover.knockbackffa.kit.gui.LightGUI;
-import me.gameisntover.knockbackffa.util.Knocker;
+import me.gameisntover.knockbackffa.gui.ItemBuilder;
+import me.gameisntover.knockbackffa.gui.LightButton;
+import me.gameisntover.knockbackffa.gui.LightButtonManager;
+import me.gameisntover.knockbackffa.gui.LightGUI;
+import me.gameisntover.knockbackffa.player.Knocker;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.meta.ItemMeta;

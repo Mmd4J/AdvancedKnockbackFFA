@@ -16,7 +16,7 @@ import me.gameisntover.knockbackffa.listener.*;
 import me.gameisntover.knockbackffa.util.Config;
 import me.gameisntover.knockbackffa.util.Expansion;
 import me.gameisntover.knockbackffa.util.Items;
-import me.gameisntover.knockbackffa.util.Knocker;
+import me.gameisntover.knockbackffa.player.Knocker;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;

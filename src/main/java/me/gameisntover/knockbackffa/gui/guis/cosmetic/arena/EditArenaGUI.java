@@ -1,14 +1,14 @@
-package me.gameisntover.knockbackffa.kit.gui.guis.arena;
+package me.gameisntover.knockbackffa.gui.guis.cosmetic.arena;
 
 import com.cryptomorin.xseries.XMaterial;
 import me.gameisntover.knockbackffa.arena.Arena;
 import me.gameisntover.knockbackffa.arena.ArenaManager;
 import me.gameisntover.knockbackffa.arena.Cuboid;
-import me.gameisntover.knockbackffa.kit.gui.ItemBuilder;
-import me.gameisntover.knockbackffa.kit.gui.LightButton;
-import me.gameisntover.knockbackffa.kit.gui.LightButtonManager;
-import me.gameisntover.knockbackffa.kit.gui.LightGUI;
-import me.gameisntover.knockbackffa.util.Knocker;
+import me.gameisntover.knockbackffa.gui.ItemBuilder;
+import me.gameisntover.knockbackffa.gui.LightButton;
+import me.gameisntover.knockbackffa.gui.LightButtonManager;
+import me.gameisntover.knockbackffa.gui.LightGUI;
+import me.gameisntover.knockbackffa.player.Knocker;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;

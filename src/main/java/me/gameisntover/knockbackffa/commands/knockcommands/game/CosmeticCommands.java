@@ -5,10 +5,10 @@ import me.gameisntover.knockbackffa.commands.KnockCommand;
 import me.gameisntover.knockbackffa.configurations.Messages;
 import me.gameisntover.knockbackffa.cosmetics.Cosmetic;
 import me.gameisntover.knockbackffa.cosmetics.CosmeticType;
-import me.gameisntover.knockbackffa.kit.gui.LightButton;
-import me.gameisntover.knockbackffa.kit.gui.LightButtonManager;
-import me.gameisntover.knockbackffa.kit.gui.LightGUI;
-import me.gameisntover.knockbackffa.util.Knocker;
+import me.gameisntover.knockbackffa.gui.LightButton;
+import me.gameisntover.knockbackffa.gui.LightButtonManager;
+import me.gameisntover.knockbackffa.gui.LightGUI;
+import me.gameisntover.knockbackffa.player.Knocker;
 import org.bukkit.permissions.PermissionDefault;
 
 import java.io.File;

@@ -1,14 +1,14 @@
-package me.gameisntover.knockbackffa.kit.gui.guis.kit;
+package me.gameisntover.knockbackffa.gui.guis.kit;
 
 import com.cryptomorin.xseries.XMaterial;
 import me.gameisntover.knockbackffa.configurations.Messages;
-import me.gameisntover.knockbackffa.kit.gui.ItemBuilder;
-import me.gameisntover.knockbackffa.kit.gui.LightButton;
-import me.gameisntover.knockbackffa.kit.gui.LightButtonManager;
-import me.gameisntover.knockbackffa.kit.gui.LightGUI;
+import me.gameisntover.knockbackffa.gui.ItemBuilder;
+import me.gameisntover.knockbackffa.gui.LightButton;
+import me.gameisntover.knockbackffa.gui.LightButtonManager;
+import me.gameisntover.knockbackffa.gui.LightGUI;
 import me.gameisntover.knockbackffa.kit.KitManager;
 import me.gameisntover.knockbackffa.kit.KnockKit;
-import me.gameisntover.knockbackffa.util.Knocker;
+import me.gameisntover.knockbackffa.player.Knocker;
 import me.gameisntover.knockbackffa.util.Knocktils;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;

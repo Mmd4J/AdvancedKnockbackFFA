@@ -1,7 +1,7 @@
 package me.gameisntover.knockbackffa.cosmetics;
 
 import com.cryptomorin.xseries.XMaterial;
-import me.gameisntover.knockbackffa.kit.gui.ItemBuilder;
+import me.gameisntover.knockbackffa.gui.ItemBuilder;
 import org.bukkit.inventory.ItemStack;
 
 public enum CosmeticType {

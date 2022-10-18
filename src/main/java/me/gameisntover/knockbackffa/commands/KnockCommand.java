@@ -1,6 +1,6 @@
 package me.gameisntover.knockbackffa.commands;
 
-import me.gameisntover.knockbackffa.util.Knocker;
+import me.gameisntover.knockbackffa.player.Knocker;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

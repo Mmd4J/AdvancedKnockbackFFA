@@ -2,7 +2,7 @@ package me.gameisntover.knockbackffa.cosmetics;
 
 import com.cryptomorin.xseries.XMaterial;
 import me.gameisntover.knockbackffa.KnockbackFFA;
-import me.gameisntover.knockbackffa.util.Knocker;
+import me.gameisntover.knockbackffa.player.Knocker;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.player.PlayerMoveEvent;

@@ -3,7 +3,7 @@ package me.gameisntover.knockbackffa.cosmetics;
 import com.cryptomorin.xseries.XMaterial;
 import lombok.Getter;
 import me.gameisntover.knockbackffa.KnockbackFFA;
-import me.gameisntover.knockbackffa.util.Knocker;
+import me.gameisntover.knockbackffa.player.Knocker;
 import me.gameisntover.knockbackffa.util.YamlData;
 import org.bukkit.Material;
 import org.jetbrains.annotations.Nullable;

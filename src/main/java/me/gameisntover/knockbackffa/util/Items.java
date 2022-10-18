@@ -2,8 +2,8 @@ package me.gameisntover.knockbackffa.util;
 
 import com.cryptomorin.xseries.XMaterial;
 import me.gameisntover.knockbackffa.configurations.ItemConfiguration;
-import me.gameisntover.knockbackffa.kit.gui.ItemBuilder;
-import me.gameisntover.knockbackffa.kit.gui.KEnchant;
+import me.gameisntover.knockbackffa.gui.ItemBuilder;
+import me.gameisntover.knockbackffa.gui.KEnchant;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.Collections;
 
 public enum Items {
-    WAND(ItemBuilder.builder().material(XMaterial.BLAZE_ROD.parseMaterial()).name(ChatColor.GOLD + "PositionSelector Wand").itemflags(Collections.singletonList(ItemFlag.HIDE_ENCHANTS)).enchants(Collections.singletonList(new KEnchant(Enchantment.DURABILITY, 99))).build()),
+    WAND(ItemBuilder.builder().material(XMaterial.BLAZE_ROD.parseMaterial()).name(ChatColor.GOLD + "PositionSelector Wand").itemflags(ItemFlag.HIDE_ENCHANTS).enchants(Collections.singletonList(new KEnchant(Enchantment.DURABILITY, 5))).build()),
     COSMETICS_MENU(ItemBuilder.builder().name(ItemConfiguration.get().getString("LobbyItems.cosmetic.name")).material(Material.getMaterial(ItemConfiguration.get().getString("LobbyItems.cosmetic.material"))).lores(ItemConfiguration.get().getStringList("LobbyItems.cosmetic.lore")).buttonMeta().build()),
     KITS_MENU(ItemBuilder.builder().name(ItemConfiguration.get().getString("LobbyItems.kits.name")).material(Material.getMaterial(ItemConfiguration.get().getString("LobbyItems.kits.material"))).lores(ItemConfiguration.get().getStringList("LobbyItems.kits.lore")).buttonMeta().build()),
     SHOP_MENU(ItemBuilder.builder().name(ItemConfiguration.get().getString("LobbyItems.shop.name")).material(Material.getMaterial(ItemConfiguration.get().getString("LobbyItems.shop.material"))).lores(ItemConfiguration.get().getStringList("LobbyItems.shop.lore")).buttonMeta().build()),

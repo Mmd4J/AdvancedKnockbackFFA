@@ -3,7 +3,7 @@ package me.gameisntover.knockbackffa.arena;
 import com.cryptomorin.xseries.XMaterial;
 import me.gameisntover.knockbackffa.kit.KnockKit;
 import me.gameisntover.knockbackffa.util.Items;
-import me.gameisntover.knockbackffa.util.Knocker;
+import me.gameisntover.knockbackffa.player.Knocker;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -33,7 +33,7 @@ public class ArenaSettings implements Listener {
         if (ArenaManager.getEnabledArena() != null) {
             Arena arena = ArenaManager.getEnabledArena();
             knocker.setInGame(true);
-            if (!arena.contains(player.getLocation())) return;
+            if (!arena.contains(e.getTo())) return;
             if (knocker.getSelectedKit() == null) {
                 List<KnockKit> ownedKits = knocker.getOwnedKits();
                 if (!ownedKits.contains(KnockKit.getFromString("default"))) {

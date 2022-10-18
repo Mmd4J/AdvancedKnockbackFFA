@@ -1,4 +1,4 @@
-package me.gameisntover.knockbackffa.kit.gui;
+package me.gameisntover.knockbackffa.gui;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

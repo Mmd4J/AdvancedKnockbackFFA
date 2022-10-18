@@ -1,6 +1,6 @@
 package me.gameisntover.knockbackffa.arena;
 
-import me.gameisntover.knockbackffa.util.Knocker;
+import me.gameisntover.knockbackffa.player.Knocker;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 

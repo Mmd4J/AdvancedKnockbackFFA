@@ -3,7 +3,7 @@ package me.gameisntover.knockbackffa.commands.knockcommands.arena;
 import me.gameisntover.knockbackffa.arena.ArenaConfiguration;
 import me.gameisntover.knockbackffa.commands.KFCommand;
 import me.gameisntover.knockbackffa.commands.KnockCommand;
-import me.gameisntover.knockbackffa.util.Knocker;
+import me.gameisntover.knockbackffa.player.Knocker;
 import org.bukkit.Location;
 import org.bukkit.permissions.PermissionDefault;
 

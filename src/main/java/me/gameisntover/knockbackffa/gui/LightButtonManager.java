@@ -1,4 +1,4 @@
-package me.gameisntover.knockbackffa.kit.gui;
+package me.gameisntover.knockbackffa.gui;
 
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;

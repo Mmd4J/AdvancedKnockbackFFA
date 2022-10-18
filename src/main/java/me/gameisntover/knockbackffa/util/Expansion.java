@@ -3,6 +3,7 @@ package me.gameisntover.knockbackffa.util;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import me.gameisntover.knockbackffa.KnockbackFFA;
 import me.gameisntover.knockbackffa.arena.ArenaManager;
+import me.gameisntover.knockbackffa.player.Knocker;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;

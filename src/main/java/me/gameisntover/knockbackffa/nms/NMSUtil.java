@@ -1,5 +1,6 @@
 package me.gameisntover.knockbackffa.nms;
 
+import lombok.SneakyThrows;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -28,5 +29,10 @@ public class NMSUtil {
         Object nmsPlayer = getHandle.invoke(player);
         Field conField = nmsPlayer.getClass().getField("playerConnection");
         return conField.get(nmsPlayer);
+    }
+
+    @SneakyThrows
+    public static Object getNMSMethod(Object obj, String method, Object... args){
+        return obj.getClass().getMethod(method).invoke(args);
     }
 }

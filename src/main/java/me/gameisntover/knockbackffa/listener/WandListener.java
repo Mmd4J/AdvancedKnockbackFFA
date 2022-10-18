@@ -1,7 +1,7 @@
 package me.gameisntover.knockbackffa.listener;
 
 import me.gameisntover.knockbackffa.util.Items;
-import me.gameisntover.knockbackffa.util.Knocker;
+import me.gameisntover.knockbackffa.player.Knocker;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

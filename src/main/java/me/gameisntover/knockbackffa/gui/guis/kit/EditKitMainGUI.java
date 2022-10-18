@@ -1,9 +1,9 @@
-package me.gameisntover.knockbackffa.kit.gui.guis.kit;
+package me.gameisntover.knockbackffa.gui.guis.kit;
 
-import me.gameisntover.knockbackffa.kit.gui.ItemBuilder;
-import me.gameisntover.knockbackffa.kit.gui.LightButton;
-import me.gameisntover.knockbackffa.kit.gui.LightButtonManager;
-import me.gameisntover.knockbackffa.kit.gui.LightGUI;
+import me.gameisntover.knockbackffa.gui.ItemBuilder;
+import me.gameisntover.knockbackffa.gui.LightButton;
+import me.gameisntover.knockbackffa.gui.LightButtonManager;
+import me.gameisntover.knockbackffa.gui.LightGUI;
 import me.gameisntover.knockbackffa.kit.KnockKit;
 
 public class EditKitMainGUI extends LightGUI {

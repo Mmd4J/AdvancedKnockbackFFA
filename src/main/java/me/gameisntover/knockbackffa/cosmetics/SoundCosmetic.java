@@ -1,7 +1,7 @@
 package me.gameisntover.knockbackffa.cosmetics;
 
 import me.gameisntover.knockbackffa.KnockbackFFA;
-import me.gameisntover.knockbackffa.util.Knocker;
+import me.gameisntover.knockbackffa.player.Knocker;
 import org.bukkit.Sound;
 import org.bukkit.scheduler.BukkitRunnable;
 

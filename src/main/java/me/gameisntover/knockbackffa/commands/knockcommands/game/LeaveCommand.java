@@ -5,7 +5,7 @@ import me.gameisntover.knockbackffa.KnockbackFFA;
 import me.gameisntover.knockbackffa.commands.KFCommand;
 import me.gameisntover.knockbackffa.commands.KnockCommand;
 import me.gameisntover.knockbackffa.configurations.Messages;
-import me.gameisntover.knockbackffa.util.Knocker;
+import me.gameisntover.knockbackffa.player.Knocker;
 import org.bukkit.permissions.PermissionDefault;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package me.gameisntover.knockbackffa.util;
+package me.gameisntover.knockbackffa.player;
 
 import fr.mrmicky.fastboard.FastBoard;
 import lombok.Getter;
@@ -16,9 +16,10 @@ import me.gameisntover.knockbackffa.configurations.ScoreboardConfiguration;
 import me.gameisntover.knockbackffa.cosmetics.Cosmetic;
 import me.gameisntover.knockbackffa.cosmetics.TrailCosmetic;
 import me.gameisntover.knockbackffa.database.Database;
-import me.gameisntover.knockbackffa.kit.gui.LightGUI;
+import me.gameisntover.knockbackffa.gui.LightGUI;
 import me.gameisntover.knockbackffa.kit.KnockKit;
-import me.gameisntover.knockbackffa.nms.NMSUtil;
+import me.gameisntover.knockbackffa.util.Items;
+import me.gameisntover.knockbackffa.util.Knocktils;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -181,7 +182,11 @@ public class Knocker {
                 if (getPlayer() != null) {
                     if (a[0] > titles.size() - 1) a[0] = 0;
                     fastBoard.updateTitle(ChatColor.translateAlternateColorCodes('&', titles.get(a[0])));
-                    fastBoard.updateLines(PlaceholderAPI.setPlaceholders(getPlayer(), ScoreboardConfiguration.get().getStringList("lines")));
+                    List<String> strings = new ArrayList<>();
+                    for (String s : ScoreboardConfiguration.get().getStringList("lines")){
+                    strings.add(Knocktils.translateColors(s));
+                    }
+                    fastBoard.updateLines(PlaceholderAPI.setPlaceholders(getPlayer(), strings));
                     if (getPlayer().getScoreboard() != null) getPlayer().getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
                 }
             }
@@ -220,8 +225,9 @@ public class Knocker {
     }
 
     @SneakyThrows
-    public Object getHandle(){
-        return NMSUtil.getConnection(getPlayer());
+    public KnockerConnection getConnection(){
+        return KnockerConnection.fromKnocker(this);
     }
+
 
 }

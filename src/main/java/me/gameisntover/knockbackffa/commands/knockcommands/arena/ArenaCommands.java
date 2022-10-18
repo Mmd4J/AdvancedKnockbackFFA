@@ -3,9 +3,9 @@ package me.gameisntover.knockbackffa.commands.knockcommands.arena;
 import me.gameisntover.knockbackffa.arena.*;
 import me.gameisntover.knockbackffa.commands.KFCommand;
 import me.gameisntover.knockbackffa.commands.KnockCommand;
-import me.gameisntover.knockbackffa.kit.gui.LightGUI;
-import me.gameisntover.knockbackffa.kit.gui.guis.arena.EditArenaGUI;
-import me.gameisntover.knockbackffa.util.Knocker;
+import me.gameisntover.knockbackffa.gui.LightGUI;
+import me.gameisntover.knockbackffa.gui.guis.cosmetic.arena.EditArenaGUI;
+import me.gameisntover.knockbackffa.player.Knocker;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -51,7 +51,7 @@ public class ArenaCommands extends KnockCommand {
                     if (knocker.getPositionA() != null && knocker.getPositionB() != null) {
                         Location loc1 = knocker.getPositionA();
                         Location loc2 = knocker.getPositionB();
-                        Arena arena = ArenaManager.create(args[0], loc1, loc2, knocker.getLocation());
+                        Arena arena = ArenaManager.create(args[1], loc1, loc2, knocker.getLocation());
                         List<String> blocks = new ArrayList<>();
                         List<String> locations = new ArrayList<>();
                         Cuboid region = new Cuboid(loc1, loc2);
@@ -62,12 +62,12 @@ public class ArenaCommands extends KnockCommand {
                         arena.getConfig().set("blocks", blocks);
                         arena.save();
                         if (ArenaManager.folder.list().length == 1) {
-                            ArenaManager.setEnabledArena(args[0]);
+                            ArenaManager.setEnabledArena(args[1]);
                             ArenaConfiguration.save();
                         }
                         ArenaCreateEvent event = new ArenaCreateEvent(knocker, arena);
                         Bukkit.getPluginManager().callEvent(event);
-                        knocker.sendMessageWithPrefix("Arena " + args[0] + " has been created!");
+                        knocker.sendMessageWithPrefix("Arena " + args[1] + " has been created!");
                     } else knocker.sendMessageWithPrefix("Before using this command please consider selecting two positions with wand! /knockbackffa:kbffawand");
                     break;
                 case "delete":
@@ -80,10 +80,10 @@ public class ArenaCommands extends KnockCommand {
                     break;
                 case "edit":
                     List<String> arenaList = Arrays.asList(ArenaManager.folder.list());
-                    if (!arenaList.contains(args[0] + ".yml")) knocker.sendMessage("&cThat arena name does not exist!");
+                    if (!arenaList.contains(args[1] + ".yml")) knocker.sendMessage("&cThat arena name does not exist!");
                     else {
                         knocker.sendMessage("&aYou are now editing " + args[0]);
-                        LightGUI gui = new EditArenaGUI(args[0]);
+                        LightGUI gui = new EditArenaGUI(args[1]);
                         knocker.openGUI(gui);
                     }
                     break;

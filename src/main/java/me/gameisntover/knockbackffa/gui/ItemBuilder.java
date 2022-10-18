@@ -1,4 +1,4 @@
-package me.gameisntover.knockbackffa.kit.gui;
+package me.gameisntover.knockbackffa.gui;
 
 import com.cryptomorin.xseries.XMaterial;
 import me.gameisntover.knockbackffa.util.Knocktils;
@@ -27,7 +27,7 @@ public class ItemBuilder {
         }
 
         public ItemStack build() {
-            meta.spigot().setUnbreakable(unbreakable);
+        //    meta.spigot().setUnbreakable(unbreakable);
             item.setItemMeta(meta);
             return item;
         }
@@ -57,6 +57,9 @@ public class ItemBuilder {
             return this;
         }
 
+        public ItemBuilderBuilder itemflags(ItemFlag... flags){
+            return itemflags(Arrays.asList(flags));
+        }
         public ItemBuilderBuilder unbreakable(boolean a) {
             this.unbreakable = a;
             return this;
@@ -87,7 +90,7 @@ public class ItemBuilder {
          */
         public ItemBuilderBuilder buttonMeta() {
             meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_DESTROYS);
-            meta.spigot().setUnbreakable(true);
+        //    meta.spigot().setUnbreakable(true);
             item.setItemMeta(meta);
             return this;
         }

@@ -1,12 +1,12 @@
-package me.gameisntover.knockbackffa.kit.gui.guis.cosmetic;
+package me.gameisntover.knockbackffa.gui.guis.cosmetic;
 
 import me.gameisntover.knockbackffa.configurations.ItemConfiguration;
-import me.gameisntover.knockbackffa.kit.gui.ItemBuilder;
-import me.gameisntover.knockbackffa.kit.gui.LightButton;
-import me.gameisntover.knockbackffa.kit.gui.LightButtonManager;
-import me.gameisntover.knockbackffa.kit.gui.LightGUI;
-import me.gameisntover.knockbackffa.kit.gui.guis.kit.KitShopGUI;
-import me.gameisntover.knockbackffa.util.Knocker;
+import me.gameisntover.knockbackffa.gui.ItemBuilder;
+import me.gameisntover.knockbackffa.gui.LightButton;
+import me.gameisntover.knockbackffa.gui.LightButtonManager;
+import me.gameisntover.knockbackffa.gui.LightGUI;
+import me.gameisntover.knockbackffa.gui.guis.kit.KitShopGUI;
+import me.gameisntover.knockbackffa.player.Knocker;
 import me.gameisntover.knockbackffa.util.Knocktils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

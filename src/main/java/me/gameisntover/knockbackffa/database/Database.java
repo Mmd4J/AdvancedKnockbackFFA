@@ -1,7 +1,7 @@
 package me.gameisntover.knockbackffa.database;
 
 import me.gameisntover.knockbackffa.util.Config;
-import me.gameisntover.knockbackffa.util.Knocker;
+import me.gameisntover.knockbackffa.player.Knocker;
 
 public interface Database {
     Config config = new Config("database");
