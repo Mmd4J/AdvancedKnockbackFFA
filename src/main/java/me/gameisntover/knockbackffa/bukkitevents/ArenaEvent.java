@@ -1,5 +1,6 @@
-package me.gameisntover.knockbackffa.arena;
+package me.gameisntover.knockbackffa.bukkitevents;
 
+import me.gameisntover.knockbackffa.arena.Arena;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;

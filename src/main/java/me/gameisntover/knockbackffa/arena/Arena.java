@@ -1,11 +1,10 @@
 package me.gameisntover.knockbackffa.arena;
 
+import me.gameisntover.knockbackffa.util.YamlData;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,9 +15,11 @@ import java.util.Objects;
 
 public class Arena {
 
-    private final FileConfiguration config;
+    private final YamlData config;
     private final String arenaName;
     private final File arenaFile;
+
+
 
     public Arena(String name) {
         this.arenaName = name;
@@ -30,10 +31,10 @@ public class Arena {
                 e.printStackTrace();
             }
         }
-        config = YamlConfiguration.loadConfiguration(arenaFile);
+        config = new YamlData(arenaFile.getName());
     }
 
-    public FileConfiguration getConfig() {
+    public YamlData getConfig() {
         return config;
     }
 
@@ -119,11 +120,7 @@ public class Arena {
      * @return Region
      */
     public Location getSpawnLocation() {
-        double x = getConfig().getDouble("arena.spawn.x");
-        double y = getConfig().getDouble("arena.spawn.y");
-        double z = getConfig().getDouble("arena.spawn.z");
-        World world = Bukkit.getWorld(getConfig().getString("arena.spawn.world"));
-        return new Location(world, x, y, z);
+        return getConfig().getLocation("arena.spawn");
     }
 
     /**
@@ -161,5 +158,9 @@ public class Arena {
         return new Cuboid(getPos1(), getPos2());
     }
 
+    public Location getGUIVillagerSpawnPoint(){
+        if (config.isSet("arena.villager-spawn-point")) return config.getLocation("arena.villager-spawn-point");
+        else return getSpawnLocation();
+    }
 
 }

@@ -15,7 +15,6 @@ import org.bukkit.Material;
 import org.bukkit.WorldBorder;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,6 @@ public class EditArenaGUI extends LightGUI {
     public EditArenaGUI(String arenaName) {
         super("Arena Editor",3);
         Arena arena =  ArenaManager.load(arenaName);
-        LightGUI arenaGUI = this;
         LightButton setspawn = LightButtonManager.createButton(ItemBuilder.builder().material(XMaterial.NETHER_STAR.parseMaterial()).name(ChatColor.GRAY + "Set spawnpoint").build(), e -> {
             Player player = (Player) e.getWhoClicked();
             arena.getConfig().set("arena.spawn.x", player.getLocation().getX());
@@ -33,6 +31,15 @@ public class EditArenaGUI extends LightGUI {
             arena.getConfig().set("arena.spawn.world", player.getLocation().getWorld());
             arena.save();
             player.sendMessage(ChatColor.GREEN + "Arena spawn location set!");
+        });
+        LightButton setVillagerSpawn = LightButtonManager.createButton(ItemBuilder.builder().material(XMaterial.VILLAGER_SPAWN_EGG.parseMaterial()).name(ChatColor.GRAY + "Set GUI Villager Spawn Point").build(), e -> {
+            Player player = (Player) e.getWhoClicked();
+            arena.getConfig().set("arena.villager-spawn-point.x", player.getLocation().getX());
+            arena.getConfig().set("arena.villager-spawn-point.y", player.getLocation().getY());
+            arena.getConfig().set("arena.villager-spawn-point.z", player.getLocation().getZ());
+            arena.getConfig().set("arena.villager-spawn-point.world", player.getLocation().getWorld());
+            arena.save();
+            player.sendMessage(ChatColor.GREEN + "Arena villager spawn   location set!");
         });
         LightButton autoReset = LightButtonManager.createButton(ItemBuilder.builder().material(XMaterial.DISPENSER.parseMaterial()).name(ChatColor.GRAY + "Auto Reset").lore(ChatColor.GRAY + "Toggle whether or not the arena will reset blocks placed or broke automatically").build(), e -> {
             arena.getConfig().set("auto-reset", !arena.getConfig().getBoolean("auto-reset"));
@@ -78,7 +85,6 @@ public class EditArenaGUI extends LightGUI {
                 e.getWhoClicked().sendMessage(ChatColor.GREEN + "Arena positions set!");
             }
         });
-        ItemMeta setposMeta = setpos.getItem().getItemMeta();
         LightButton worldBorder = LightButtonManager.createButton(ItemBuilder.builder().lore(ChatColor.GREEN + "Toggle worldborder in arena").material(Material.BARRIER).name(ChatColor.GRAY + "World Border").build(), e -> {
             arena.getConfig().set("world-border", !arena.getConfig().getBoolean("world-border"));
             arena.save();
@@ -95,9 +101,10 @@ public class EditArenaGUI extends LightGUI {
                 worldBorderr.reset();
             }
         });
-        arenaGUI.setButton(setspawn,10);
-        arenaGUI.setButton(setpos,11);
-        arenaGUI.setButton(worldBorder,12);
-        arenaGUI.setButton(autoReset,13);
+        setButton(setspawn,10);
+        setButton(setVillagerSpawn,11);
+        setButton(setpos,12);
+        setButton(worldBorder,13);
+        setButton(autoReset,14);
     }
 }

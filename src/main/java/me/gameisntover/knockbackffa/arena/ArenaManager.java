@@ -1,6 +1,7 @@
 package me.gameisntover.knockbackffa.arena;
 
 import me.gameisntover.knockbackffa.KnockbackFFA;
+import me.gameisntover.knockbackffa.bukkitevents.ArenaChangeEvent;
 import me.gameisntover.knockbackffa.configurations.Messages;
 import me.gameisntover.knockbackffa.configurations.Sounds;
 import me.gameisntover.knockbackffa.player.Knocker;

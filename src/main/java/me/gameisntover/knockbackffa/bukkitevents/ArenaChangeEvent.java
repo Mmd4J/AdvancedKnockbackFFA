@@ -1,5 +1,6 @@
-package me.gameisntover.knockbackffa.arena;
+package me.gameisntover.knockbackffa.bukkitevents;
 
+import me.gameisntover.knockbackffa.arena.Arena;
 import org.bukkit.event.HandlerList;
 
 public class ArenaChangeEvent extends ArenaEvent {
@@ -37,5 +38,7 @@ public class ArenaChangeEvent extends ArenaEvent {
     public void setCancelled(boolean cancel) {
         this.cancelled = cancel;
     }
+
+
 
 }

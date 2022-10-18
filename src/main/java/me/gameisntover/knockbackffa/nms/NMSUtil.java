@@ -17,13 +17,6 @@ public class NMSUtil {
         return nmsClass;
     }
 
-    public static Class<?> getKMSClass(String kmsClassString) throws ClassNotFoundException{
-        String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3] + ".";
-        String name = "net.minecraft.server.knockbackffa_" + version + kmsClassString;
-        Class<?> kmsClass = Class.forName(name);
-        return kmsClass;
-    }
-
     public static Object getConnection(Player player) throws SecurityException, NoSuchMethodException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException, InvocationTargetException {
         Method getHandle = player.getClass().getMethod("getHandle");
         Object nmsPlayer = getHandle.invoke(player);
@@ -34,5 +27,17 @@ public class NMSUtil {
     @SneakyThrows
     public static Object getNMSMethod(Object obj, String method, Object... args){
         return obj.getClass().getMethod(method).invoke(args);
+    }
+
+    public static Class<?> getKMSClass(String kmsClassString) throws ClassNotFoundException{
+        String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3] + ".";
+        String name = "net.minecraft.server.knockbackffa_" + version + kmsClassString;
+        Class<?> kmsClass = Class.forName(name);
+        return kmsClass;
+    }
+
+    @SneakyThrows
+    public static Object getKMSMethod(Object obj, String methodName, Object... args){
+        return obj.getClass().getMethod(methodName).invoke(args);
     }
 }

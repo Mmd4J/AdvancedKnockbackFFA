@@ -31,7 +31,6 @@ public class JoinCommand extends KnockCommand {
                 String joinText = Messages.ARENA_JOIN.toString();
                 joinText = PlaceholderAPI.setPlaceholders(p, joinText);
                 p.sendMessage(joinText);
-                knocker.getPlayer().openInventory(p.getInventory());
                 p.getInventory().clear();
                 p.setFoodLevel(20);
                 knocker.giveLobbyItems();

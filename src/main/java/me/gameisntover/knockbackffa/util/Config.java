@@ -2,6 +2,7 @@ package me.gameisntover.knockbackffa.util;
 
 import lombok.Getter;
 import me.gameisntover.knockbackffa.KnockbackFFA;
+import org.bukkit.Location;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -34,4 +35,6 @@ public class Config extends YamlConfiguration {
             e.printStackTrace();
         }
     }
+
+
 }
