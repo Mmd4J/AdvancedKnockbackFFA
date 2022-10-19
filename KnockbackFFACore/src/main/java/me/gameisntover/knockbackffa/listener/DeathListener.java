@@ -73,7 +73,6 @@ public class DeathListener implements Listener {
             @Override
             public void run() {
                 player.spigot().respawn();
-                knocker.giveLobbyItems();
                 knocker.teleportPlayerToArena();
                 cancel();
             }

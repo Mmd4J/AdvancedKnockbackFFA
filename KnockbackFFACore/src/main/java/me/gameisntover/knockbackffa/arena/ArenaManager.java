@@ -39,7 +39,6 @@ public class ArenaManager {
             if (knocker.isInGame()) {
                 p.closeInventory();
                 p.getInventory().clear();
-                knocker.giveLobbyItems();
                 knocker.teleportPlayerToArena();
                 p.playSound(p.getLocation(), Sounds.ARENACHANGE.getSound(), 1, 1);
                 p.sendMessage(Knocktils.translateColors(Messages.ARENA_CHANGE.toString().replace("%arena%", arenaName)));

@@ -35,7 +35,6 @@ public class JoinLeaveListeners implements Listener
             if (KnockbackFFA.BungeeMode()) {
                 knocker.teleportPlayerToArena();
                 player.getInventory().clear();
-                knocker.giveLobbyItems();
 
             } else if (!knocker.isInGame()) knocker.leaveCurrentArena();
             knocker.setInGame(KnockbackFFA.BungeeMode());

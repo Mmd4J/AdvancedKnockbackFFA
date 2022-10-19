@@ -1,5 +1,5 @@
 #In The New Update Item names and materials are customizable customize them from here!
-LobbyItems:
+lobbyitems:
   shop:
     name: "&6Shop"
     material: "EMERALD"

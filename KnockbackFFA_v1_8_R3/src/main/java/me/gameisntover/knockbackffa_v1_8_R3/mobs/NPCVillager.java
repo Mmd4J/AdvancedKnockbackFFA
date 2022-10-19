@@ -17,7 +17,6 @@ public class NPCVillager extends EntityVillager {
         setPosition(loc.getBlockX(),loc.getBlockY(),loc.getBlockZ());
         setCustomName(ChatColor.translateAlternateColorCodes('&',name));
         setCustomNameVisible(true);
-
         b(true);
         k(true);
         setInvisible(true);

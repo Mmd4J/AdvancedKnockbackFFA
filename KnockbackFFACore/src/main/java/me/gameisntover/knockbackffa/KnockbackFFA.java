@@ -11,6 +11,8 @@ import me.gameisntover.knockbackffa.configurations.Messages;
 import me.gameisntover.knockbackffa.configurations.ScoreboardConfiguration;
 import me.gameisntover.knockbackffa.configurations.Sounds;
 import me.gameisntover.knockbackffa.cosmetics.Cosmetic;
+import me.gameisntover.knockbackffa.database.Database;
+import me.gameisntover.knockbackffa.entity.NPCVillager;
 import me.gameisntover.knockbackffa.kit.KitManager;
 import me.gameisntover.knockbackffa.listener.*;
 import me.gameisntover.knockbackffa.nms.NMSUtil;
@@ -189,7 +191,7 @@ public final class KnockbackFFA extends JavaPlugin {
 
     private void loadListeners() {
         Arrays.asList(new JoinLeaveListeners(),new DeathListener(),new WandListener(),
-                new GameRulesListener(),new GUIItemInteractListener(),
+                new GameRulesListener(),
                 new ArenaSettings()).forEach(listener -> Bukkit.getPluginManager().registerEvents(listener , this));
     }
 
@@ -203,7 +205,11 @@ public final class KnockbackFFA extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        if (NPCVillager.villager != null) NPCVillager.villager.kill();
+        for (Player player : Bukkit.getOnlinePlayers()){
+            Knocker knocker = Knocker.getKnocker(player.getUniqueId());
+            Database.getDatabase().updateData(knocker);
+        }
     }
 
 

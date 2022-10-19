@@ -11,7 +11,6 @@ import me.gameisntover.knockbackffa.arena.ArenaConfiguration;
 import me.gameisntover.knockbackffa.arena.ArenaManager;
 import me.gameisntover.knockbackffa.arena.world.VoidChunkGenerator;
 import me.gameisntover.knockbackffa.bukkitevents.PlayerJoinArenaEvent;
-import me.gameisntover.knockbackffa.configurations.ItemConfiguration;
 import me.gameisntover.knockbackffa.configurations.ScoreboardConfiguration;
 import me.gameisntover.knockbackffa.cosmetics.Cosmetic;
 import me.gameisntover.knockbackffa.cosmetics.TrailCosmetic;
@@ -211,11 +210,7 @@ public class Knocker {
             return getLocation().getWorld().equals(Bukkit.getWorld(ArenaConfiguration.get().getString("mainlobby.world")));
         else return false;
     }
-    public void giveLobbyItems(){
-        getInventory().setItem(ItemConfiguration.get().getInt("LobbyItems.cosmetic.slot"),Items.COSMETICS_MENU.getItem());
-        getInventory().setItem(ItemConfiguration.get().getInt("LobbyItems.kits.slot"), Items.KITS_MENU.getItem());
-        getInventory().setItem(ItemConfiguration.get().getInt("LobbyItems.shop.slot"), Items.SHOP_MENU.getItem());
-    }
+
     public Inventory getInventory(){
         return getPlayer().getInventory();
     }

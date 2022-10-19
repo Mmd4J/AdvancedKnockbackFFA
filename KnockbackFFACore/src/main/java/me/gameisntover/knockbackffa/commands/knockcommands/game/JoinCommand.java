@@ -33,7 +33,6 @@ public class JoinCommand extends KnockCommand {
                 p.sendMessage(joinText);
                 p.getInventory().clear();
                 p.setFoodLevel(20);
-                knocker.giveLobbyItems();
                 knocker.toggleScoreBoard(true);
                 knocker.setInGame(true);
             }

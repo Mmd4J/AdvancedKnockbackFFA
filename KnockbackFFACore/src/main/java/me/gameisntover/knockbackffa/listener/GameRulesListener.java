@@ -6,11 +6,14 @@ import me.gameisntover.knockbackffa.KnockbackFFA;
 import me.gameisntover.knockbackffa.arena.ArenaConfiguration;
 import me.gameisntover.knockbackffa.arena.ArenaManager;
 import me.gameisntover.knockbackffa.arena.Cuboid;
+import me.gameisntover.knockbackffa.bukkitevents.PlayerInteractAtVillagerEvent;
 import me.gameisntover.knockbackffa.configurations.ItemConfiguration;
 import me.gameisntover.knockbackffa.configurations.Messages;
 import me.gameisntover.knockbackffa.configurations.Sounds;
-import me.gameisntover.knockbackffa.util.Items;
+import me.gameisntover.knockbackffa.entity.NPCVillager;
+import me.gameisntover.knockbackffa.gui.guis.MainMenuGUI;
 import me.gameisntover.knockbackffa.player.Knocker;
+import me.gameisntover.knockbackffa.util.Items;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
@@ -25,10 +28,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -51,7 +51,7 @@ public class GameRulesListener implements Listener {
 
     }
 
-    @EventHandler
+    @EventHandler @SuppressWarnings("Deprecation")
     public void onPlayerMove(PlayerMoveEvent e) {
         Player player = e.getPlayer();
         List<String> voids = ArenaConfiguration.get().getStringList("registered-voids");
@@ -92,8 +92,8 @@ public class GameRulesListener implements Listener {
             Knocker knocker = Knocker.getKnocker(e.getEntity().getUniqueId());
             Player player = (Player) e.getEntity().getShooter();
             if (!knocker.isInGame())  return;
-                if (player.getInventory().getItemInHand().getType().equals(XMaterial.BOW.parseMaterial())) return;
-                    player.sendMessage(Messages.BOW_USE.toString());
+            if (player.getInventory().getItemInHand().getType().equals(XMaterial.BOW.parseMaterial())) return;
+            player.sendMessage(Messages.BOW_USE.toString());
                     new BukkitRunnable() {
                         int timer = 10;
                         @Override
@@ -210,5 +210,31 @@ public class GameRulesListener implements Listener {
     @EventHandler
     public void onEndermiteSpawn(CreatureSpawnEvent e) {
         if (e.getEntity() instanceof Endermite) e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onPlayerVillagerInteract(PlayerInteractAtEntityEvent e){
+        Knocker knocker = Knocker.getKnocker(e.getPlayer().getUniqueId());
+        if (NPCVillager.villager != null) {
+            if (e.getRightClicked().getUniqueId().equals(NPCVillager.villager.getBukkitEntity().getUniqueId())) {
+                e.setCancelled(true);
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        knocker.closeGUI();
+                    }
+                }.runTaskLater(KnockbackFFA.getInstance(),1);
+                PlayerInteractAtVillagerEvent event = new PlayerInteractAtVillagerEvent(knocker, NPCVillager.villager);
+                Bukkit.getPluginManager().callEvent(event);
+                if (knocker.isInGame() && !event.isCancelled()) {
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            knocker.openGUI(new MainMenuGUI());
+                        }
+                    }.runTaskLater(KnockbackFFA.getInstance(),1);
+            }
+            }
+        }
     }
 }

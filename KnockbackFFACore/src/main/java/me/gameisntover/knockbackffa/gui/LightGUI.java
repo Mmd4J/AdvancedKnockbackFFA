@@ -49,8 +49,10 @@ public class LightGUI implements Listener {
     @EventHandler
     public void onInventoryClickEvent(InventoryClickEvent e) {
         if (e.getInventory().equals(inventory)) {
-            LightButton button = guiButtonMap.get(e.getSlot());
-            button.onClick(e);
+            if (guiButtonMap.containsKey(e.getSlot())) {
+                LightButton button = guiButtonMap.get(e.getSlot());
+                button.onClick(e);
+            }
             e.setCancelled(true);
         }
     }
@@ -74,6 +76,6 @@ public class LightGUI implements Listener {
     }
     public void destroy(){
         HandlerList.unregisterAll(this);
-        System.out.println("Destroyed");
+        
     }
 }

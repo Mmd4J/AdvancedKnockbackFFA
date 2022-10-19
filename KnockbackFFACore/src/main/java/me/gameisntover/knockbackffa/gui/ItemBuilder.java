@@ -2,12 +2,12 @@ package me.gameisntover.knockbackffa.gui;
 
 import com.cryptomorin.xseries.XMaterial;
 import me.gameisntover.knockbackffa.util.Knocktils;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -71,14 +71,21 @@ public class ItemBuilder {
         }
 
         public ItemBuilderBuilder lore(String... lore) {
-            meta.setLore(Arrays.asList(lore));
+            List<String> l = new ArrayList<>();
+            for (String s : lore){
+                l.add(Knocktils.translateColors(s));
+            }
+            meta.setLore(l);
             item.setItemMeta(meta);
             return this;
         }
 
-        public ItemBuilderBuilder lores(List<String> lores) {
-            lores.forEach(lore -> ChatColor.translateAlternateColorCodes('&', lore));
-            meta.setLore(lores);
+        public ItemBuilderBuilder lores(List<String> lore) {
+            List<String> l = new ArrayList<>();
+            for (String s : lore){
+                l.add(Knocktils.translateColors(s));
+            }
+            meta.setLore(l);
             item.setItemMeta(meta);
             return this;
         }

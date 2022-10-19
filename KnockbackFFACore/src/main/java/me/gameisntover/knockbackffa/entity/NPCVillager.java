@@ -4,6 +4,7 @@ import lombok.SneakyThrows;
 import me.gameisntover.knockbackffa.nms.NMSUtil;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Villager;
 
 import java.util.UUID;
 
@@ -13,6 +14,7 @@ public class NPCVillager{
     @SneakyThrows
     public NPCVillager(Location loc) {
         npcVillager = NMSUtil.getKMSClass("mobs.NPCVillager").getConstructors()[0].newInstance(loc,"Luke",UUID.randomUUID());
+    Villager v = (Villager) getBukkitEntity();
     villager = this;
     }
     @SneakyThrows
@@ -20,10 +22,8 @@ public class NPCVillager{
         return (Entity) npcVillager.getClass().getMethod("getBukkitEntity").invoke(npcVillager);
     }
 
-    @SneakyThrows
     public void kill(){
-        npcVillager.getClass().getMethod("setInvisible", Boolean.class).invoke(npcVillager,true);
-        npcVillager.getClass().getMethod("die").invoke(npcVillager);
+        getBukkitEntity().remove();
         villager = null;
     }
 
