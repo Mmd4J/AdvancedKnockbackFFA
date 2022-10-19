@@ -23,7 +23,7 @@ public class KnockerConnection {
     @SneakyThrows
     public void sendPacket(String packetName,int i, Object... args){
         Object packet = NMSUtil.getNMSClass(packetName).getConstructors()[i].newInstance(args);
-        NMSUtil.getNMSMethod(packet,"sendPacket",packet);
+        playerConnection.getClass().getMethod("sendPacket",NMSUtil.getNMSClass("Packet")).invoke(playerConnection,packet);
     }
 
     protected static KnockerConnection fromKnocker(Knocker knocker){

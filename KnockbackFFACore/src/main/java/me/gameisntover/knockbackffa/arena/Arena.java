@@ -6,8 +6,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,21 +15,11 @@ public class Arena {
 
     private final YamlData config;
     private final String arenaName;
-    private final File arenaFile;
-
 
 
     public Arena(String name) {
         this.arenaName = name;
-        this.arenaFile = new File(ArenaManager.folder, name + ".yml");
-        if (!arenaFile.exists()) {
-            try {
-                arenaFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        config = new YamlData(arenaFile.getName());
+        config = new YamlData(ArenaManager.folder,arenaName);
     }
 
     public YamlData getConfig() {
@@ -40,9 +28,9 @@ public class Arena {
 
     public void save() {
         try {
-            config.save(arenaFile);
+            config.save();
         } catch (Exception e) {
-            Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Error saving " + arenaFile.getName() + "!");
+            Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Error saving " + arenaName +".yml!");
         }
     }
 
@@ -73,7 +61,7 @@ public class Arena {
      * if that arena is the enabled arena.
      */
     public void removeArena() {
-        arenaFile.delete();
+        config.getFile().delete();
         while (ArenaManager.getEnabledArena().getName().equals(arenaName))
             ArenaManager.setEnabledArena(ArenaManager.randomArena());
         save();

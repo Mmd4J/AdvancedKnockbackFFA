@@ -13,6 +13,7 @@ import me.gameisntover.knockbackffa.configurations.Sounds;
 import me.gameisntover.knockbackffa.cosmetics.Cosmetic;
 import me.gameisntover.knockbackffa.kit.KitManager;
 import me.gameisntover.knockbackffa.listener.*;
+import me.gameisntover.knockbackffa.nms.NMSUtil;
 import me.gameisntover.knockbackffa.util.Config;
 import me.gameisntover.knockbackffa.util.Expansion;
 import me.gameisntover.knockbackffa.util.Items;
@@ -45,9 +46,11 @@ public final class KnockbackFFA extends JavaPlugin {
     }
 
 
+    @SneakyThrows
     @Override
     public void onEnable() {
         INSTANCE = this;
+        NMSUtil.registerEntity("NpcVillager",120,NMSUtil.getNMSClass("EntityVillager"),NMSUtil.getKMSClass("mobs.NPCVillager"));
 
         for(Player player : Bukkit.getOnlinePlayers()) {
             Knocker.getKnocker(player.getUniqueId()).setInGame(BungeeMode());
@@ -62,9 +65,10 @@ public final class KnockbackFFA extends JavaPlugin {
         getLogger().info("Loading example cosmetics if not exists");
         List<String> cosmetics = Arrays.asList("piano.yml","frozentrail.yml");
         cosmetics.forEach(s -> {
-           if (!new File(getDataFolder(),s).exists()) saveResource(s,true);
-           new File(getDataFolder(),s).renameTo(new File(Cosmetic.getFolder(),s));
-        });
+            File file = new File(Cosmetic.getFolder(),s);
+           if (!file.exists()){ saveResource(s,true);
+           new File(getDataFolder(),s).renameTo(file);
+        }});
         getLogger().info("Loading Tasks");
         loadTasks();
         getLogger().info("Enjoy using plugin :)");

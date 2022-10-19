@@ -4,6 +4,7 @@ import me.gameisntover.knockbackffa.KnockbackFFA;
 import me.gameisntover.knockbackffa.bukkitevents.ArenaChangeEvent;
 import me.gameisntover.knockbackffa.configurations.Messages;
 import me.gameisntover.knockbackffa.configurations.Sounds;
+import me.gameisntover.knockbackffa.entity.NPCVillager;
 import me.gameisntover.knockbackffa.player.Knocker;
 import me.gameisntover.knockbackffa.util.Knocktils;
 import org.bukkit.Bukkit;
@@ -44,6 +45,9 @@ public class ArenaManager {
                 p.sendMessage(Knocktils.translateColors(Messages.ARENA_CHANGE.toString().replace("%arena%", arenaName)));
             }
         }
+        if (NPCVillager.villager != null) NPCVillager.villager.kill();
+        new NPCVillager(arena.getGUIVillagerSpawnPoint());
+
     }
 
     public static List<Arena> getArenaList() {
